@@ -2,4 +2,4 @@
 
 Afterlife
 
-Gra izometryczna w settingu post-apocalypse. Celem gry jest chodzenie zbieranie łupów w 
+Gra izometryczna w settingu post-apocalypse. Celem gry jest zwiedzanie bunkierów i zbieranie łupów.
