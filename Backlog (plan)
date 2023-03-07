@@ -1,0 +1,21 @@
+1. Stworzyć głównego bohatera
+2. Utworzyć listę stworzeń i scen
+3. Utworzyć klasę z ustawieniem parametrów gry
+4. Utworzyć wzorzec projektowy Factory dla obiektów gry
+5. Utworzyć wzorzec projektowy Factory dla wrogów
+6. Utworzyć wzorzec projektowy Factory dla zasobów o wartości punktowej
+7. Utworzyć wzorzec projektowy Factory dla zasobów leczących
+8. Utworzyć wzorzec projektowy Factory dla zasobów zbrojnych
+9. Utworzyć klasę do obliczeń
+10. Ustawienia przemieszczania się obiektów
+11. Ustawienia strzelania 
+12. Ustawienia pasa życia
+13. Ustawienia przemieszczania się bohatera
+14. Ustawienia podniesienia przedmiotów 
+15. Ustawienia efektu od podniesienia przedmiotów ( jedzenie i apteczka- zdrowie, naboje- odnowienie broni, inne zasoby - punkty)
+16. Ustawienia otrzymywania punktów za zabicie wrogów
+17. Ustawienia zmniejszenia ilości nabojów
+18. Ustawienia zmniejszenia ilości jedzenia i apteczek
+19. Ustawienia głodu ( po upływie czasu bohater powoli zaczyna tracić życie ) 
+20. Zaprojektować koniec gry
+21.  Narysować obiekty
