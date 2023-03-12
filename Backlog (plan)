@@ -1,21 +1,28 @@
-1. Stworzyć głównego bohatera
-2. Utworzyć listę stworzeń i scen
-3. Utworzyć klasę z ustawieniem parametrów gry
-4. Utworzyć wzorzec projektowy Factory dla obiektów gry
-5. Utworzyć wzorzec projektowy Factory dla wrogów
-6. Utworzyć wzorzec projektowy Factory dla zasobów o wartości punktowej
-7. Utworzyć wzorzec projektowy Factory dla zasobów leczących
-8. Utworzyć wzorzec projektowy Factory dla zasobów zbrojnych
-9. Utworzyć klasę do obliczeń
-10. Ustawienia przemieszczania się obiektów
-11. Ustawienia strzelania 
-12. Ustawienia pasa życia
-13. Ustawienia przemieszczania się bohatera
-14. Ustawienia podniesienia przedmiotów 
-15. Ustawienia efektu od podniesienia przedmiotów ( jedzenie i apteczka- zdrowie, naboje- odnowienie broni, inne zasoby - punkty)
-16. Ustawienia otrzymywania punktów za zabicie wrogów
-17. Ustawienia zmniejszenia ilości nabojów
-18. Ustawienia zmniejszenia ilości jedzenia i apteczek
-19. Ustawienia głodu ( po upływie czasu bohater powoli zaczyna tracić życie ) 
-20. Zaprojektować koniec gry
-21.  Narysować obiekty
+1. Utworzyć listę stworzeń i scen
+2. Utworzyć klasę z ustawieniem parametrów gry
+3 Utworzyć klasę do obliczeń
+Tworzenie bohatera:
+4.1 Stworzyć głównego bohatera
+4.2 Ustawienia przemieszczania się bohatera
+4.3 Ustawienia pasa życia bohatera 
+4.4 Ustawienia strzelania 
+5. Utworzyć wzorzec projektowy Factory dla obiektów gry
+Tworzenie wrogów:
+6.1 Utworzyć wzorzec projektowy Factory dla wrogów 
+6.2 Ustawienia zabicia wrogów 
+6.3 Ustawienia otrzymywania punktów za zabicie wrogów
+6.4 Ustawienia przemieszczania się wrogów 
+6.5 Ustawienia otrzymywanie obrażeń od wrogów
+Tworzenie przedmiotów:
+7.1 Utworzyć wzorzec projektowy Factory dla zasobów o wartości punktowej
+7.2 Utworzyć wzorzec projektowy Factory dla zasobów leczących
+7.3 Utworzyć wzorzec projektowy Factory dla zasobów zbrojnych
+7.4 Ustawienia podniesienia przedmiotów 
+7.5 Ustawienia efektu od podniesienia przedmiotów ( jedzenie i apteczka- zdrowie, naboje- odnowienie broni, inne zasoby - punkty)
+8. Ustawienia zmniejszenia ilości nabojów
+9. Ustawienia zmniejszenia ilości jedzenia i apteczek
+10. Ustawienia głodu ( po upływie czasu bohater powoli zaczyna tracić życie ) 
+Tworzenia ekranu końcowego
+11.1 Zaprojektować ekran końcu gry
+11.2 Dodać do ekranu końca gry tablicę wyników
+12. Narysować obiekty 
