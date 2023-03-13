@@ -33,17 +33,11 @@ int main(void)
     while (!WindowShouldClose())
     {
 
-        if(player.x < 0)
-        {
-            player.x=0;
-            player.speedX *=-1;
-        }
 
-
-        if (IsKeyDown(KEY_RIGHT)) player.x+= player.speedX;
-        if (IsKeyDown(KEY_LEFT)) player.x -= player.speedX;
-        if (IsKeyDown(KEY_UP)) player.y -= player.speedY;
-        if (IsKeyDown(KEY_DOWN)) player.y += player.speedY;
+        if (IsKeyDown(KEY_RIGHT) && player.x < (GetScreenWidth()-player.width)) player.x+= player.speedX;
+        if (IsKeyDown(KEY_LEFT) && player.x > 1) player.x -= player.speedX;
+        if (IsKeyDown(KEY_UP) && player.y >0) player.y -= player.speedY;
+        if (IsKeyDown(KEY_DOWN) && player.y < (GetScreenHeight()-player.height)) player.y  += player.speedY;
 
 
         BeginDrawing();
