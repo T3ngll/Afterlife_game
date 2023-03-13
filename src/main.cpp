@@ -1,52 +1,48 @@
-
 #include "raylib.h"
+#include "Character.h"
 
-//------------------------------------------------------------------------------------
-// Program main entry point
-//------------------------------------------------------------------------------------
 int main(void)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
+
     const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenHeight = 800;
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - keyboard input");
+    InitWindow(screenWidth, screenHeight, "Afterlife");
+    SetWindowState(FLAG_VSYNC_HINT);
 
-    Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
+    Character ch;
 
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
 
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+
+    SetTargetFPS(60);
+
+
+
+    while (!WindowShouldClose())
     {
-        // Update
-        //----------------------------------------------------------------------------------
-        if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
-        if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
-        if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
-        if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
-        //----------------------------------------------------------------------------------
 
-        // Draw
-        //----------------------------------------------------------------------------------
+        if (IsKeyDown(KEY_RIGHT)) ch.x+= ch.speedX+GetFrameTime();
+        if (IsKeyDown(KEY_LEFT)) ch.x -= ch.speedX+GetFrameTime();
+        if (IsKeyDown(KEY_UP)) ch.y -= ch.speedY+GetFrameTime();
+        if (IsKeyDown(KEY_DOWN)) ch.y += ch.speedY+GetFrameTime();
+
+
+
         BeginDrawing();
 
             ClearBackground(RAYWHITE);
 
-            DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
+            DrawText("init window and move mechanic", 10, 10, 20, DARKGRAY);
 
-            DrawCircleV(ballPosition, 50, MAROON);
+            DrawCircleV(Character, 50, GRAY);
+
+
+            DrawFPS(10,10);
 
         EndDrawing();
-        //----------------------------------------------------------------------------------
     }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
+    CloseWindow();
 
     return 0;
 }
