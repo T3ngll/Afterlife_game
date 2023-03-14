@@ -11,8 +11,8 @@ class Character
     float speedY;
     float health;
     float ammo;
-    //float rotation;
-    //Vector2 mousePosition = {0};
+   // float rotation;
+   // Vector2 mousePosition = {0};
 public:
     Character(float height, float width, float speedX, float speedY, float health, float ammo):height(height),width(width),speedX(speedX),speedY(speedY),health(health),ammo(ammo)
     {
