@@ -7,7 +7,7 @@ using namespace std;
 
 
 
-int main(void)
+int main()
 {
 
     InitWindow(800,800, "Afterlife");
@@ -21,7 +21,7 @@ int main(void)
 
     UnloadImage(background);
 
-    Character player;
+    Character player(70,50,300,300,100,20);
 
 
     //cout << "Run path: " << GetWorkingDirectory() << endl;
@@ -29,21 +29,21 @@ int main(void)
     {
 
 
-        if (IsKeyDown(KEY_D) && player.x < (GetScreenWidth()-player.width)) player.x+= player.speedX*GetFrameTime();
-        if (IsKeyDown(KEY_A) && player.x > 1) player.x -= player.speedX*GetFrameTime();
-        if (IsKeyDown(KEY_W) && player.y >0) player.y -= player.speedY*GetFrameTime();
-        if (IsKeyDown(KEY_S) && player.y < (GetScreenHeight()-player.height)) player.y  += player.speedY*GetFrameTime();
+        if (IsKeyDown(KEY_D) && player.getX() < (GetScreenWidth()-player.getWidth())) player.setX(player.getSpeedX()*GetFrameTime()) ;
+        if (IsKeyDown(KEY_A) && player.getX() > 1) player.setX(-1*player.getSpeedX()*GetFrameTime());
+        if (IsKeyDown(KEY_W) && player.getY() >0) player.setY(-1*player.getSpeedY()*GetFrameTime()) ;
+        if (IsKeyDown(KEY_S) && player.getY() < (GetScreenHeight()-player.getHeight())) player.setY(player.getSpeedY()*GetFrameTime());
 
 
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
 
-        DrawTexture(texture, 0, 0, RAYWHITE);
+        DrawTexture(texture, 0, 0, WHITE);
 
         //DrawText("placeholder", 10, 10, 20, DARKGRAY);
-
-    DrawRectangle(player.x, player.y, player.width, player.height, BLACK);
+        DrawRectangle(player.getX(),player.getY(),player.getWidth(),player.getHeight(),BLACK);
+       // player.Draw(player,player.getVector(),player.getRotation(),BLACK);
 
 
         DrawFPS(10,10);
