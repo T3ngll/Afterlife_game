@@ -28,21 +28,10 @@ public:
     float getSpeedX() const {return speedX;}
     float getSpeedY() const {return speedY;}
     float getHealth() const {return health;}
-    //Vector2 getVector() {return mousePosition;}
-    //float getRotation() const {return rotation;}
 
-    //void Draw(float x,float y, float width,float height);
 
 
 };
-/*
-void Character::Draw(float x,float y, float width,float height)
-{
-    //Rectangle rec={character.x,character.y,character.width, character.height};
-    DrawRectangle(x,y,width,height,LIME);
-    //DrawRectanglePro(rec,(Vector2){character.x,character.y},rotation * RAD2DEG,BLACK);
-
-}*/
 
 
 
