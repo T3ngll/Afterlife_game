@@ -1,5 +1,7 @@
 #include "raylib.h"
 #include "Character.h"
+#include <iostream>
+using namespace std;
 
 
 
@@ -13,28 +15,31 @@ int main(void)
 
     //SetTargetFPS(100);
     SetWindowState(FLAG_VSYNC_HINT);
+    Image background = LoadImage("resources/hall.png");
+    ImageResize(&background,GetScreenWidth(),GetScreenHeight());
+    Texture2D texture = LoadTextureFromImage(background);
 
-    Texture2D Background = LoadTexture("./resources/hall.png");
+    UnloadImage(background);
 
     Character player;
 
 
-
-
+    //cout << "Run path: " << GetWorkingDirectory() << endl;
     while (!WindowShouldClose())
     {
 
 
-        if (IsKeyDown(KEY_RIGHT) && player.x < (GetScreenWidth()-player.width)) player.x+= player.speedX*GetFrameTime();
-        if (IsKeyDown(KEY_LEFT) && player.x > 1) player.x -= player.speedX*GetFrameTime();
-        if (IsKeyDown(KEY_UP) && player.y >0) player.y -= player.speedY*GetFrameTime();
-        if (IsKeyDown(KEY_DOWN) && player.y < (GetScreenHeight()-player.height)) player.y  += player.speedY*GetFrameTime();
+        if (IsKeyDown(KEY_D) && player.x < (GetScreenWidth()-player.width)) player.x+= player.speedX*GetFrameTime();
+        if (IsKeyDown(KEY_A) && player.x > 1) player.x -= player.speedX*GetFrameTime();
+        if (IsKeyDown(KEY_W) && player.y >0) player.y -= player.speedY*GetFrameTime();
+        if (IsKeyDown(KEY_S) && player.y < (GetScreenHeight()-player.height)) player.y  += player.speedY*GetFrameTime();
 
 
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
-        DrawTexture(Background,0,0,WHITE);
+
+        DrawTexture(texture, 0, 0, RAYWHITE);
 
         //DrawText("placeholder", 10, 10, 20, DARKGRAY);
 
@@ -45,7 +50,7 @@ int main(void)
 
         EndDrawing();
     }
-    UnloadTexture(Background);
+    UnloadTexture(texture);
 
     CloseWindow();
 

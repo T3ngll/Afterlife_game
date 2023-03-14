@@ -7,4 +7,4 @@ include_directories(include)
 
 add_executable(afterlife
         include/raylib.h
-        src/main.cpp src/Character.cpp src/Character.h)
+        src/main.cpp src/Character.h)

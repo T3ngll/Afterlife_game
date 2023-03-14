@@ -85,9 +85,6 @@
 		<Unit filename="D:/projects/projects c++/GitHub/afterlife/include/raylib.h">
 			<Option target="afterlife"/>
 		</Unit>
-		<Unit filename="D:/projects/projects c++/GitHub/afterlife/src/Character.cpp">
-			<Option target="afterlife"/>
-		</Unit>
 		<Unit filename="D:/projects/projects c++/GitHub/afterlife/src/Character.h">
 			<Option target="afterlife"/>
 		</Unit>

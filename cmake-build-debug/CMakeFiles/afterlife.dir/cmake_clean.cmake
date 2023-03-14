@@ -1,6 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/afterlife.dir/src/Character.cpp.obj"
-  "CMakeFiles/afterlife.dir/src/Character.cpp.obj.d"
   "CMakeFiles/afterlife.dir/src/main.cpp.obj"
   "CMakeFiles/afterlife.dir/src/main.cpp.obj.d"
   "afterlife.exe"

@@ -128,30 +128,6 @@ afterlife/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/build
 .PHONY : afterlife/fast
 
-src/Character.obj: src/Character.cpp.obj
-.PHONY : src/Character.obj
-
-# target to build an object file
-src/Character.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/Character.cpp.obj
-.PHONY : src/Character.cpp.obj
-
-src/Character.i: src/Character.cpp.i
-.PHONY : src/Character.i
-
-# target to preprocess a source file
-src/Character.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/Character.cpp.i
-.PHONY : src/Character.cpp.i
-
-src/Character.s: src/Character.cpp.s
-.PHONY : src/Character.s
-
-# target to generate assembly for a file
-src/Character.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/Character.cpp.s
-.PHONY : src/Character.cpp.s
-
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -185,9 +161,6 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... afterlife
-	@echo ... src/Character.obj
-	@echo ... src/Character.i
-	@echo ... src/Character.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

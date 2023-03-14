@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "D:/projects/projects c++/GitHub/afterlife/src/Character.cpp" "CMakeFiles/afterlife.dir/src/Character.cpp.obj" "gcc" "CMakeFiles/afterlife.dir/src/Character.cpp.obj.d"
   "D:/projects/projects c++/GitHub/afterlife/src/main.cpp" "CMakeFiles/afterlife.dir/src/main.cpp.obj" "gcc" "CMakeFiles/afterlife.dir/src/main.cpp.obj.d"
   )
 
