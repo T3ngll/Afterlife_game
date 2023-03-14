@@ -22,12 +22,18 @@ int main()
     UnloadImage(background);
 
     Character player(70,50,300,300,100,20);
-
+    Vector2 mousePosition = {0}
 
     //cout << "Run path: " << GetWorkingDirectory() << endl;
     while (!WindowShouldClose())
     {
+    
+        mousePosition = GetMousePosition();
 
+        float dx = mousePosition.x - player.getX();
+        float dy = mousePosition.y - player.getY();
+
+        float rotation = atan2f(dy, dx);
 
         if (IsKeyDown(KEY_D) && player.getX() < (GetScreenWidth()-player.getWidth())) player.setX(player.getSpeedX()*GetFrameTime()) ;
         if (IsKeyDown(KEY_A) && player.getX() > 1) player.setX(-1*player.getSpeedX()*GetFrameTime());
@@ -42,7 +48,8 @@ int main()
         DrawTexture(texture, 0, 0, WHITE);
 
         //DrawText("placeholder", 10, 10, 20, DARKGRAY);
-        DrawRectangle(player.getX(),player.getY(),player.getWidth(),player.getHeight(),BLACK);
+        DrawRectanglePro((Rectangle) { player.getX(), player.getY(), player.getWidth(), player.getHeight() },
+            (Vector2) { player.getWidth() / 2, player.getHeight() / 2 }, rotation * RAD2DEG, BLACK);
        // player.Draw(player,player.getVector(),player.getRotation(),BLACK);
 
 
