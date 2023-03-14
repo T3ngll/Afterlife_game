@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "Character.h"
+#include <cmath>
 #include <iostream>
 using namespace std;
 
@@ -22,7 +23,7 @@ int main()
     UnloadImage(background);
 
     Character player(70,50,300,300,100,20);
-    Vector2 mousePosition = {0}
+    Vector2 mousePosition = {0};
 
     //cout << "Run path: " << GetWorkingDirectory() << endl;
     while (!WindowShouldClose())
@@ -47,13 +48,13 @@ int main()
 
         DrawTexture(texture, 0, 0, WHITE);
 
-        //DrawText("placeholder", 10, 10, 20, DARKGRAY);
         DrawRectanglePro((Rectangle) { player.getX(), player.getY(), player.getWidth(), player.getHeight() },
             (Vector2) { player.getWidth() / 2, player.getHeight() / 2 }, rotation * RAD2DEG, BLACK);
        // player.Draw(player,player.getVector(),player.getRotation(),BLACK);
 
 
-        DrawFPS(10,10);
+        DrawText("AfterLife Test \nPress W A S D to move", 10, 10, 20, WHITE);
+        DrawFPS(10,70);
 
         EndDrawing();
     }
