@@ -23,7 +23,7 @@ int main()
 
     // init character
     Character player(70,50,300,300,100,20);
-    Rectangle rect{float(GetScreenWidth())-175.0f,float(GetScreenHeight())-250.0f,50,200};
+    //Rectangle rect{float(GetScreenWidth())-175.0f,float(GetScreenHeight())-250.0f,50,200};
 
 
 
@@ -61,7 +61,7 @@ int main()
         ClearBackground(RAYWHITE);
 
         DrawTexture(texture, 0, 0, WHITE);
-        DrawRectangleRec(rect,RED);
+       // DrawRectangleRec(rect,RED);
 
         DrawRectanglePro((Rectangle) { player.getX(), player.getY(), player.getWidth(), player.getHeight() },
             (Vector2) { player.getWidth() / 2, player.getHeight() / 2 }, rotation * RAD2DEG, BLACK);

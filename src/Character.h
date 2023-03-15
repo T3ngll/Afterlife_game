@@ -3,7 +3,7 @@
 
 class Object{
 protected:
-    Vector2 pos;
+    Vector2 pos{};
     float width;
     float height;
 public:
@@ -38,8 +38,6 @@ class Character: public Object, public Movable
 {
     int health;
     int ammo;
-   // float rotation;
-   // Vector2 mousePosition = {0};
 public:
     Character(float width, float height, float speedX, float speedY, int health, int ammo): Object(0,0,width,height),
                                                                                                 Movable(speedX,speedY),health(health),ammo(ammo)
