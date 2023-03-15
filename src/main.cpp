@@ -23,8 +23,7 @@ int main()
 
     // init character
     Character player(70,50,300,300,100,20);
-    Rectangle rect{GetScreenWidth()-175.0f,GetScreenHeight()-250.0f,50,200};
-    Vector2 mousePosition = {0};
+    Rectangle rect{float(GetScreenWidth())-175.0f,float(GetScreenHeight())-250.0f,50,200};
 
 
 
@@ -32,14 +31,14 @@ int main()
     while (!WindowShouldClose())
     {
         // mouse tracking
-        mousePosition = GetMousePosition();
+        Vector2 mousePosition = GetMousePosition();
         float dx = mousePosition.x - player.getX();
         float dy = mousePosition.y - player.getY();
         float rotation = atan2f(dy, dx);
 
 
         //check if control key is down
-        if (IsKeyDown(KEY_D) && player.getX() < (GetScreenWidth()-player.getWidth()))
+        if (IsKeyDown(KEY_D) && player.getX() < (float(GetScreenWidth())-player.getWidth()))
         {
             player.setX(player.getSpeedX()*GetFrameTime()) ;
         }
@@ -51,7 +50,7 @@ int main()
         {
             player.setY(-1*player.getSpeedY()*GetFrameTime()) ;
         }
-        if (IsKeyDown(KEY_S) && player.getY() < (GetScreenHeight()-player.getWidth()))
+        if (IsKeyDown(KEY_S) && player.getY() < (float(GetScreenHeight())-player.getWidth()))
         {
             player.setY(player.getSpeedY()*GetFrameTime());
         }
