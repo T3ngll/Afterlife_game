@@ -80,11 +80,14 @@ int main()
         }
 
         //hp decrease and increase
-        if (IsKeyPressed(KEY_UP) && player.getHp() <= player.getHpMax()-20)
+        if (IsKeyPressed(KEY_UP) && player.getHp() < 100)
         {
-            player.setHp(player.getHp()+20) ;
+            if(IsKeyPressed(KEY_UP) && player.getHp()>80)
+            player.setHp(player.getHpMax());
+            else
+            player.setHp(player.getHp()+20);
         }
-        if (IsKeyPressed(KEY_DOWN) && player.getHp() > player.getHpMax()-100)
+        if (IsKeyPressed(KEY_DOWN) && player.getHp() > 0)
         {
             player.setHp(player.getHp()-20) ;
         }
