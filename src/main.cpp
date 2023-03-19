@@ -33,10 +33,13 @@ int main()
 
 
     // init character
-    class Character player(Character,70,50,300,300,100,100,20,0);
+    //class Character player(Character,70,50,300,300,100,100,20,0);
+    class Character player(Character,70,50,Vector2{200,200},100,100,20,0);
 
+    //for(int i=0;i<player.getAmmo();i++)
+    //{
 
-
+   // }
 
 
 
