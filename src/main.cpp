@@ -43,7 +43,7 @@ int main()
     for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
     {
         bullet[i].setPos((Vector2){player.getX(),player.getY()});
-        bullet[i].setSpeed(Vector2 {50,50});
+        bullet[i].setSpeed(Vector2 {300,300});
         bullet[i].setRadius(10);
         bullet[i].isActive(false);
         bullet[i].setColor(WHITE);
@@ -105,6 +105,7 @@ int main()
                     bullet[i].setPos((Vector2) {player.getX()+30, player.getY()+30});
 
                     bullet[i].isActive(true);
+                    bullet[i].setTarget(mousePosition);
                     break;
                 }
             }
@@ -115,7 +116,7 @@ int main()
         {
             if (bullet[i].isActive())
             {
-                bullet[i].setTarget(mousePosition);
+
 
                 if(bullet[i].getX() > bullet[i].getTarget().x)
                 {
@@ -137,6 +138,16 @@ int main()
                 //bullet[i].setX((bullet[i].getX()+3)*GetFrameTime());
 
                 bullet[i].setLifeSpawn(bullet[i].getLifeSpawn()+1);
+
+                if(bullet[i].getPos().x==bullet[i].getTarget().x && bullet[i].getPos().y==bullet[i].getTarget().y)
+                {
+                    bullet[i].setPos(Vector2{player.getX()+30,player.getY()+30});
+                    bullet[i].setSpeed(Vector2{0,0});
+                    bullet[i].setLifeSpawn(0);
+                    bullet[i].isActive(false);
+                }
+
+
                 if(bullet[i].getX()>=800)
                 {
                     bullet[i].setPos(Vector2{player.getX()+30,player.getY()+30});
@@ -194,6 +205,7 @@ int main()
           (Rectangle){monster.getX(),monster.getY(),monster.getWidth(),monster.getHeight()});
           if (collision)
           {
+              if(player.getHp() > 0)
             player.setHp(player.getHp()-1);
           }
 
