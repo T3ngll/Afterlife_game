@@ -51,7 +51,7 @@ int main()
         float dy = mousePosition.y - player.getY();
         float rotation = atan2f(dy, dx)+(PI/2);
 
-        float HpPercent=  static_cast<float>(player.getHp())/player.getHpMax();
+        auto HpPercent=  (float)(player.getHp())/(float)player.getHpMax();
 
 
         //check if control key is down
@@ -102,6 +102,8 @@ int main()
 
         DrawRectangle(10, 10, 400, 30, BLACK);  
         DrawRectangle(14, 14, (392) * HpPercent, (22), RED);
+
+
         if(player.getHp()<=0)
         {
             DrawText("oh, you died(", 350, 400, 40, WHITE);
