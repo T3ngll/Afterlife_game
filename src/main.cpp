@@ -37,6 +37,7 @@ int main()
     class Character player(Character,70,50,Vector2{200,200},100,100,20,0);
     class Enemy monster(140,40,Vector2{100,100});
 
+    bool collision = false;
 
     //for(int i=0;i<player.getAmmo();i++)
     //{
@@ -106,10 +107,12 @@ int main()
           monster.setY(-1*monster.getSpeedY()*GetFrameTime() );
         }
 
-        // if(player.getX() > monster.getX())
-         // {
-         //   player.setHp(player.getHp()-20);
-         // }
+          collision = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),player.getWidth(),player.getHeight()},
+          (Rectangle){monster.getX(),monster.getY(),monster.getWidth(),monster.getHeight()});
+          if (collision)
+          {
+            player.setHp(player.getHp()-1);
+          }
 
 
         // start render
