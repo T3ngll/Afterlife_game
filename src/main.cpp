@@ -4,8 +4,9 @@
 using namespace std;
 
 
+#define PLAYER_MAX_SHOOTS  20
 
-
+static Bullet bullet[PLAYER_MAX_SHOOTS];
 
 
 
@@ -39,10 +40,15 @@ int main()
 
     bool collision = false;
 
-    //for(int i=0;i<player.getAmmo();i++)
-    //{
-
-   // }
+    for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
+    {
+        bullet[i].setPos((Vector2){player.getX(),player.getY()});
+        bullet[i].setSpeed(Vector2 {50,50});
+        bullet[i].setRadius(10);
+        bullet[i].isActive(false);
+        bullet[i].setColor(WHITE);
+        
+    }
 
 
 
@@ -51,7 +57,14 @@ int main()
     //main game loop
     while (!WindowShouldClose())
     {
+        // start render
+        BeginDrawing();
+
+        ClearBackground(RAYWHITE);
+        DrawTexture(Background, 0, 0, WHITE);
+
         // mouse tracking
+
         Vector2 mousePosition = GetMousePosition();
         float dx = mousePosition.x - player.getX();
         float dy = mousePosition.y - player.getY();
@@ -61,23 +74,90 @@ int main()
 
 
         //check if control key is down
-        if (IsKeyDown(KEY_D) && player.getX() < (float(GetScreenWidth())-player.getWidth()))
+        if (IsKeyDown(KEY_W) && player.getY() >player.getWidth())
         {
-            player.setX(player.getSpeedX()*GetFrameTime()) ;
-
+            player.setY(-1*player.getSpeedY()*GetFrameTime()) ;
         }
         if (IsKeyDown(KEY_A) && player.getX() >player.getWidth())
         {
             player.setX(-1*player.getSpeedX()*GetFrameTime());
         }
-        if (IsKeyDown(KEY_W) && player.getY() >player.getWidth())
-        {
-            player.setY(-1*player.getSpeedY()*GetFrameTime()) ;
-        }
         if (IsKeyDown(KEY_S) && player.getY() < (float(GetScreenHeight())-player.getWidth()))
         {
             player.setY(player.getSpeedY()*GetFrameTime());
         }
+        if (IsKeyDown(KEY_D) && player.getX() < (float(GetScreenWidth())-player.getWidth()))
+        {
+            player.setX(player.getSpeedX()*GetFrameTime()) ;
+
+        }
+
+
+
+
+        //shooting
+        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        {
+            for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
+            {
+                if (!bullet[i].isActive())
+                {
+                    bullet[i].setPos((Vector2) {player.getX()+30, player.getY()+30});
+
+                    bullet[i].isActive(true);
+                    break;
+                }
+            }
+        }
+
+
+        for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
+        {
+            if (bullet[i].isActive())
+            {
+                bullet[i].setTarget(mousePosition);
+
+                if(bullet[i].getX() > bullet[i].getTarget().x)
+                {
+                    bullet[i].setX(-1*(bullet[i].getSpeedX()+3)*GetFrameTime() );
+                }
+                if(bullet[i].getX() < bullet[i].getTarget().x)
+                {
+                    bullet[i].setX((bullet[i].getSpeedX()+3)*GetFrameTime() );
+                }
+                if(bullet[i].getY() >  bullet[i].getTarget().y)
+                {
+                    bullet[i].setY(-1*(bullet[i].getSpeedY()+3)*GetFrameTime() );
+                }
+                if(bullet[i].getY() < bullet[i].getTarget().y)
+                {
+                    bullet[i].setY((bullet[i].getSpeedY()+3)*GetFrameTime() );
+                }
+
+                //bullet[i].setX((bullet[i].getX()+3)*GetFrameTime());
+
+                bullet[i].setLifeSpawn(bullet[i].getLifeSpawn()+1);
+                if(bullet[i].getX()>=800)
+                {
+                    bullet[i].setPos(Vector2{player.getX()+30,player.getY()+30});
+                    bullet[i].setSpeed(Vector2{0,0});
+                    bullet[i].setLifeSpawn(0);
+                    bullet[i].isActive(false);
+                }
+
+                if(bullet[i].isActive())
+                {
+                    DrawCircleV(bullet[i].getPos(),bullet[i].getRadius(),WHITE);
+                }
+
+                //if(bullet[i].getLifeSpawn()>=80) {}
+
+            }
+
+        }
+
+
+
 
         //hp decrease and increase
         if (IsKeyPressed(KEY_UP) && player.getHp() < 100)
@@ -118,12 +198,9 @@ int main()
           }
 
 
-        // start render
-        BeginDrawing();
 
-        ClearBackground(RAYWHITE);
 
-        DrawTexture(Background, 0, 0, WHITE);
+
         DrawLine(0,GetScreenHeight()/2,GetScreenWidth(),GetScreenHeight()/2,BLACK);
         DrawLine(GetScreenWidth()/2,0,GetScreenWidth()/2,GetScreenHeight(),BLACK);
 

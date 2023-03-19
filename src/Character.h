@@ -10,6 +10,7 @@ protected:
     float height;
     bool active;
 public:
+    Object() = default;
     Object(Vector2 pos, float width, float height): pos(pos),width(width),height(height),active(true){};
 
     Vector2 getPos() const{return pos;}
@@ -34,10 +35,15 @@ protected:
     float speedY;
     Vector2 speed{speedX,speedY};
 public:
+    Movable()= default;
     Movable(Vector2 speed): speed(speed){};
     Vector2 getSpeed(){return speed;}
     float getSpeedX() const {return speed.x;}
     float getSpeedY() const {return speed.y;}
+
+    void setSpeed(Vector2 speed2){speed=speed2;}
+    void setSpeedX(float speed)  {speedX=speed;}
+    void setSpeedY(float speed)  {speedY=speed;}
 };
 
 
@@ -72,9 +78,21 @@ class Bullet : public Object,public Movable
 Color color;
 int lifeSpawn;
 float radius;
+Vector2 target;
 public:
+    Bullet()= default;
     Bullet(Vector2 pos,Vector2 speed,bool active,int lifeSpawn,float radius,Color color): Object(pos,0,0), Movable(speed),lifeSpawn(lifeSpawn),radius(radius),color(color){};
 
+    int getLifeSpawn(){return lifeSpawn;}
+    void setLifeSpawn(int life){lifeSpawn=life;}
+
+    void setRadius(float rad){radius=rad;}
+    float getRadius(){return radius;}
+
+    void setColor(Color color){this->color=color;}
+
+    void setTarget(Vector2 target){this->target=target;}\
+    Vector2 getTarget() {return target;}
 };
 
 
