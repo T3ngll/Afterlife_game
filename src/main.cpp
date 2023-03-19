@@ -7,6 +7,9 @@ using namespace std;
 
 
 
+
+
+
 int main()
 {
 
@@ -16,14 +19,26 @@ int main()
     SetTargetFPS(60);
     //SetWindowState(FLAG_VSYNC_HINT);
     Image background = LoadImage("resources/hall.png");
+    Image character = LoadImage("resources/character.png");
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
-    Texture2D texture = LoadTextureFromImage(background);
+    Texture2D Background = LoadTextureFromImage(background);
+    Texture2D Character = LoadTextureFromImage(character);
     UnloadImage(background);
 
 
+    auto frameWidth = (float)Character.width;
+    auto frameHeight = (float)Character.height;
+
+
+
+
     // init character
-    Character player(70,50,300,300,100,20);
-    //Rectangle rect{float(GetScreenWidth())-175.0f,float(GetScreenHeight())-250.0f,50,200};
+    class Character player(Character,70,50,300,300,100,20);
+
+
+
+
+
 
 
 
@@ -34,13 +49,14 @@ int main()
         Vector2 mousePosition = GetMousePosition();
         float dx = mousePosition.x - player.getX();
         float dy = mousePosition.y - player.getY();
-        float rotation = atan2f(dy, dx);
+        float rotation = atan2f(dy, dx)+(PI/2);
 
 
         //check if control key is down
         if (IsKeyDown(KEY_D) && player.getX() < (float(GetScreenWidth())-player.getWidth()))
         {
             player.setX(player.getSpeedX()*GetFrameTime()) ;
+
         }
         if (IsKeyDown(KEY_A) && player.getX() >player.getWidth())
         {
@@ -60,12 +76,15 @@ int main()
 
         ClearBackground(RAYWHITE);
 
-        DrawTexture(texture, 0, 0, WHITE);
-       // DrawRectangleRec(rect,RED);
+        DrawTexture(Background, 0, 0, WHITE);
+        DrawLine(0,GetScreenHeight()/2,GetScreenWidth(),GetScreenHeight()/2,BLACK);
+        DrawLine(GetScreenWidth()/2,0,GetScreenWidth()/2,GetScreenHeight(),BLACK);
 
-        DrawRectanglePro((Rectangle) { player.getX(), player.getY(), player.getWidth(), player.getHeight() },
-            (Vector2) { player.getWidth() / 2, player.getHeight() / 2 }, rotation * RAD2DEG, BLACK);
-
+        DrawTexturePro(player.getTexture(),(Rectangle){0,0,frameWidth,frameHeight},
+                       (Rectangle){player.getX(),player.getY(),player.getWidth(),player.getHeight()},
+                       (Vector2){(float)player.getWidth()/2, (float)player.getHeight()/2},
+                       rotation*RAD2DEG,
+                       WHITE);
 
 
 
@@ -76,7 +95,8 @@ int main()
     }
 
     // clear gpu
-    UnloadTexture(texture);
+    UnloadTexture(Background);
+    UnloadTexture(Character);
 
 
     //end

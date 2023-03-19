@@ -3,20 +3,22 @@
 
 class Object{
 protected:
-    Vector2 pos{};
+    float x = 0;
+    float y = 0;
+    Vector2 pos{x,y};
     float width;
     float height;
 public:
-    Object(float x,float y, float width, float height):width(width),height(height)
-    {
-        pos.x=x;
-        pos.y=y;
-    };
+    Object(Vector2 pos, float width, float height): pos(pos),width(width),height(height){};
+
+    Vector2 getPos() {return pos;}
+    void setPos(Vector2 posNew) {pos=posNew;}
 
     float getX() const {return pos.x;}
-    void setX(float x) {pos.x+=x;}
+    void setX(float xNew) {pos.x+=xNew;}
+
     float getY() const {return pos.y;}
-    void setY(float y) {pos.y+=y;}
+    void setY(float yNew) {pos.y+=yNew;}
 
     float getHeight() const {return height;}
     float getWidth() const {return width;}
@@ -38,15 +40,17 @@ class Character: public Object, public Movable
 {
     int health;
     int ammo;
+    Texture2D CharacterTexture;
 public:
-    Character(float width, float height, float speedX, float speedY, int health, int ammo): Object(0,0,width,height),
+    Character(Texture2D CharacterTexture , float width, float height, float speedX, float speedY, int health, int ammo): CharacterTexture(CharacterTexture), Object(pos,width,height),
                                                                                                 Movable(speedX,speedY),health(health),ammo(ammo)
     {
-        pos.x=float(GetScreenWidth()) / 2 -width/2;
-        pos.y=float(GetScreenHeight()) / 2 -height/2;
+        pos.x=float(GetScreenWidth()) / 2 ;
+        pos.y=float(GetScreenHeight()) / 2 ;
     };
 
-
+    Texture2D getTexture(){return CharacterTexture;}
+    //void setTexture(Texture2D Texture){CharacterTexture=Texture;}
 
     int getHealth() const {return health;}
     int getAmmo() const{return ammo;}
