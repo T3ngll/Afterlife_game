@@ -33,7 +33,7 @@ int main()
 
 
     // init character
-    class Character player(Character,70,50,300,300,100,20);
+    class Character player(Character,70,50,300,300,100,100,20,0);
 
 
 
@@ -50,6 +50,8 @@ int main()
         float dx = mousePosition.x - player.getX();
         float dy = mousePosition.y - player.getY();
         float rotation = atan2f(dy, dx)+(PI/2);
+
+        float HpPercent=  static_cast<float>(player.getHp())/player.getHpMax();
 
 
         //check if control key is down
@@ -71,6 +73,16 @@ int main()
             player.setY(player.getSpeedY()*GetFrameTime());
         }
 
+        //hp decrease and increase
+        if (IsKeyPressed(KEY_UP) && player.getHp() <= player.getHpMax()-20)
+        {
+            player.setHp(player.getHp()+20) ;
+        }
+        if (IsKeyPressed(KEY_DOWN) && player.getHp() > player.getHpMax()-100)
+        {
+            player.setHp(player.getHp()-20) ;
+        }
+
         // start render
         BeginDrawing();
 
@@ -88,8 +100,15 @@ int main()
 
 
 
-        DrawText("AfterLife Test \nPress W A S D to move", 10, 10, 20, WHITE);
-        DrawFPS(10,70);
+        DrawRectangle(10, 10, 400, 30, BLACK);  
+        DrawRectangle(14, 14, (392) * HpPercent, (22), RED);
+        if(player.getHp()<=0)
+        {
+            DrawText("oh, you died(", 350, 400, 40, WHITE);
+        }
+
+        DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value", 10, 50, 20, WHITE);
+        DrawFPS(10, 140);
 
         EndDrawing(); // end render
     }

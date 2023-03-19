@@ -38,12 +38,14 @@ public:
 
 class Character: public Object, public Movable
 {
-    int health;
+    int hp;
+    int hpMax;
     int ammo;
+    int score;
     Texture2D CharacterTexture;
 public:
-    Character(Texture2D CharacterTexture , float width, float height, float speedX, float speedY, int health, int ammo): CharacterTexture(CharacterTexture), Object(pos,width,height),
-                                                                                                Movable(speedX,speedY),health(health),ammo(ammo)
+    Character(Texture2D CharacterTexture , float width, float height, float speedX, float speedY, int hp, int hpMax, int ammo, int score): CharacterTexture(CharacterTexture), Object(pos,width,height),
+                                                                                                Movable(speedX,speedY),hp(hp), hpMax(hpMax), ammo(ammo),score(score)
     {
         pos.x=float(GetScreenWidth()) / 2 ;
         pos.y=float(GetScreenHeight()) / 2 ;
@@ -52,8 +54,11 @@ public:
     Texture2D getTexture(){return CharacterTexture;}
     //void setTexture(Texture2D Texture){CharacterTexture=Texture;}
 
-    int getHealth() const {return health;}
+    int getHp() const {return hp;}
+    void setHp(int hpNew) {hp=hpNew;}
+    int getHpMax() const {return hpMax;}
     int getAmmo() const{return ammo;}
+    int getScore() const{return score;}
 
 
 
