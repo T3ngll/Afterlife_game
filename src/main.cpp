@@ -35,6 +35,8 @@ int main()
     // init character
     //class Character player(Character,70,50,300,300,100,100,20,0);
     class Character player(Character,70,50,Vector2{200,200},100,100,20,0);
+    class Enemy monster(140,40,Vector2{100,100});
+
 
     //for(int i=0;i<player.getAmmo();i++)
     //{
@@ -86,6 +88,30 @@ int main()
             player.setHp(player.getHp()-20) ;
         }
 
+        //enemy movement
+        if(player.getX() > monster.getX())
+        {
+          monster.setX(monster.getSpeedX()*GetFrameTime() );
+        }
+        if(player.getX() < monster.getX())
+        {
+          monster.setX(-1*monster.getSpeedX()*GetFrameTime() );
+        }
+        if(player.getY() > monster.getY())
+        {
+          monster.setY(monster.getSpeedY()*GetFrameTime() );
+        }
+        if(player.getY() < monster.getY())
+        {
+          monster.setY(-1*monster.getSpeedY()*GetFrameTime() );
+        }
+
+        // if(player.getX() > monster.getX())
+         // {
+         //   player.setHp(player.getHp()-20);
+         // }
+
+
         // start render
         BeginDrawing();
 
@@ -101,6 +127,8 @@ int main()
                        rotation*RAD2DEG,
                        WHITE);
 
+        DrawRectangle(monster.getX(), monster.getY(), monster.getWidth(), monster.getHeight(), BLACK); 
+        DrawText("ENEMY", monster.getX(), monster.getY(), 40, WHITE);
 
 
         DrawRectangle(10, 10, 400, 30, BLACK);  
