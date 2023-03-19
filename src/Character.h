@@ -38,11 +38,12 @@ public:
 
 class Character: public Object, public Movable
 {
+    Texture2D CharacterTexture;
     int hp;
     int hpMax;
     int ammo;
     int score;
-    Texture2D CharacterTexture;
+
 public:
     Character(Texture2D CharacterTexture , float width, float height, float speedX, float speedY, int hp, int hpMax, int ammo, int score): CharacterTexture(CharacterTexture), Object(pos,width,height),
                                                                                                 Movable(speedX,speedY),hp(hp), hpMax(hpMax), ammo(ammo),score(score)
