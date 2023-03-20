@@ -21,25 +21,29 @@ int main()
     //SetWindowState(FLAG_VSYNC_HINT);
     Image background = LoadImage("resources/hall.png");
     Image character = LoadImage("resources/character.png");
+    Image enemy = LoadImage("resources/foe.png");
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
     Texture2D Background = LoadTextureFromImage(background);
     Texture2D Character = LoadTextureFromImage(character);
+    Texture2D Enemy = LoadTextureFromImage(enemy);
     UnloadImage(background);
 
 
     auto frameWidth = (float)Character.width;
     auto frameHeight = (float)Character.height;
 
-
-
+    auto frameWidth2 = (float)Enemy.width;
+    auto frameHeight2 = (float)Enemy.height;
 
     // init character
     //class Character player(Character,70,50,300,300,100,100,20,0);
     class Character player(Character,70,50,Vector2{200,200},100,100,20,0);
-    class Enemy monster(140,40,Vector2{100,100});
+    class Enemy monster(Enemy,140,140,Vector2{100,100});
 
     bool collision = false;
+
     int frameCounter=0;
+
     for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
     {
         bullet[i].setPos((Vector2){player.getX(),player.getY()});
@@ -69,6 +73,10 @@ int main()
         float dx = mousePosition.x - player.getX();
         float dy = mousePosition.y - player.getY();
         float rotation = atan2f(dy, dx)+(PI/2);
+        //enemy rotation parameters
+        float dx2 = player.getX()-monster.getX();
+        float dy2 = player.getY()-monster.getY();
+        float rotation2 = atan2f(dy2, dx2)+(PI/2);
 
         auto HpPercent=  (float)(player.getHp())/(float)player.getHpMax();
 
@@ -201,8 +209,8 @@ int main()
           monster.setY(-1*monster.getSpeedY()*GetFrameTime() );
         }
 
-          collision = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),player.getWidth(),player.getHeight()},
-          (Rectangle){monster.getX(),monster.getY(),monster.getWidth(),monster.getHeight()});
+          collision = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
+          (Rectangle){monster.getX(),monster.getY(),(float)monster.getWidth(),(float)monster.getHeight()});
           if (collision)
           {
             if(frameCounter>60)
@@ -225,10 +233,13 @@ int main()
                        rotation*RAD2DEG,
                        WHITE);
 
-        DrawRectangle(monster.getX(), monster.getY(), monster.getWidth(), monster.getHeight(), BLACK); 
-        DrawText("ENEMY", monster.getX(), monster.getY(), 40, WHITE);
+        DrawTexturePro(monster.getTexture(),(Rectangle){0,0,frameWidth2,frameHeight2},
+                       (Rectangle){ monster.getX(),monster.getY(),monster.getWidth(),monster.getHeight()},
+                       (Vector2){(float)monster.getWidth()/2, (float)monster.getHeight()/2},
+                       rotation2*RAD2DEG,
+                       WHITE);
 
-
+        //healthar
         DrawRectangle(10, 10, 400, 30, BLACK);  
         DrawRectangle(14, 14, (392) * HpPercent, (22), RED);
 
@@ -238,8 +249,8 @@ int main()
             DrawText("oh, you died(", 350, 400, 40, WHITE);
         }
 
-        DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value", 10, 50, 20, WHITE);
-        DrawFPS(10, 140);
+        DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value\nPress MouseLeft to shoot", 10, 50, 20, WHITE);
+        DrawFPS(10, 170);
 
         EndDrawing(); // end render
     }
@@ -247,6 +258,7 @@ int main()
     // clear gpu
     UnloadTexture(Background);
     UnloadTexture(Character);
+    UnloadTexture(Enemy);
 
 
     //end
