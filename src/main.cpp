@@ -39,7 +39,7 @@ int main()
     class Enemy monster(140,40,Vector2{100,100});
 
     bool collision = false;
-
+    int frameCounter=0;
     for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
     {
         bullet[i].setPos((Vector2){player.getX(),player.getY()});
@@ -62,7 +62,7 @@ int main()
 
         ClearBackground(RAYWHITE);
         DrawTexture(Background, 0, 0, WHITE);
-
+        frameCounter++;
         // mouse tracking
 
         Vector2 mousePosition = GetMousePosition();
@@ -194,7 +194,11 @@ int main()
           (Rectangle){monster.getX(),monster.getY(),monster.getWidth(),monster.getHeight()});
           if (collision)
           {
-            player.setHp(player.getHp()-1);
+            if(frameCounter>60)
+            {
+            player.setHp(player.getHp()-20);
+            frameCounter=0;
+            }
           }
 
 
