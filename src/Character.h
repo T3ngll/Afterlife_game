@@ -32,17 +32,26 @@ public:
 class Movable{
 protected:
     Vector2 speed;
-
+    float frameWidth;
+    float frameHeight;
 public:
     Movable() = default;
-    explicit Movable(Vector2 speed): speed(speed){};
-    Vector2 getSpeed(){return speed;}
-    float getSpeedX() const {return speed.x;}
-    float getSpeedY() const {return speed.y;}
+    Movable(Vector2 speed,float frameWidth = 0, float frameHeight = 0): speed(speed){};
 
-    void setSpeed(Vector2 speed){this->speed=speed;}
-    void setSpeedX(float speed)  {this->speed.x=speed;}
-    void setSpeedY(float speed)  {this->speed.y=speed;}
+    float getFrameWidth (){ return frameWidth; }
+    float getFrameHeight (){ return frameHeight; }
+
+    void setFrameWidth (float frameWidth){ this->frameWidth=frameWidth; }
+    void setFrameHeight (float frameHeight){ this->frameHeight=frameHeight; }
+
+
+    Vector2 getSpeed(){return speed;}
+    float getSpeedX() const { return speed.x; }
+    float getSpeedY() const { return speed.y; }
+
+    void setSpeed(Vector2 speed){ this->speed=speed; }
+    void setSpeedX(float speed)  { this->speed.x=speed; }
+    void setSpeedY(float speed)  { this->speed.y=speed; }
 };
 
 
@@ -80,7 +89,7 @@ float radius;
 Vector2 target;
 public:
     Bullet()= default;
-    Bullet(Vector2 pos,Vector2 speed,bool active,int lifeSpawn,float radius,Color color): Object(pos,0,0), Movable(speed),lifeSpawn(lifeSpawn),radius(radius),color(color){};
+    Bullet(Vector2 pos,Vector2 speed, bool active,int lifeSpawn,float radius,Color color): Object(pos,0,0), Movable(speed),lifeSpawn(lifeSpawn),radius(radius),color(color){};
 
     int getLifeSpawn(){return lifeSpawn;}
     void setLifeSpawn(int life){lifeSpawn=life;}

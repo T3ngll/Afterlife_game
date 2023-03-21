@@ -36,15 +36,17 @@ int main()
 
 
     // --move to Interface Movable
-    auto frameWidth = (float)Character.width;
-    auto frameHeight = (float)Character.height;
 
-    auto frameWidth2 = (float)Enemy.width;
-    auto frameHeight2 = (float)Enemy.height;
 
-    // init character
+    // init characters
     class Character player(Character,70,50,Vector2{200,200},100,100,20,0);
     class Enemy monster(Enemy,140,140,Vector2{100,100});
+
+    player.setFrameWidth(Character.width);
+    player.setFrameHeight(Character.height);
+
+    monster.setFrameWidth(Enemy.width);
+    monster.setFrameHeight(Enemy.height);
 
     bool collision = false;
 
@@ -277,18 +279,16 @@ int main()
 
 
 
-//124
-
         DrawLine(0,GetScreenHeight()/2,GetScreenWidth(),GetScreenHeight()/2,BLACK);
         DrawLine(GetScreenWidth()/2,0,GetScreenWidth()/2,GetScreenHeight(),BLACK);
 
-        DrawTexturePro(player.getTexture(),(Rectangle){0,0,frameWidth,frameHeight},
+        DrawTexturePro(player.getTexture(),(Rectangle){0,0,player.getFrameWidth(),player.getFrameHeight()},
                        (Rectangle){player.getX(),player.getY(),player.getWidth(),player.getHeight()},
                        (Vector2){(float)player.getWidth()/2, (float)player.getHeight()/2},
                        rotation*RAD2DEG,
                        WHITE);
 
-        DrawTexturePro(monster.getTexture(),(Rectangle){0,0,frameWidth2,frameHeight2},
+        DrawTexturePro(monster.getTexture(),(Rectangle){0,0,monster.getFrameWidth(),monster.getFrameHeight()},
                        (Rectangle){ monster.getX(),monster.getY(),monster.getWidth(),monster.getHeight()},
                        (Vector2){(float)monster.getWidth()/2, (float)monster.getHeight()/2},
                        rotation2*RAD2DEG,
