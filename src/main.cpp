@@ -1,7 +1,11 @@
-#include "raylib.h"
-#include "Character.h"
+#include "character.h"
+#include "projectiles.h"
+
 #include <cmath>
 #include <vector>
+
+#include "raylib.h"
+
 
 using namespace std;
 
@@ -51,20 +55,6 @@ int main()
     bool collision = false;
 
     int frameCounter=0;
-
-    /*for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
-    {
-        bullet[i].setPos((Vector2){player.getX(),player.getY()});
-        bullet[i].setSpeed(Vector2 {300,300});
-        bullet[i].setRadius(10);
-        bullet[i].isActive(false);
-        bullet[i].setColor(WHITE);
-        
-    } old bullets init*/
-
-
-
-
 
     //main game loop
     while (!WindowShouldClose())
@@ -130,17 +120,6 @@ int main()
                 bullets.push_back(temp);
             }
 
-            /*for(auto & i : bullet)
-            {
-                if (!i.isActive())
-                {
-                    i.setPos((Vector2) {player.getX()+30, player.getY()+30});
-
-                    i.isActive(true);
-                    i.setTarget(mousePosition);
-                    break;
-                }
-            }*/
         }
 
 

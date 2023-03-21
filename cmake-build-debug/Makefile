@@ -128,6 +128,30 @@ afterlife/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/build
 .PHONY : afterlife/fast
 
+src/character.obj: src/character.cpp.obj
+.PHONY : src/character.obj
+
+# target to build an object file
+src/character.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/character.cpp.obj
+.PHONY : src/character.cpp.obj
+
+src/character.i: src/character.cpp.i
+.PHONY : src/character.i
+
+# target to preprocess a source file
+src/character.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/character.cpp.i
+.PHONY : src/character.cpp.i
+
+src/character.s: src/character.cpp.s
+.PHONY : src/character.s
+
+# target to generate assembly for a file
+src/character.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/character.cpp.s
+.PHONY : src/character.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -152,6 +176,78 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/movable.obj: src/movable.cpp.obj
+.PHONY : src/movable.obj
+
+# target to build an object file
+src/movable.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/movable.cpp.obj
+.PHONY : src/movable.cpp.obj
+
+src/movable.i: src/movable.cpp.i
+.PHONY : src/movable.i
+
+# target to preprocess a source file
+src/movable.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/movable.cpp.i
+.PHONY : src/movable.cpp.i
+
+src/movable.s: src/movable.cpp.s
+.PHONY : src/movable.s
+
+# target to generate assembly for a file
+src/movable.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/movable.cpp.s
+.PHONY : src/movable.cpp.s
+
+src/object.obj: src/object.cpp.obj
+.PHONY : src/object.obj
+
+# target to build an object file
+src/object.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/object.cpp.obj
+.PHONY : src/object.cpp.obj
+
+src/object.i: src/object.cpp.i
+.PHONY : src/object.i
+
+# target to preprocess a source file
+src/object.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/object.cpp.i
+.PHONY : src/object.cpp.i
+
+src/object.s: src/object.cpp.s
+.PHONY : src/object.s
+
+# target to generate assembly for a file
+src/object.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/object.cpp.s
+.PHONY : src/object.cpp.s
+
+src/projectiles.obj: src/projectiles.cpp.obj
+.PHONY : src/projectiles.obj
+
+# target to build an object file
+src/projectiles.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/projectiles.cpp.obj
+.PHONY : src/projectiles.cpp.obj
+
+src/projectiles.i: src/projectiles.cpp.i
+.PHONY : src/projectiles.i
+
+# target to preprocess a source file
+src/projectiles.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/projectiles.cpp.i
+.PHONY : src/projectiles.cpp.i
+
+src/projectiles.s: src/projectiles.cpp.s
+.PHONY : src/projectiles.s
+
+# target to generate assembly for a file
+src/projectiles.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/projectiles.cpp.s
+.PHONY : src/projectiles.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -161,9 +257,21 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... afterlife
+	@echo ... src/character.obj
+	@echo ... src/character.i
+	@echo ... src/character.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/movable.obj
+	@echo ... src/movable.i
+	@echo ... src/movable.s
+	@echo ... src/object.obj
+	@echo ... src/object.i
+	@echo ... src/object.s
+	@echo ... src/projectiles.obj
+	@echo ... src/projectiles.i
+	@echo ... src/projectiles.s
 .PHONY : help
 
 
