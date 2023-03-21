@@ -6,5 +6,13 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(include)
 
 add_executable(afterlife
+        include/character.h
+        include/movable.h
+        include/object.h
+        include/projectiles.h
         include/raylib.h
-        src/main.cpp src/character.h src/character.cpp src/object.h src/object.cpp src/movable.cpp src/movable.h src/projectiles.cpp src/projectiles.h)
+        src/character.cpp
+        src/main.cpp
+        src/movable.cpp
+        src/object.cpp
+        src/projectiles.cpp)

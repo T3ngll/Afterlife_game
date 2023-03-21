@@ -68,26 +68,11 @@ include CMakeFiles/afterlife.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/afterlife.dir/flags.make
 
-CMakeFiles/afterlife.dir/src/main.cpp.obj: CMakeFiles/afterlife.dir/flags.make
-CMakeFiles/afterlife.dir/src/main.cpp.obj: CMakeFiles/afterlife.dir/includes_CXX.rsp
-CMakeFiles/afterlife.dir/src/main.cpp.obj: ../src/main.cpp
-CMakeFiles/afterlife.dir/src/main.cpp.obj: CMakeFiles/afterlife.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\projects\projects c++\GitHub\afterlife\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/afterlife.dir/src/main.cpp.obj"
-	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afterlife.dir/src/main.cpp.obj -MF CMakeFiles\afterlife.dir\src\main.cpp.obj.d -o CMakeFiles\afterlife.dir\src\main.cpp.obj -c "D:\projects\projects c++\GitHub\afterlife\src\main.cpp"
-
-CMakeFiles/afterlife.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afterlife.dir/src/main.cpp.i"
-	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\projects\projects c++\GitHub\afterlife\src\main.cpp" > CMakeFiles\afterlife.dir\src\main.cpp.i
-
-CMakeFiles/afterlife.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afterlife.dir/src/main.cpp.s"
-	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\projects\projects c++\GitHub\afterlife\src\main.cpp" -o CMakeFiles\afterlife.dir\src\main.cpp.s
-
 CMakeFiles/afterlife.dir/src/character.cpp.obj: CMakeFiles/afterlife.dir/flags.make
 CMakeFiles/afterlife.dir/src/character.cpp.obj: CMakeFiles/afterlife.dir/includes_CXX.rsp
 CMakeFiles/afterlife.dir/src/character.cpp.obj: ../src/character.cpp
 CMakeFiles/afterlife.dir/src/character.cpp.obj: CMakeFiles/afterlife.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\projects\projects c++\GitHub\afterlife\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/afterlife.dir/src/character.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\projects\projects c++\GitHub\afterlife\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/afterlife.dir/src/character.cpp.obj"
 	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afterlife.dir/src/character.cpp.obj -MF CMakeFiles\afterlife.dir\src\character.cpp.obj.d -o CMakeFiles\afterlife.dir\src\character.cpp.obj -c "D:\projects\projects c++\GitHub\afterlife\src\character.cpp"
 
 CMakeFiles/afterlife.dir/src/character.cpp.i: cmake_force
@@ -98,26 +83,26 @@ CMakeFiles/afterlife.dir/src/character.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afterlife.dir/src/character.cpp.s"
 	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\projects\projects c++\GitHub\afterlife\src\character.cpp" -o CMakeFiles\afterlife.dir\src\character.cpp.s
 
-CMakeFiles/afterlife.dir/src/object.cpp.obj: CMakeFiles/afterlife.dir/flags.make
-CMakeFiles/afterlife.dir/src/object.cpp.obj: CMakeFiles/afterlife.dir/includes_CXX.rsp
-CMakeFiles/afterlife.dir/src/object.cpp.obj: ../src/object.cpp
-CMakeFiles/afterlife.dir/src/object.cpp.obj: CMakeFiles/afterlife.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\projects\projects c++\GitHub\afterlife\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/afterlife.dir/src/object.cpp.obj"
-	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afterlife.dir/src/object.cpp.obj -MF CMakeFiles\afterlife.dir\src\object.cpp.obj.d -o CMakeFiles\afterlife.dir\src\object.cpp.obj -c "D:\projects\projects c++\GitHub\afterlife\src\object.cpp"
+CMakeFiles/afterlife.dir/src/main.cpp.obj: CMakeFiles/afterlife.dir/flags.make
+CMakeFiles/afterlife.dir/src/main.cpp.obj: CMakeFiles/afterlife.dir/includes_CXX.rsp
+CMakeFiles/afterlife.dir/src/main.cpp.obj: ../src/main.cpp
+CMakeFiles/afterlife.dir/src/main.cpp.obj: CMakeFiles/afterlife.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\projects\projects c++\GitHub\afterlife\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/afterlife.dir/src/main.cpp.obj"
+	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afterlife.dir/src/main.cpp.obj -MF CMakeFiles\afterlife.dir\src\main.cpp.obj.d -o CMakeFiles\afterlife.dir\src\main.cpp.obj -c "D:\projects\projects c++\GitHub\afterlife\src\main.cpp"
 
-CMakeFiles/afterlife.dir/src/object.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afterlife.dir/src/object.cpp.i"
-	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\projects\projects c++\GitHub\afterlife\src\object.cpp" > CMakeFiles\afterlife.dir\src\object.cpp.i
+CMakeFiles/afterlife.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afterlife.dir/src/main.cpp.i"
+	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\projects\projects c++\GitHub\afterlife\src\main.cpp" > CMakeFiles\afterlife.dir\src\main.cpp.i
 
-CMakeFiles/afterlife.dir/src/object.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afterlife.dir/src/object.cpp.s"
-	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\projects\projects c++\GitHub\afterlife\src\object.cpp" -o CMakeFiles\afterlife.dir\src\object.cpp.s
+CMakeFiles/afterlife.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afterlife.dir/src/main.cpp.s"
+	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\projects\projects c++\GitHub\afterlife\src\main.cpp" -o CMakeFiles\afterlife.dir\src\main.cpp.s
 
 CMakeFiles/afterlife.dir/src/movable.cpp.obj: CMakeFiles/afterlife.dir/flags.make
 CMakeFiles/afterlife.dir/src/movable.cpp.obj: CMakeFiles/afterlife.dir/includes_CXX.rsp
 CMakeFiles/afterlife.dir/src/movable.cpp.obj: ../src/movable.cpp
 CMakeFiles/afterlife.dir/src/movable.cpp.obj: CMakeFiles/afterlife.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\projects\projects c++\GitHub\afterlife\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/afterlife.dir/src/movable.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\projects\projects c++\GitHub\afterlife\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/afterlife.dir/src/movable.cpp.obj"
 	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afterlife.dir/src/movable.cpp.obj -MF CMakeFiles\afterlife.dir\src\movable.cpp.obj.d -o CMakeFiles\afterlife.dir\src\movable.cpp.obj -c "D:\projects\projects c++\GitHub\afterlife\src\movable.cpp"
 
 CMakeFiles/afterlife.dir/src/movable.cpp.i: cmake_force
@@ -127,6 +112,21 @@ CMakeFiles/afterlife.dir/src/movable.cpp.i: cmake_force
 CMakeFiles/afterlife.dir/src/movable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afterlife.dir/src/movable.cpp.s"
 	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\projects\projects c++\GitHub\afterlife\src\movable.cpp" -o CMakeFiles\afterlife.dir\src\movable.cpp.s
+
+CMakeFiles/afterlife.dir/src/object.cpp.obj: CMakeFiles/afterlife.dir/flags.make
+CMakeFiles/afterlife.dir/src/object.cpp.obj: CMakeFiles/afterlife.dir/includes_CXX.rsp
+CMakeFiles/afterlife.dir/src/object.cpp.obj: ../src/object.cpp
+CMakeFiles/afterlife.dir/src/object.cpp.obj: CMakeFiles/afterlife.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\projects\projects c++\GitHub\afterlife\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/afterlife.dir/src/object.cpp.obj"
+	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/afterlife.dir/src/object.cpp.obj -MF CMakeFiles\afterlife.dir\src\object.cpp.obj.d -o CMakeFiles\afterlife.dir\src\object.cpp.obj -c "D:\projects\projects c++\GitHub\afterlife\src\object.cpp"
+
+CMakeFiles/afterlife.dir/src/object.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/afterlife.dir/src/object.cpp.i"
+	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\projects\projects c++\GitHub\afterlife\src\object.cpp" > CMakeFiles\afterlife.dir\src\object.cpp.i
+
+CMakeFiles/afterlife.dir/src/object.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/afterlife.dir/src/object.cpp.s"
+	C:\PROGRA~1\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\projects\projects c++\GitHub\afterlife\src\object.cpp" -o CMakeFiles\afterlife.dir\src\object.cpp.s
 
 CMakeFiles/afterlife.dir/src/projectiles.cpp.obj: CMakeFiles/afterlife.dir/flags.make
 CMakeFiles/afterlife.dir/src/projectiles.cpp.obj: CMakeFiles/afterlife.dir/includes_CXX.rsp
@@ -145,19 +145,19 @@ CMakeFiles/afterlife.dir/src/projectiles.cpp.s: cmake_force
 
 # Object files for target afterlife
 afterlife_OBJECTS = \
-"CMakeFiles/afterlife.dir/src/main.cpp.obj" \
 "CMakeFiles/afterlife.dir/src/character.cpp.obj" \
-"CMakeFiles/afterlife.dir/src/object.cpp.obj" \
+"CMakeFiles/afterlife.dir/src/main.cpp.obj" \
 "CMakeFiles/afterlife.dir/src/movable.cpp.obj" \
+"CMakeFiles/afterlife.dir/src/object.cpp.obj" \
 "CMakeFiles/afterlife.dir/src/projectiles.cpp.obj"
 
 # External object files for target afterlife
 afterlife_EXTERNAL_OBJECTS =
 
-afterlife.exe: CMakeFiles/afterlife.dir/src/main.cpp.obj
 afterlife.exe: CMakeFiles/afterlife.dir/src/character.cpp.obj
-afterlife.exe: CMakeFiles/afterlife.dir/src/object.cpp.obj
+afterlife.exe: CMakeFiles/afterlife.dir/src/main.cpp.obj
 afterlife.exe: CMakeFiles/afterlife.dir/src/movable.cpp.obj
+afterlife.exe: CMakeFiles/afterlife.dir/src/object.cpp.obj
 afterlife.exe: CMakeFiles/afterlife.dir/src/projectiles.cpp.obj
 afterlife.exe: CMakeFiles/afterlife.dir/build.make
 afterlife.exe: CMakeFiles/afterlife.dir/linklibs.rsp

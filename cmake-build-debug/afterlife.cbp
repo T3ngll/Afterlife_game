@@ -82,13 +82,22 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/projects/projects c++/GitHub/afterlife/include/character.h">
+			<Option target="afterlife"/>
+		</Unit>
+		<Unit filename="D:/projects/projects c++/GitHub/afterlife/include/movable.h">
+			<Option target="afterlife"/>
+		</Unit>
+		<Unit filename="D:/projects/projects c++/GitHub/afterlife/include/object.h">
+			<Option target="afterlife"/>
+		</Unit>
+		<Unit filename="D:/projects/projects c++/GitHub/afterlife/include/projectiles.h">
+			<Option target="afterlife"/>
+		</Unit>
 		<Unit filename="D:/projects/projects c++/GitHub/afterlife/include/raylib.h">
 			<Option target="afterlife"/>
 		</Unit>
 		<Unit filename="D:/projects/projects c++/GitHub/afterlife/src/character.cpp">
-			<Option target="afterlife"/>
-		</Unit>
-		<Unit filename="D:/projects/projects c++/GitHub/afterlife/src/character.h">
 			<Option target="afterlife"/>
 		</Unit>
 		<Unit filename="D:/projects/projects c++/GitHub/afterlife/src/main.cpp">
@@ -97,19 +106,10 @@
 		<Unit filename="D:/projects/projects c++/GitHub/afterlife/src/movable.cpp">
 			<Option target="afterlife"/>
 		</Unit>
-		<Unit filename="D:/projects/projects c++/GitHub/afterlife/src/movable.h">
-			<Option target="afterlife"/>
-		</Unit>
 		<Unit filename="D:/projects/projects c++/GitHub/afterlife/src/object.cpp">
 			<Option target="afterlife"/>
 		</Unit>
-		<Unit filename="D:/projects/projects c++/GitHub/afterlife/src/object.h">
-			<Option target="afterlife"/>
-		</Unit>
 		<Unit filename="D:/projects/projects c++/GitHub/afterlife/src/projectiles.cpp">
-			<Option target="afterlife"/>
-		</Unit>
-		<Unit filename="D:/projects/projects c++/GitHub/afterlife/src/projectiles.h">
 			<Option target="afterlife"/>
 		</Unit>
 		<Unit filename="D:/projects/projects c++/GitHub/afterlife/CMakeLists.txt">
