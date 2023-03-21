@@ -23,7 +23,7 @@ int main()
 {
 
     //init window, set fps, set textures
-    InitWindow(800,800, "Afterlife");
+    InitWindow(1920,1080, "Afterlife");
 
     SetTargetFPS(60);
     //SetWindowState(FLAG_VSYNC_HINT);
@@ -90,11 +90,16 @@ int main()
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
 
+
             if (bullets.size() < PLAYER_MAX_SHOOTS) {
 
 
                 Bullet temp;
-                temp.setSpeed(Vector2 {300,300});
+                float dist = 0.002*sqrtf((player.getX()-GetMousePosition().x)*(player.getX()-GetMousePosition().x) +
+                       (player.getY()-GetMousePosition().y)*(player.getY()-GetMousePosition().y));
+               // float dist = 0.002* sqrtf((GetMousePosition().x-player.getX())*(GetMousePosition().x-player.getX())
+                //        +(GetMousePosition().y-player.getY()*(GetMousePosition().y-player.getY())
+                temp.setSpeed(Vector2 {(player.getX()-GetMousePosition().x)/dist,(player.getY()-GetMousePosition().y)/dist});
                 temp.setRadius(10);
                 temp.setActive(false);
                 temp.setPos((Vector2){player.getX(),player.getY()});
@@ -105,34 +110,21 @@ int main()
 
         }
 
-
         for(auto bullet = bullets.begin(); bullet != bullets.end(); bullet++)
         {
-            //auto i = *bullet;
 
-            if(bullet->getX() > bullet->getTarget().x)
-            {
-                bullet->setX(-1 * (bullet->getSpeedX() ) * GetFrameTime() );
-            }
-            if(bullet->getX() < bullet->getTarget().x)
-            {
-                bullet->setX((bullet->getSpeedX() ) * GetFrameTime() );
-            }
-            if(bullet->getY() > bullet->getTarget().y)
-            {
-                bullet->setY(-1 * (bullet->getSpeedY() ) * GetFrameTime() );
-            }
-            if(bullet->getY() < bullet->getTarget().y)
-            {
-                bullet->setY((bullet->getSpeedY() ) * GetFrameTime() );
-            }
+                bullet->setX((-bullet->getSpeedX() ) * GetFrameTime() );
+
+                bullet->setY((-bullet->getSpeedY() ) * GetFrameTime() );
+
 
             // add logic for collision
 
 
-            if(bullet->getX() >= 800 || bullet->getX() <= 0 || bullet->getY() >= 800 || bullet->getY() <= 0) // check also y
+            if(bullet->getX() >= GetScreenWidth() || bullet->getX() <= 0 || bullet->getY() >= GetScreenHeight() || bullet->getY() <= 0) // check also y
             {
-                bullets.erase(bullet);
+
+                //bullets.erase(bullet);
                 continue;
             }
 
