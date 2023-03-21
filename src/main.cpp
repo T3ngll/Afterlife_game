@@ -1,12 +1,16 @@
 #include "raylib.h"
 #include "Character.h"
 #include <cmath>
+#include <vector>
+
 using namespace std;
 
 
 #define PLAYER_MAX_SHOOTS  20
 
-static Bullet bullet[PLAYER_MAX_SHOOTS];
+//static Bullet bullet[PLAYER_MAX_SHOOTS];
+
+vector<Bullet> bullets;
 
 
 
@@ -27,8 +31,11 @@ int main()
     Texture2D Character = LoadTextureFromImage(character);
     Texture2D Enemy = LoadTextureFromImage(enemy);
     UnloadImage(background);
+    UnloadImage(character);
+    UnloadImage(enemy);
 
 
+    // --move to Interface Movable
     auto frameWidth = (float)Character.width;
     auto frameHeight = (float)Character.height;
 
@@ -36,7 +43,6 @@ int main()
     auto frameHeight2 = (float)Enemy.height;
 
     // init character
-    //class Character player(Character,70,50,300,300,100,100,20,0);
     class Character player(Character,70,50,Vector2{200,200},100,100,20,0);
     class Enemy monster(Enemy,140,140,Vector2{100,100});
 
@@ -44,7 +50,7 @@ int main()
 
     int frameCounter=0;
 
-    for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
+    /*for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
     {
         bullet[i].setPos((Vector2){player.getX(),player.getY()});
         bullet[i].setSpeed(Vector2 {300,300});
@@ -52,7 +58,7 @@ int main()
         bullet[i].isActive(false);
         bullet[i].setColor(WHITE);
         
-    }
+    } old bullets init*/
 
 
 
@@ -69,6 +75,8 @@ int main()
         frameCounter++;
         // mouse tracking
 
+        // make one function that returns rotation
+        // or add method to characters
         Vector2 mousePosition = GetMousePosition();
         float dx = mousePosition.x - player.getX();
         float dy = mousePosition.y - player.getY();
@@ -78,10 +86,11 @@ int main()
         float dy2 = player.getY()-monster.getY();
         float rotation2 = atan2f(dy2, dx2)+(PI/2);
 
-        auto HpPercent=  (float)(player.getHp())/(float)player.getHpMax();
+
 
 
         //check if control key is down
+        // --replace by switch
         if (IsKeyDown(KEY_W) && player.getY() >player.getWidth())
         {
             player.setY(-1*player.getSpeedY()*GetFrameTime()) ;
@@ -102,78 +111,124 @@ int main()
 
 
 
-
         //shooting
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
-            for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
-            {
-                if (!bullet[i].isActive())
-                {
-                    bullet[i].setPos((Vector2) {player.getX()+30, player.getY()+30});
 
-                    bullet[i].isActive(true);
-                    bullet[i].setTarget(mousePosition);
+            if (bullets.size() < PLAYER_MAX_SHOOTS) {
+
+
+                Bullet temp;
+                temp.setSpeed(Vector2 {300,300});
+                temp.setRadius(10);
+                temp.setActive(false);
+                temp.setPos((Vector2){player.getX(),player.getY()});
+                temp.setColor(WHITE);
+                temp.setTarget(mousePosition);
+                bullets.push_back(temp);
+            }
+
+            /*for(auto & i : bullet)
+            {
+                if (!i.isActive())
+                {
+                    i.setPos((Vector2) {player.getX()+30, player.getY()+30});
+
+                    i.isActive(true);
+                    i.setTarget(mousePosition);
                     break;
                 }
-            }
+            }*/
         }
 
 
-        for(int i=0;i<PLAYER_MAX_SHOOTS;i++)
+        for(auto bullet = bullets.begin(); bullet != bullets.end(); bullet++)
         {
-            if (bullet[i].isActive())
+            //auto i = *bullet;
+
+            if(bullet->getX() > bullet->getTarget().x)
+            {
+                bullet->setX(-1 * (bullet->getSpeedX() ) * GetFrameTime() );
+            }
+            if(bullet->getX() < bullet->getTarget().x)
+            {
+                bullet->setX((bullet->getSpeedX() ) * GetFrameTime() );
+            }
+            if(bullet->getY() > bullet->getTarget().y)
+            {
+                bullet->setY(-1 * (bullet->getSpeedY() ) * GetFrameTime() );
+            }
+            if(bullet->getY() < bullet->getTarget().y)
+            {
+                bullet->setY((bullet->getSpeedY() ) * GetFrameTime() );
+            }
+
+            // add logic for collision
+
+
+            if(bullet->getX() >= 800 || bullet->getX() <= 0 || bullet->getY() >= 800 || bullet->getY() <= 0) // check also y
+            {
+                bullets.erase(bullet);
+                continue;
+            }
+
+
+            DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
+
+            /*if (i.isActive())
             {
 
 
-                if(bullet[i].getX() > bullet[i].getTarget().x)
+                if(i.getX() > i.getTarget().x)
                 {
-                    bullet[i].setX(-1*(bullet[i].getSpeedX()+3)*GetFrameTime() );
+                    i.setX(-1*(i.getSpeedX()+3)*GetFrameTime() );
                 }
-                if(bullet[i].getX() < bullet[i].getTarget().x)
+                if(i.getX() < i.getTarget().x)
                 {
-                    bullet[i].setX((bullet[i].getSpeedX()+3)*GetFrameTime() );
+                    i.setX((i.getSpeedX()+3)*GetFrameTime() );
                 }
-                if(bullet[i].getY() >  bullet[i].getTarget().y)
+                if(i.getY() >  i.getTarget().y)
                 {
-                    bullet[i].setY(-1*(bullet[i].getSpeedY()+3)*GetFrameTime() );
+                    i.setY(-1*(i.getSpeedY()+3)*GetFrameTime() );
                 }
-                if(bullet[i].getY() < bullet[i].getTarget().y)
+                if(i.getY() < i.getTarget().y)
                 {
-                    bullet[i].setY((bullet[i].getSpeedY()+3)*GetFrameTime() );
+                    i.setY((i.getSpeedY()+3)*GetFrameTime() );
                 }
 
                 //bullet[i].setX((bullet[i].getX()+3)*GetFrameTime());
 
-                bullet[i].setLifeSpawn(bullet[i].getLifeSpawn()+1);
+                i.setLifeSpawn(i.getLifeSpawn()+1);
 
-                if(bullet[i].getPos().x==bullet[i].getTarget().x && bullet[i].getPos().y==bullet[i].getTarget().y)
+                if(i.getPos().x==i.getTarget().x && i.getPos().y==i.getTarget().y)
                 {
-                    bullet[i].setPos(Vector2{player.getX()+30,player.getY()+30});
-                    bullet[i].setSpeed(Vector2{0,0});
-                    bullet[i].setLifeSpawn(0);
-                    bullet[i].isActive(false);
+                    i.setPos(Vector2{player.getX()+30,player.getY()+30});
+                    i.setSpeed(Vector2{0,0});
+                    i.setLifeSpawn(0);
+                    i.isActive(false);
                 }
 
 
-                if(bullet[i].getX()>=800)
+                if(i.getX()>=800)
                 {
-                    bullet[i].setPos(Vector2{player.getX()+30,player.getY()+30});
-                    bullet[i].setSpeed(Vector2{0,0});
-                    bullet[i].setLifeSpawn(0);
-                    bullet[i].isActive(false);
+                    i.setPos(Vector2{player.getX()+30,player.getY()+30});
+                    i.setSpeed(Vector2{0,0});
+                    i.setLifeSpawn(0);
+                    i.isActive(false);
                 }
 
-                if(bullet[i].isActive())
+                if(i.isActive())
                 {
-                    DrawCircleV(bullet[i].getPos(),bullet[i].getRadius(),WHITE);
+                    DrawCircleV(i.getPos(),i.getRadius(),WHITE);
                 }
 
                 //if(bullet[i].getLifeSpawn()>=80) {}
 
-            }
+            }*/
 
         }
+
+
 
 
 
@@ -240,8 +295,10 @@ int main()
                        WHITE);
 
         //healthar
+        auto HpPercent=  (float)(player.getHp())/(float)player.getHpMax();
+
         DrawRectangle(10, 10, 400, 30, BLACK);  
-        DrawRectangle(14, 14, (392) * HpPercent, (22), RED);
+        DrawRectangle(14, 14, 392.0f * HpPercent, (22), RED);
 
 
         if(player.getHp()<=0)

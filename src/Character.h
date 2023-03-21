@@ -6,9 +6,9 @@ protected:
     float x = 0;
     float y = 0;
     Vector2 pos{x,y};
-    float width;
-    float height;
-    bool active;
+    float width = 0;
+    float height = 0;
+    bool active = true;// in new logic we can delete it
 public:
     Object() = default;
     Object(Vector2 pos, float width, float height): pos(pos),width(width),height(height),active(true){};
@@ -26,24 +26,23 @@ public:
     float getWidth() const {return width;}
 
     bool isActive() const{return active;}
-    void isActive(bool isActive){active=isActive;}
+    void setActive(bool isActive){active=isActive;}
 };
 
 class Movable{
 protected:
-    float speedX;
-    float speedY;
-    Vector2 speed{speedX,speedY};
+    Vector2 speed;
+
 public:
-    Movable()= default;
-    Movable(Vector2 speed): speed(speed){};
+    Movable() = default;
+    explicit Movable(Vector2 speed): speed(speed){};
     Vector2 getSpeed(){return speed;}
     float getSpeedX() const {return speed.x;}
     float getSpeedY() const {return speed.y;}
 
-    void setSpeed(Vector2 speed2){speed=speed2;}
-    void setSpeedX(float speed)  {speedX=speed;}
-    void setSpeedY(float speed)  {speedY=speed;}
+    void setSpeed(Vector2 speed){this->speed=speed;}
+    void setSpeedX(float speed)  {this->speed.x=speed;}
+    void setSpeedY(float speed)  {this->speed.y=speed;}
 };
 
 
