@@ -29,7 +29,7 @@ int main()
     //SetWindowState(FLAG_VSYNC_HINT);
     Image background = LoadImage("resources/hall.png");
     Image character = LoadImage("resources/character.png");
-    Image enemy = LoadImage("resources/foe.png");
+    Image enemy = LoadImage("resources/character.png");
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
     Texture2D Background = LoadTextureFromImage(background);
     Texture2D Character = LoadTextureFromImage(character);
@@ -38,8 +38,6 @@ int main()
     UnloadImage(character);
     UnloadImage(enemy);
 
-
-    // --move to Interface Movable
 
 
     // init characters
@@ -64,21 +62,6 @@ int main()
 
         ClearBackground(RAYWHITE);
         DrawTexture(Background, 0, 0, WHITE);
-        frameCounter++;
-        // mouse tracking
-
-        // make one function that returns rotation
-        // or add method to characters
-        Vector2 mousePosition = GetMousePosition();
-        float dx = mousePosition.x - player.getX();
-        float dy = mousePosition.y - player.getY();
-        float rotation = atan2f(dy, dx)+(PI/2);
-        //enemy rotation parameters
-        float dx2 = player.getX()-monster.getX();
-        float dy2 = player.getY()-monster.getY();
-        float rotation2 = atan2f(dy2, dx2)+(PI/2);
-
-
 
 
         //check if control key is down
@@ -116,7 +99,7 @@ int main()
                 temp.setActive(false);
                 temp.setPos((Vector2){player.getX(),player.getY()});
                 temp.setColor(WHITE);
-                temp.setTarget(mousePosition);
+                temp.setTargetToMouse();
                 bullets.push_back(temp);
             }
 
@@ -246,7 +229,8 @@ int main()
         }
 
           collision = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-          (Rectangle){monster.getX(),monster.getY(),(float)monster.getWidth(),(float)monster.getHeight()});
+          (Rectangle){monster.getX(),monster.getY(),20.0f,20.0f});
+        frameCounter++;
           if (collision)
           {
             if(frameCounter>60)
@@ -264,16 +248,16 @@ int main()
         DrawTexturePro(player.getTexture(),(Rectangle){0,0,player.getFrameWidth(),player.getFrameHeight()},
                        (Rectangle){player.getX(),player.getY(),player.getWidth(),player.getHeight()},
                        (Vector2){(float)player.getWidth()/2, (float)player.getHeight()/2},
-                       rotation*RAD2DEG,
+                       player.getRotation(),
                        WHITE);
 
         DrawTexturePro(monster.getTexture(),(Rectangle){0,0,monster.getFrameWidth(),monster.getFrameHeight()},
                        (Rectangle){ monster.getX(),monster.getY(),monster.getWidth(),monster.getHeight()},
                        (Vector2){(float)monster.getWidth()/2, (float)monster.getHeight()/2},
-                       rotation2*RAD2DEG,
-                       WHITE);
+                       monster.getRotationToPlayer(player),
+                       RED);
 
-        //healthar
+        //healthbar
         auto HpPercent=  (float)(player.getHp())/(float)player.getHpMax();
 
         DrawRectangle(10, 10, 400, 30, BLACK);  

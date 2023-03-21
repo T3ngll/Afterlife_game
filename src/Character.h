@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "object.h"
 #include "movable.h"
+#include <cmath>
 
 class Character: public Object, public Movable
 {
@@ -18,6 +19,8 @@ public:
 
     int getHp() const;
     void setHp(int hpNew);
+
+    float getRotation();
 
     int getHpMax() const;
 
@@ -39,6 +42,8 @@ public:
         pos.y=float(GetScreenHeight()) -100;
     };
     Texture2D getTexture(){return FoeTexture;}
+
+    float getRotationToPlayer(Character player);
 };
 
 

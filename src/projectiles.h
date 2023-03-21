@@ -20,6 +20,6 @@ public:
 
     void setColor(Color color);
 
-    void setTarget(Vector2 target);
+    void setTargetToMouse();
     Vector2 getTarget();
 };

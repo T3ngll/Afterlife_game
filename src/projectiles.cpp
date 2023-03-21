@@ -13,5 +13,9 @@ float Bullet::getRadius(){return radius;}
 
 void Bullet::setColor(Color color){this->color=color;}
 
-void Bullet::setTarget(Vector2 target){this->target=target;}
+void Bullet::setTargetToMouse()
+{
+    Vector2 mousePos=GetMousePosition();
+    this->target=mousePos;
+}
 Vector2 Bullet::getTarget() {return target;}
