@@ -43,7 +43,7 @@ int main()
 
     // init characters
     class Character player(Character,70,50,Vector2{200,200},100,100,20,0);
-    class Enemy monster(Enemy,140,140,Vector2{100,100});
+    class Enemy monster(Enemy,140,140,Vector2{100,100},100,100);
 
     player.setFrameWidth(Character.width);
     player.setFrameHeight(Character.height);
@@ -55,6 +55,8 @@ int main()
     bool collisionAttack = false;
 
     int frameCounter=0;
+    int frameCounter2=0;
+
 
     //main game loop
     while (!WindowShouldClose())
@@ -64,7 +66,7 @@ int main()
 
         ClearBackground(RAYWHITE);
         DrawTexture(Background, 0, 0, WHITE);
-
+        frameCounter++;
 
         //check if control key is down
         // --replace by switch
@@ -134,12 +136,21 @@ int main()
             DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
 
             //collision between bullet and a monster
+            if(monster.isActive())
+        {
             collisionAttack=CheckCollisionCircleRec((Vector2){bullet->getPos()}, bullet->getRadius(),
-          (Rectangle){monster.getX(),monster.getY(),140.0f,140.0f});
+          (Rectangle){monster.getX(),monster.getY(),monster.getWidth(),monster.getHeight()});
           if (collisionAttack)
           {
-            monster.setActive(false);
+            monster.setHp(monster.getHp()-2);
+            if(monster.getHp()<=0)
+            {
+                monster.setActive(false);
+                player.setScore(player.getScore()+100);
+                
+            }
           }
+        }
 
             /*if (i.isActive())
             {
@@ -237,7 +248,7 @@ int main()
             {
           collisionTakeDamage = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
           (Rectangle){monster.getX(),monster.getY(),20.0f,20.0f});
-        frameCounter++;
+        
           if (collisionTakeDamage)
           {
             if(frameCounter>60)
@@ -270,18 +281,25 @@ int main()
 
         //healthbar
         auto HpPercent=  (float)(player.getHp())/(float)player.getHpMax();
+        auto HpPercent2=  (float)(monster.getHp())/(float)monster.getHpMax();
 
-        DrawRectangle(10, 10, 400, 30, BLACK);  
-        DrawRectangle(14, 14, 392.0f * HpPercent, (22), RED);
-
+        DrawRectangle(10, 30, 400, 30, BLACK);  
+        DrawRectangle(14, 34, 392.0f * HpPercent, (22), RED);
+        //enemy hp
+        if(monster.isActive())
+        {
+             DrawRectangle(monster.getX()-90, monster.getY()-90, 200, 25, BLACK);  
+             DrawRectangle(monster.getX()-86, monster.getY()-86, 192.0f * HpPercent2, (17), RED);
+        }
 
         if(player.getHp()<=0)
         {
             DrawText("oh, you died(", 350, 400, 40, WHITE);
         }
 
-        DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value\nPress MouseLeft to shoot", 10, 50, 20, WHITE);
-        DrawFPS(10, 170);
+        DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value\nPress MouseLeft to shoot", 10, 80, 20, WHITE);
+        DrawText(TextFormat("SCORE: %i", player.getScore()), 10, 200, 20, WHITE);
+        DrawFPS(10, 230);
 
         EndDrawing(); // end render
     }

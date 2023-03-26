@@ -27,6 +27,7 @@ public:
     int getAmmo() const;
 
     int getScore() const;
+    void setScore(int scoreNew);
 };
 
 

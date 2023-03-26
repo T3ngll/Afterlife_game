@@ -8,3 +8,6 @@ float Enemy::getRotationToPlayer(Character player)
     return rotation*RAD2DEG;
 
 }
+int Enemy::getHp() const {return hp;}
+void Enemy::setHp(int hpNew) {hp=hpNew;}
+int Enemy::getHpMax() const {return hpMax;}

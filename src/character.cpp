@@ -25,6 +25,7 @@ int Character::getHpMax() const {return hpMax;}
 int Character::getAmmo() const{return ammo;}
 
 int Character::getScore() const{return score;}
+void Character::setScore(int scoreNew) {score=scoreNew;}
 
 
 
