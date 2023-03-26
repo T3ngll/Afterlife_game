@@ -1,5 +1,6 @@
 #include "character.h"
 #include "projectiles.h"
+#include "enemy.h"
 
 #include <cmath>
 #include <vector>
@@ -50,7 +51,8 @@ int main()
     monster.setFrameWidth(Enemy.width);
     monster.setFrameHeight(Enemy.height);
 
-    bool collision = false;
+    bool collisionTakeDamage = false;
+    bool collisionAttack = false;
 
     int frameCounter=0;
 
@@ -131,6 +133,14 @@ int main()
 
             DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
 
+            //collision between bullet and a monster
+            collisionAttack=CheckCollisionCircleRec((Vector2){bullet->getPos()}, bullet->getRadius(),
+          (Rectangle){monster.getX(),monster.getY(),140.0f,140.0f});
+          if (collisionAttack)
+          {
+            monster.setActive(false);
+          }
+
             /*if (i.isActive())
             {
 
@@ -203,27 +213,32 @@ int main()
         }
 
         //enemy movement
-        if(player.getX() > monster.getX())
+        if(monster.isActive())
         {
-          monster.setX(monster.getSpeedX()*GetFrameTime() );
-        }
-        if(player.getX() < monster.getX())
-        {
-          monster.setX(-1*monster.getSpeedX()*GetFrameTime() );
-        }
-        if(player.getY() > monster.getY())
-        {
-          monster.setY(monster.getSpeedY()*GetFrameTime() );
-        }
-        if(player.getY() < monster.getY())
-        {
-          monster.setY(-1*monster.getSpeedY()*GetFrameTime() );
+            if(player.getX() > monster.getX())
+            {
+            monster.setX(monster.getSpeedX()*GetFrameTime() );
+            }
+            if(player.getX() < monster.getX())
+            {
+            monster.setX(-1*monster.getSpeedX()*GetFrameTime() );
+            }
+            if(player.getY() > monster.getY())
+            {
+            monster.setY(monster.getSpeedY()*GetFrameTime() );
+            }
+            if(player.getY() < monster.getY())
+            {
+            monster.setY(-1*monster.getSpeedY()*GetFrameTime() );
+            }
         }
 
-          collision = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
+            if(monster.isActive())
+            {
+          collisionTakeDamage = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
           (Rectangle){monster.getX(),monster.getY(),20.0f,20.0f});
         frameCounter++;
-          if (collision)
+          if (collisionTakeDamage)
           {
             if(frameCounter>60)
             {
@@ -231,6 +246,7 @@ int main()
             frameCounter=0;
             }
           }
+            }
 
 
 
@@ -243,11 +259,14 @@ int main()
                        player.getRotation(),
                        WHITE);
 
+     if(monster.isActive())
+     {
         DrawTexturePro(monster.getTexture(),(Rectangle){0,0,monster.getFrameWidth(),monster.getFrameHeight()},
                        (Rectangle){ monster.getX(),monster.getY(),monster.getWidth(),monster.getHeight()},
                        (Vector2){(float)monster.getWidth()/2, (float)monster.getHeight()/2},
                        monster.getRotationToPlayer(player),
                        RED);
+     }
 
         //healthbar
         auto HpPercent=  (float)(player.getHp())/(float)player.getHpMax();
