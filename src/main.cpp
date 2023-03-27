@@ -2,9 +2,10 @@
 #include "projectiles.h"
 #include "enemy.h"
 #include "enfactory.h"
-
+#include <stdlib.h>
 #include <cmath>
 #include <vector>
+#include <time.h>
 
 #include "raylib.h"
 
@@ -25,6 +26,8 @@ Factory f;
 
 int main()
 {
+
+    srand(time(NULL));
 
     //init window, set fps, set textures
     InitWindow(1920,1080, "Afterlife");
@@ -50,7 +53,7 @@ int main()
     // init characters
     class Character player(Character,70,50,Vector2{200,200},100,20,0);
     Type type = Walker;
-    enemies.push_back(f.create(type,Vector2{100,100},walker));
+    enemies.push_back(f.create(type,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},walker));
     //class Enemy monster(Enemy,140,140,Vector2{100,100},100);
 
     player.setFrameWidth(Character.width);

@@ -28,7 +28,8 @@ class Factory
 		{
 			case Walker:
                 
-				auto enemy = new Enemy(tex,140,140,pos,100);
+				auto enemy = new Enemy(tex,140,140,pos,Vector2{100,100},100);
+
                 enemy->setFrameWidth(tex.width);
                 enemy->setFrameHeight(tex.height);
                 return enemy;
