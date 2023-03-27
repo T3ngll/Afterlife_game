@@ -1,10 +1,11 @@
 #include "character.h"
 
-Character::Character(Texture2D CharacterTexture , float width, float height, Vector2 speed, int hp, int hpMax, int ammo, int score): CharacterTexture(CharacterTexture), Object(pos,width,height),
-                    Movable(speed),hp(hp), hpMax(hpMax), ammo(ammo),score(score)
+Character::Character(Texture2D CharacterTexture , float width, float height, Vector2 speed, int hpMax, int ammo, int score): CharacterTexture(CharacterTexture), Object(pos,width,height),
+                    Movable(speed), hpMax(hpMax), ammo(ammo),score(score)
 {
     pos.x=float(GetScreenWidth()) / 2 ;
     pos.y=float(GetScreenHeight()) / 2 ;
+    hp=hpMax;
 }
 
 Texture2D Character::getTexture(){return CharacterTexture;}

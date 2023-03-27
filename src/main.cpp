@@ -1,6 +1,7 @@
 #include "character.h"
 #include "projectiles.h"
 #include "enemy.h"
+#include "enfactory.h"
 
 #include <cmath>
 #include <vector>
@@ -16,7 +17,9 @@ using namespace std;
 //static Bullet bullet[PLAYER_MAX_SHOOTS];
 
 vector<Bullet> bullets;
+vector<Enemy*> enemies;
 
+Factory f;
 
 
 
@@ -30,26 +33,33 @@ int main()
     //SetWindowState(FLAG_VSYNC_HINT);
     Image background = LoadImage("resources/hall.png");
     Image character = LoadImage("resources/character.png");
-    Image enemy = LoadImage("resources/character.png");
+    //Image enemy = LoadImage("resources/character.png");
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
+    Image enemy = LoadImage("resources/character.png");
+       
+       
     Texture2D Background = LoadTextureFromImage(background);
     Texture2D Character = LoadTextureFromImage(character);
-    Texture2D Enemy = LoadTextureFromImage(enemy);
+    auto walker = LoadTextureFromImage(enemy);
     UnloadImage(background);
     UnloadImage(character);
     UnloadImage(enemy);
 
 
-
+    
     // init characters
-    class Character player(Character,70,50,Vector2{200,200},100,100,20,0);
-    class Enemy monster(Enemy,140,140,Vector2{100,100},100,100);
+    class Character player(Character,70,50,Vector2{200,200},100,20,0);
+    Type type = Walker;
+    enemies.push_back(f.create(type,Vector2{100,100},walker));
+    //class Enemy monster(Enemy,140,140,Vector2{100,100},100);
 
     player.setFrameWidth(Character.width);
     player.setFrameHeight(Character.height);
 
-    monster.setFrameWidth(Enemy.width);
-    monster.setFrameHeight(Enemy.height);
+    auto monster = enemies[0];
+
+   //monster.setFrameWidth(Enemy.width);
+   //monster.setFrameHeight(Enemy.height);
 
     bool collisionTakeDamage = false;
     bool collisionAttack = false;
@@ -136,16 +146,16 @@ int main()
             DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
 
             //collision between bullet and a monster
-            if(monster.isActive())
+            if(monster->isActive())
         {
             collisionAttack=CheckCollisionCircleRec((Vector2){bullet->getPos()}, bullet->getRadius(),
-          (Rectangle){monster.getX(),monster.getY(),monster.getWidth(),monster.getHeight()});
+          (Rectangle){monster->getX(),monster->getY(),monster->getWidth(),monster->getHeight()});
           if (collisionAttack)
           {
-            monster.setHp(monster.getHp()-2);
-            if(monster.getHp()<=0)
+            monster->setHp(monster->getHp()-2);
+            if(monster->getHp()<=0)
             {
-                monster.setActive(false);
+                monster->setActive(false);
                 player.setScore(player.getScore()+100);
                 
             }
@@ -224,30 +234,30 @@ int main()
         }
 
         //enemy movement
-        if(monster.isActive())
+        if(monster->isActive())
         {
-            if(player.getX() > monster.getX())
+            if(player.getX() > monster->getX())
             {
-            monster.setX(monster.getSpeedX()*GetFrameTime() );
+            monster->setX(monster->getSpeedX()*GetFrameTime() );
             }
-            if(player.getX() < monster.getX())
+            if(player.getX() < monster->getX())
             {
-            monster.setX(-1*monster.getSpeedX()*GetFrameTime() );
+            monster->setX(-1*monster->getSpeedX()*GetFrameTime() );
             }
-            if(player.getY() > monster.getY())
+            if(player.getY() > monster->getY())
             {
-            monster.setY(monster.getSpeedY()*GetFrameTime() );
+            monster->setY(monster->getSpeedY()*GetFrameTime() );
             }
-            if(player.getY() < monster.getY())
+            if(player.getY() < monster->getY())
             {
-            monster.setY(-1*monster.getSpeedY()*GetFrameTime() );
+            monster->setY(-1*monster->getSpeedY()*GetFrameTime() );
             }
         }
 
-            if(monster.isActive())
+            if(monster->isActive())
             {
           collisionTakeDamage = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-          (Rectangle){monster.getX(),monster.getY(),20.0f,20.0f});
+          (Rectangle){monster->getX(),monster->getY(),20.0f,20.0f});
         
           if (collisionTakeDamage)
           {
@@ -270,26 +280,26 @@ int main()
                        player.getRotation(),
                        WHITE);
 
-     if(monster.isActive())
+     if(monster->isActive())
      {
-        DrawTexturePro(monster.getTexture(),(Rectangle){0,0,monster.getFrameWidth(),monster.getFrameHeight()},
-                       (Rectangle){ monster.getX(),monster.getY(),monster.getWidth(),monster.getHeight()},
-                       (Vector2){(float)monster.getWidth()/2, (float)monster.getHeight()/2},
-                       monster.getRotationToPlayer(player),
+        DrawTexturePro(monster->getTexture(),(Rectangle){0,0,monster->getFrameWidth(),monster->getFrameHeight()},
+                       (Rectangle){ monster->getX(),monster->getY(),monster->getWidth(),monster->getHeight()},
+                       (Vector2){(float)monster->getWidth()/2, (float)monster->getHeight()/2},
+                       monster->getRotationToPlayer(player),
                        RED);
      }
 
         //healthbar
         auto HpPercent=  (float)(player.getHp())/(float)player.getHpMax();
-        auto HpPercent2=  (float)(monster.getHp())/(float)monster.getHpMax();
+        auto HpPercent2=  (float)(monster->getHp())/(float)monster->getHpMax();
 
         DrawRectangle(10, 30, 400, 30, BLACK);  
         DrawRectangle(14, 34, 392.0f * HpPercent, (22), RED);
         //enemy hp
-        if(monster.isActive())
+        if(monster->isActive())
         {
-             DrawRectangle(monster.getX()-90, monster.getY()-90, 200, 25, BLACK);  
-             DrawRectangle(monster.getX()-86, monster.getY()-86, 192.0f * HpPercent2, (17), RED);
+             DrawRectangle(monster->getX()-90, monster->getY()-90, 200, 25, BLACK);  
+             DrawRectangle(monster->getX()-86, monster->getY()-86, 192.0f * HpPercent2, (17), RED);
         }
 
         if(player.getHp()<=0)
@@ -307,7 +317,7 @@ int main()
     // clear gpu
     UnloadTexture(Background);
     UnloadTexture(Character);
-    UnloadTexture(Enemy);
+    UnloadTexture(walker);
 
 
     //end

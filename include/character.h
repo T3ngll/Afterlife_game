@@ -13,7 +13,7 @@ class Character: public Object, public Movable
     int score;
 
 public:
-    Character(Texture2D CharacterTexture , float width, float height, Vector2 speed, int hp, int hpMax, int ammo, int score);
+    Character(Texture2D CharacterTexture , float width, float height, Vector2 speed, int hpMax, int ammo, int score);
 
     Texture2D getTexture();
 
