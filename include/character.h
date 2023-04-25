@@ -11,6 +11,7 @@ class Character: public Object, public Movable
     int hpMax;
     int ammo;
     int score;
+    float HpPercent;
 
 public:
     Character(Texture2D CharacterTexture , float width, float height, Vector2 speed, int hpMax, int ammo, int score);
@@ -28,6 +29,9 @@ public:
 
     int getScore() const;
     void setScore(int scoreNew);
+
+      void setHpPercent(float hpPercentNew);
+    float getHpPercent() const;
 };
 
 

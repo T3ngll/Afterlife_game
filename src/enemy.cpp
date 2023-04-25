@@ -11,3 +11,5 @@ float Enemy::getRotationToPlayer(Character player)
 int Enemy::getHp() const {return hp;}
 void Enemy::setHp(int hpNew) {hp=hpNew;}
 int Enemy::getHpMax() const {return hpMax;}
+void Enemy::setHpPercent(float hpPercentNew) {HpPercent=hpPercentNew;}
+float Enemy::getHpPercent() const {return HpPercent;}

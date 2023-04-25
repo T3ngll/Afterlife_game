@@ -28,5 +28,8 @@ int Character::getAmmo() const{return ammo;}
 int Character::getScore() const{return score;}
 void Character::setScore(int scoreNew) {score=scoreNew;}
 
+void Character::setHpPercent(float hpPercentNew) {HpPercent=hpPercentNew;}
+float Character::getHpPercent() const {return HpPercent;}
+
 
 

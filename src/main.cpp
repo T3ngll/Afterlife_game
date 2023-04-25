@@ -51,18 +51,25 @@ int main()
     UnloadImage(enemy);
 
 
-    
+    int EnAmount=3;
+
     // init characters
     class Character player(Character,70,50,Vector2{200,200},100,20,0);
     Type type = Walker, Heal;
+    for(int i=0; i<EnAmount; i++)
+    {
     enemies.push_back(f.create(type,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},walker));
+    }
     //heals.push_back(f.create(type,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
-    //class Enemy monster(Enemy,140,140,Vector2{100,100},100);
 
     player.setFrameWidth(Character.width);
     player.setFrameHeight(Character.height);
 
-    auto monster = enemies[0];
+   /* for(int i=0; i<2; i++)
+    {
+    auto monster = enemies[i];
+    }
+    */
     //auto aidkit = heals[0];
 
    //monster.setFrameWidth(Enemy.width);
@@ -154,21 +161,24 @@ int main()
             DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
 
             //collision between bullet and a monster
-            if(monster->isActive())
+                for(int i=0; i<EnAmount; i++)
+    {
+            if(enemies[i]->isActive())
         {
             collisionAttack=CheckCollisionCircleRec((Vector2){bullet->getPos()}, bullet->getRadius(),
-          (Rectangle){monster->getX(),monster->getY(),monster->getWidth(),monster->getHeight()});
+          (Rectangle){enemies[i]->getX(),enemies[i]->getY(),enemies[i]->getWidth(),enemies[i]->getHeight()});
           if (collisionAttack)
           {
-            monster->setHp(monster->getHp()-2);
-            if(monster->getHp()<=0)
+            enemies[i]->setHp(enemies[i]->getHp()-2);
+            if(enemies[i]->getHp()<=0)
             {
-                monster->setActive(false);
+                enemies[i]->setActive(false);
                 player.setScore(player.getScore()+100);
                 
             }
           }
         }
+    }
         
 
             /*if (i.isActive())
@@ -243,30 +253,32 @@ int main()
         }
 
         //enemy movement
-        if(monster->isActive())
+        for(int i=0; i<EnAmount; i++)
+    {
+        if(enemies[i]->isActive())
         {
-            if(player.getX() > monster->getX())
+            if(player.getX() > enemies[i]->getX())
             {
-            monster->setX(monster->getSpeedX()*GetFrameTime() );
+            enemies[i]->setX(enemies[i]->getSpeedX()*GetFrameTime() );
             }
-            if(player.getX() < monster->getX())
+            if(player.getX() < enemies[i]->getX())
             {
-            monster->setX(-1*monster->getSpeedX()*GetFrameTime() );
+            enemies[i]->setX(-1*enemies[i]->getSpeedX()*GetFrameTime() );
             }
-            if(player.getY() > monster->getY())
+            if(player.getY() > enemies[i]->getY())
             {
-            monster->setY(monster->getSpeedY()*GetFrameTime() );
+            enemies[i]->setY(enemies[i]->getSpeedY()*GetFrameTime() );
             }
-            if(player.getY() < monster->getY())
+            if(player.getY() < enemies[i]->getY())
             {
-            monster->setY(-1*monster->getSpeedY()*GetFrameTime() );
+            enemies[i]->setY(-1*enemies[i]->getSpeedY()*GetFrameTime() );
             }
         }
 
-            if(monster->isActive())
+            if(enemies[i]->isActive())
             {
           collisionTakeDamage = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-          (Rectangle){monster->getX(),monster->getY(),20.0f,20.0f});
+          (Rectangle){enemies[i]->getX(),enemies[i]->getY(),20.0f,20.0f});
         
           if (collisionTakeDamage)
           {
@@ -277,8 +289,9 @@ int main()
             }
           }
             }
+    }
 
-          /*   if(aidkit->isActive())
+            /* if(aidkit->isActive())
             {
           collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
           (Rectangle){aidkit->getX(),aidkit->getY(),20.0f,20.0f});
@@ -299,33 +312,42 @@ int main()
                        (Vector2){(float)player.getWidth()/2, (float)player.getHeight()/2},
                        player.getRotation(),
                        WHITE);
-
-     if(monster->isActive())
+        for(int i=0; i<EnAmount; i++)
+    {
+     if(enemies[i]->isActive())
      {
-        DrawTexturePro(monster->getTexture(),(Rectangle){0,0,monster->getFrameWidth(),monster->getFrameHeight()},
-                       (Rectangle){ monster->getX(),monster->getY(),monster->getWidth(),monster->getHeight()},
-                       (Vector2){(float)monster->getWidth()/2, (float)monster->getHeight()/2},
-                       monster->getRotationToPlayer(player),
+        DrawTexturePro(enemies[i]->getTexture(),(Rectangle){0,0,enemies[i]->getFrameWidth(),enemies[i]->getFrameHeight()},
+                       (Rectangle){ enemies[i]->getX(),enemies[i]->getY(),enemies[i]->getWidth(),enemies[i]->getHeight()},
+                       (Vector2){(float)enemies[i]->getWidth()/2, (float)enemies[i]->getHeight()/2},
+                       enemies[i]->getRotationToPlayer(player),
                        RED);
      }
-     /*if(aidkit->isActive())
+    }
+    /*
+     if(aidkit->isActive())
      {
-         DrawRectangle(aidkit->getX(),aidkit->getY(),aidkit->getWidth(),aidkit->getHeight(), RED); 
+         DrawRectangle(aidkit->getX(),aidkit->getY(),20,20, RED); 
      }*/
 
         //healthbar
-        auto HpPercent=  (float)(player.getHp())/(float)player.getHpMax();
-        auto HpPercent2=  (float)(monster->getHp())/(float)monster->getHpMax();
+       player.setHpPercent((float)(player.getHp())/(float)player.getHpMax());
+        for(int i=0; i<EnAmount; i++)
+    {
+         enemies[i]->setHpPercent((float)(enemies[i]->getHp())/(float)enemies[i]->getHpMax());
+    }
+    
 
         DrawRectangle(10, 30, 400, 30, BLACK);  
-        DrawRectangle(14, 34, 392.0f * HpPercent, (22), RED);
+        DrawRectangle(14, 34, 392.0f * player.getHpPercent(), (22), RED);
         //enemy hp
-        if(monster->isActive())
+        for(int i=0; i<EnAmount; i++)
+    {
+        if(enemies[i]->isActive())
         {
-             DrawRectangle(monster->getX()-90, monster->getY()-90, 200, 25, BLACK);  
-             DrawRectangle(monster->getX()-86, monster->getY()-86, 192.0f * HpPercent2, (17), RED);
+             DrawRectangle(enemies[i]->getX()-90, enemies[i]->getY()-90, 200, 25, BLACK);  
+             DrawRectangle(enemies[i]->getX()-86, enemies[i]->getY()-86, 192.0f * enemies[i]->getHpPercent(), (17), RED);
         }
-
+    }
         if(player.getHp()<=0)
         {
             DrawText("oh, you died(", 350, 400, 40, WHITE);
