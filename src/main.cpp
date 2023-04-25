@@ -1,8 +1,7 @@
 #include "character.h"
 #include "projectiles.h"
 #include "enemy.h"
-#include "enfactory.h"
-//#include "objfactory.h"
+#include "factory.h"
 #include <stdlib.h>
 #include <cmath>
 #include <vector>
@@ -23,7 +22,7 @@ vector<Enemy*> enemies;
 vector<Object*> heals;
 
 Factory f;
-//Factory w;
+
 
 
 
@@ -39,14 +38,14 @@ int main()
     //SetWindowState(FLAG_VSYNC_HINT);
     Image background = LoadImage("resources/hall.png");
     Image character = LoadImage("resources/character.png");
-    //Image enemy = LoadImage("resources/character.png");
-    ImageResize(&background,GetScreenWidth(),GetScreenHeight());
     Image enemy = LoadImage("resources/character.png");
+    ImageResize(&background,GetScreenWidth(),GetScreenHeight());
+
        
        
     Texture2D Background = LoadTextureFromImage(background);
     Texture2D Character = LoadTextureFromImage(character);
-    auto walker = LoadTextureFromImage(enemy);
+    Texture2D walker = LoadTextureFromImage(enemy);
     UnloadImage(background);
     UnloadImage(character);
     UnloadImage(enemy);
@@ -57,14 +56,14 @@ int main()
     class Character player(Character,70,50,Vector2{200,200},100,20,0);
     Type type = Walker, Heal;
     enemies.push_back(f.create(type,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},walker));
-    heals.push_back(f.create(type,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+    //heals.push_back(f.create(type,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
     //class Enemy monster(Enemy,140,140,Vector2{100,100},100);
 
     player.setFrameWidth(Character.width);
     player.setFrameHeight(Character.height);
 
     auto monster = enemies[0];
-    auto aidkit = heals[0];
+    //auto aidkit = heals[0];
 
    //monster.setFrameWidth(Enemy.width);
    //monster.setFrameHeight(Enemy.height);
@@ -279,7 +278,7 @@ int main()
           }
             }
 
-             if(aidkit->isActive())
+          /*   if(aidkit->isActive())
             {
           collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
           (Rectangle){aidkit->getX(),aidkit->getY(),20.0f,20.0f});
@@ -288,7 +287,7 @@ int main()
           {
             player.setHp(player.getHp()+50); 
           }
-            }
+            }*/
 
 
 
@@ -309,10 +308,10 @@ int main()
                        monster->getRotationToPlayer(player),
                        RED);
      }
-     if(aidkit->isActive())
+     /*if(aidkit->isActive())
      {
          DrawRectangle(aidkit->getX(),aidkit->getY(),aidkit->getWidth(),aidkit->getHeight(), RED); 
-     }
+     }*/
 
         //healthbar
         auto HpPercent=  (float)(player.getHp())/(float)player.getHpMax();
