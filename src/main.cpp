@@ -2,6 +2,7 @@
 #include "projectiles.h"
 #include "enemy.h"
 #include "enfactory.h"
+//#include "objfactory.h"
 #include <stdlib.h>
 #include <cmath>
 #include <vector>
@@ -19,8 +20,10 @@ using namespace std;
 
 vector<Bullet> bullets;
 vector<Enemy*> enemies;
+vector<Object*> heals;
 
 Factory f;
+//Factory w;
 
 
 
@@ -52,20 +55,23 @@ int main()
     
     // init characters
     class Character player(Character,70,50,Vector2{200,200},100,20,0);
-    Type type = Walker;
+    Type type = Walker, Heal;
     enemies.push_back(f.create(type,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},walker));
+    heals.push_back(f.create(type,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
     //class Enemy monster(Enemy,140,140,Vector2{100,100},100);
 
     player.setFrameWidth(Character.width);
     player.setFrameHeight(Character.height);
 
     auto monster = enemies[0];
+    auto aidkit = heals[0];
 
    //monster.setFrameWidth(Enemy.width);
    //monster.setFrameHeight(Enemy.height);
 
     bool collisionTakeDamage = false;
     bool collisionAttack = false;
+    bool collisionObj = false;
 
     int frameCounter=0;
     int frameCounter2=0;
@@ -164,6 +170,7 @@ int main()
             }
           }
         }
+        
 
             /*if (i.isActive())
             {
@@ -272,6 +279,17 @@ int main()
           }
             }
 
+             if(aidkit->isActive())
+            {
+          collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
+          (Rectangle){aidkit->getX(),aidkit->getY(),20.0f,20.0f});
+        
+          if (collisionObj)
+          {
+            player.setHp(player.getHp()+50); 
+          }
+            }
+
 
 
         DrawLine(0,GetScreenHeight()/2,GetScreenWidth(),GetScreenHeight()/2,BLACK);
@@ -290,6 +308,10 @@ int main()
                        (Vector2){(float)monster->getWidth()/2, (float)monster->getHeight()/2},
                        monster->getRotationToPlayer(player),
                        RED);
+     }
+     if(aidkit->isActive())
+     {
+         DrawRectangle(aidkit->getX(),aidkit->getY(),aidkit->getWidth(),aidkit->getHeight(), RED); 
      }
 
         //healthbar

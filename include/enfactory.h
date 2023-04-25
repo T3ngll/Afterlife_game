@@ -1,8 +1,9 @@
 #pragma once
 #include "enemy.h"
+#include "object.h"
 #include "raylib.h"
 
-enum Type{Walker};
+enum Type{Walker, Heal};
 
 class Factory
 {
@@ -33,6 +34,17 @@ class Factory
                 enemy->setFrameWidth(tex.width);
                 enemy->setFrameHeight(tex.height);
                 return enemy;
+			
+		}
+	}
+    Object* create(Type d,Vector2 pos)  // factory method
+	{
+		switch(d)
+		{
+			case Heal:
+                
+				auto heal = new Object(pos,140,140);
+                return heal;
 			
 		}
 	}
