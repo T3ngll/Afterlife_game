@@ -99,7 +99,7 @@ int main()
             } break;
             case GAMEPLAY:
             {
-                if (IsKeyPressed(KEY_ENTER))
+                if (player.getHp()<=0)
                 {
                     currentScreen = ENDING;
                 }
@@ -108,7 +108,8 @@ int main()
             {
                 if (IsKeyPressed(KEY_ENTER))
                 {
-                    currentScreen = TITLE;
+                    //currentScreen = TITLE;
+                    
                 }
             } break;
             default: break;
@@ -416,18 +417,18 @@ if (IsKeyPressed(KEY_KP_ADD))
         case TITLE:
                 {
                     // TODO: Draw TITLE screen here!
-                    DrawRectangle(0, 0, screenWidth, screenHeight, GREEN);
-                    DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
-                    DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
+                    DrawRectangle(0, 0, screenWidth, screenHeight, WHITE);
+                    DrawText("AfterLife", screenWidth/2, screenHeight/2, 100, BLACK);
+                    DrawText("PRESS ENTER to Gameplay Screen", 120, 220, 20, BLACK);
 
                 } break;
 
                 case ENDING:
                 {
                     // TODO: Draw ENDING screen here!
-                    DrawRectangle(0, 0, screenWidth, screenHeight, BLUE);
-                    DrawText("ENDING SCREEN", 20, 20, 40, DARKBLUE);
-                    DrawText("PRESS ENTER or TAP to RETURN to TITLE SCREEN", 120, 220, 20, DARKBLUE);
+                    DrawRectangle(0, 0, screenWidth, screenHeight, BLACK);
+                    DrawText("Game Over", screenWidth/2, screenHeight/2, 100, WHITE);
+                    DrawText("PRESS ENTER to Close Game", 120, 220, 20, WHITE);
 
                 } break;
                 default: break;
