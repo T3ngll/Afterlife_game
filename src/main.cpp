@@ -258,6 +258,7 @@ int main()
 if (IsKeyPressed(KEY_KP_ADD))
 {
     player.setCurAmmo(player.getCurAmmo()+20);
+    player.setMaxAmmo(player.getCurAmmo());
 }
 
 
