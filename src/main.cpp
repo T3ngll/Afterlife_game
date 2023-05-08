@@ -22,7 +22,7 @@ vector<Enemy*> enemies;
 vector<Object*> heals;
 
 Factory f;
-
+typedef enum GameScreen { TITLE, GAMEPLAY, ENDING } GameScreen;
 
 
 
@@ -30,9 +30,10 @@ int main()
 {
 
     srand(time(NULL));
-
+    const int screenWidth = 1920;
+    const int screenHeight = 1080;
     //init window, set fps, set textures
-    InitWindow(1920,1080, "Afterlife");
+    InitWindow(screenWidth,screenHeight, "Afterlife");
 
     SetTargetFPS(60);
     //SetWindowState(FLAG_VSYNC_HINT);
@@ -81,15 +82,45 @@ int main()
 
     int frameCounter=0;
     int frameCounter2=0;
-
+    GameScreen currentScreen = TITLE;
 
     //main game loop
     while (!WindowShouldClose())
     {
+        switch(currentScreen)
+        {
+            case TITLE:
+            {
+
+                if (IsKeyPressed(KEY_ENTER))
+                {
+                    currentScreen = GAMEPLAY;
+                }
+            } break;
+            case GAMEPLAY:
+            {
+                if (IsKeyPressed(KEY_ENTER))
+                {
+                    currentScreen = ENDING;
+                }
+            } break;
+            case ENDING:
+            {
+                if (IsKeyPressed(KEY_ENTER))
+                {
+                    currentScreen = TITLE;
+                }
+            } break;
+            default: break;
+        }
         // start render
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
+        switch(currentScreen)
+            {
+                case GAMEPLAY:
+                {
         DrawTexture(Background, 0, 0, WHITE);
         frameCounter++;
 
@@ -380,6 +411,26 @@ if (IsKeyPressed(KEY_KP_ADD))
         DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value\nPress MouseLeft to shoot", 10, 80, 20, WHITE);
         DrawText(TextFormat("SCORE: %i", player.getScore()), 10, 200, 20, WHITE);
         DrawFPS(10, 230);
+        } break;
+        case TITLE:
+                {
+                    // TODO: Draw TITLE screen here!
+                    DrawRectangle(0, 0, screenWidth, screenHeight, GREEN);
+                    DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
+                    DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
+
+                } break;
+
+                case ENDING:
+                {
+                    // TODO: Draw ENDING screen here!
+                    DrawRectangle(0, 0, screenWidth, screenHeight, BLUE);
+                    DrawText("ENDING SCREEN", 20, 20, 40, DARKBLUE);
+                    DrawText("PRESS ENTER or TAP to RETURN to TITLE SCREEN", 120, 220, 20, DARKBLUE);
+
+                } break;
+                default: break;
+            }
 
         EndDrawing(); // end render
     }
