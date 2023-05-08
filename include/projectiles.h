@@ -8,12 +8,13 @@ class Bullet : public Object,public Movable
     int lifeSpawn;
     float radius;
     Vector2 target;
+    int damage=5;
 public:
     Bullet()= default;
     Bullet(Vector2 pos,Vector2 speed, bool active,int lifeSpawn,float radius,Color color);
 
-    int getLifeSpawn();
-    void setLifeSpawn(int life);
+    int getDamage();
+    void setDamage(int damage);
 
     void setRadius(float rad);
     float getRadius();

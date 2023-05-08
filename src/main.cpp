@@ -120,7 +120,7 @@ int main()
         {
 
 
-            if (bullets.size() < PLAYER_MAX_SHOOTS) {
+            if (bullets.size() < player.getMaxAmmo()) {
 
 
                 Bullet temp;
@@ -130,12 +130,23 @@ int main()
                 //        +(GetMousePosition().y-player.getY()*(GetMousePosition().y-player.getY())
                 temp.setSpeed(Vector2 {(player.getX()-GetMousePosition().x)/dist,(player.getY()-GetMousePosition().y)/dist});
                 temp.setRadius(10);
-                temp.setActive(false);
+                temp.setStatus(true);
+                temp.setDamage(34);
                 temp.setPos((Vector2){player.getX(),player.getY()});
                 temp.setColor(WHITE);
                 temp.setTargetToMouse();
                 bullets.push_back(temp);
+                if(player.getCurAmmo()>0)
+                {
+                    player.setCurAmmo(player.getCurAmmo()-1);
+                }
+
             }
+
+        }
+        if(player.getCurAmmo()==0)
+        {
+            bullets.clear();
 
         }
 
@@ -157,8 +168,15 @@ int main()
                 continue;
             }
 
+            if(bullet->isActive())
+            {
+                DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
+            }
+            else
+            {
+                bullet->setDamage(0);
+            }
 
-            DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
 
             //collision between bullet and a monster
                 for(int i=0; i<EnAmount; i++)
@@ -169,13 +187,15 @@ int main()
           (Rectangle){enemies[i]->getX(),enemies[i]->getY(),enemies[i]->getWidth(),enemies[i]->getHeight()});
           if (collisionAttack)
           {
-            enemies[i]->setHp(enemies[i]->getHp()-2);
+            enemies[i]->setHp(enemies[i]->getHp()-bullet->getDamage());
             if(enemies[i]->getHp()<=0)
             {
-                enemies[i]->setActive(false);
+                enemies[i]->setStatus(false);
                 player.setScore(player.getScore()+100);
                 
             }
+            bullet->setStatus(false);
+
           }
         }
     }
@@ -235,7 +255,10 @@ int main()
         }
 
 
-
+if (IsKeyPressed(KEY_KP_ADD))
+{
+    player.setCurAmmo(player.getCurAmmo()+20);
+}
 
 
 
@@ -304,8 +327,8 @@ int main()
 
 
 
-        DrawLine(0,GetScreenHeight()/2,GetScreenWidth(),GetScreenHeight()/2,BLACK);
-        DrawLine(GetScreenWidth()/2,0,GetScreenWidth()/2,GetScreenHeight(),BLACK);
+        //DrawLine(0,GetScreenHeight()/2,GetScreenWidth(),GetScreenHeight()/2,BLACK);
+       // DrawLine(GetScreenWidth()/2,0,GetScreenWidth()/2,GetScreenHeight(),BLACK);
 
         DrawTexturePro(player.getTexture(),(Rectangle){0,0,player.getFrameWidth(),player.getFrameHeight()},
                        (Rectangle){player.getX(),player.getY(),player.getWidth(),player.getHeight()},
@@ -331,6 +354,7 @@ int main()
 
         //healthbar
        player.setHpPercent((float)(player.getHp())/(float)player.getHpMax());
+
         for(int i=0; i<EnAmount; i++)
     {
          enemies[i]->setHpPercent((float)(enemies[i]->getHp())/(float)enemies[i]->getHpMax());
@@ -350,9 +374,9 @@ int main()
     }
         if(player.getHp()<=0)
         {
-            DrawText("oh, you died(", 350, 400, 40, WHITE);
+            DrawText("YOU DIED", GetScreenWidth()/2-MeasureText("YOU DIED",200)/2, GetScreenHeight()/2, 200, RED);
         }
-
+        DrawText(TextFormat("ammo: %i",player.getCurAmmo()),GetScreenWidth()/2, GetScreenHeight()/2, 50,BLACK);
         DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value\nPress MouseLeft to shoot", 10, 80, 20, WHITE);
         DrawText(TextFormat("SCORE: %i", player.getScore()), 10, 200, 20, WHITE);
         DrawFPS(10, 230);

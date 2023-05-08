@@ -9,12 +9,13 @@ class Character: public Object, public Movable
     Texture2D CharacterTexture;
     int hp;
     int hpMax;
-    int ammo;
+    int maxAmmo;
+    int curAmmo;
     int score;
     float HpPercent;
 
 public:
-    Character(Texture2D CharacterTexture , float width, float height, Vector2 speed, int hpMax, int ammo, int score);
+    Character(Texture2D CharacterTexture , float width, float height, Vector2 speed, int hpMax, int maxAmmo, int score);
 
     Texture2D getTexture();
 
@@ -25,7 +26,12 @@ public:
 
     int getHpMax() const;
 
-    int getAmmo() const;
+    int getMaxAmmo() const;
+    void setMaxAmmo(int ammo);
+
+    int getCurAmmo() const;
+    void setCurAmmo(int ammo);
+
 
     int getScore() const;
     void setScore(int scoreNew);

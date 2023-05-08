@@ -5,8 +5,6 @@
 
 Bullet::Bullet(Vector2 pos,Vector2 speed, bool active,int lifeSpawn,float radius,Color color): Object(pos,0,0), Movable(speed),lifeSpawn(lifeSpawn),radius(radius),color(color){};
 
-int Bullet::getLifeSpawn(){return lifeSpawn;}
-void Bullet::setLifeSpawn(int life){lifeSpawn=life;}
 
 void Bullet::setRadius(float rad){radius=rad;}
 float Bullet::getRadius(){return radius;}
@@ -19,3 +17,8 @@ void Bullet::setTargetToMouse()
     this->target=mousePos;
 }
 Vector2 Bullet::getTarget() {return target;}
+
+int Bullet::getDamage() {return damage;}
+
+void Bullet::setDamage(int damage) {this->damage=damage;}
+

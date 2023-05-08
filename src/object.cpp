@@ -15,4 +15,4 @@ float Object::getHeight() const {return height;}
 float Object::getWidth() const {return width;}
 
 bool Object::isActive() const{return active;}
-void Object::setActive(bool isActive){active=isActive;}
+void Object::setStatus(bool status){active=status;}

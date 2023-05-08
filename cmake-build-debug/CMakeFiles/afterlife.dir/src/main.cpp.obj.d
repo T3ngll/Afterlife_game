@@ -33,6 +33,9 @@ CMakeFiles/afterlife.dir/src/main.cpp.obj: \
  C:/PROGRA~1/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/mm_malloc.h \
  C:/PROGRA~1/mingw64/x86_64-w64-mingw32/include/errno.h \
  D:/projects/projects\ c++/GitHub/afterlife/include/projectiles.h \
+ D:/projects/projects\ c++/GitHub/afterlife/include/enemy.h \
+ D:/projects/projects\ c++/GitHub/afterlife/include/factory.h \
+ C:/PROGRA~1/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/cstdlib \
  C:/PROGRA~1/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/vector \
  C:/PROGRA~1/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/bits/stl_algobase.h \
  C:/PROGRA~1/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/bits/functexcept.h \
@@ -71,4 +74,9 @@ CMakeFiles/afterlife.dir/src/main.cpp.obj: \
  C:/PROGRA~1/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/backward/binders.h \
  C:/PROGRA~1/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/bits/range_access.h \
  C:/PROGRA~1/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/bits/vector.tcc \
+ C:/PROGRA~1/mingw64/x86_64-w64-mingw32/include/time.h \
+ C:/PROGRA~1/mingw64/x86_64-w64-mingw32/include/sys/timeb.h \
+ C:/PROGRA~1/mingw64/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
+ C:/PROGRA~1/mingw64/x86_64-w64-mingw32/include/_timeval.h \
+ C:/PROGRA~1/mingw64/x86_64-w64-mingw32/include/pthread_time.h \
  D:/projects/projects\ c++/GitHub/afterlife/include/raylib.h

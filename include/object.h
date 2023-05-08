@@ -26,5 +26,5 @@ public:
     float getWidth() const;
 
     bool isActive() const;
-    void setActive(bool isActive);
+    void setStatus(bool status);
 };
