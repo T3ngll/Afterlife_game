@@ -10,13 +10,7 @@
 
 #include "raylib.h"
 
-
 using namespace std;
-
-
-#define PLAYER_MAX_SHOOTS  20
-
-//static Bullet bullet[PLAYER_MAX_SHOOTS];
 
 vector<Bullet> bullets;
 vector<Bullet> bulletsToDelete;
@@ -38,10 +32,8 @@ int main()
 
     //init window, set fps, set textures
     InitWindow(1920,1080, "Afterlife");
-    void ToggleFullscreen(void);
-
+    ToggleFullscreen();
     SetTargetFPS(60);
-    //SetWindowState(FLAG_VSYNC_HINT);
     Image background = LoadImage("resources/hall.png");
     Image character = LoadImage("resources/character.png");
     Image enemy = LoadImage("resources/character.png");
@@ -182,25 +174,13 @@ int main()
             }
 
         }
-        //if(player.getCurAmmo()==0)
-        {
-           // bullets.clear();
-
-        }
 
         for(auto bullet = bullets.begin(); bullet != bullets.end(); bullet++)
         {
 
-            //if (bullet->isActive()) {}
-
             bullet->setX((-bullet->getSpeedX() ) * GetFrameTime() );
 
             bullet->setY((-bullet->getSpeedY() ) * GetFrameTime() );
-
-
-            // add logic for collision
-
-
 
             if(bullet->getX() >= GetScreenWidth() || bullet->getX() <= 0 || bullet->getY() >= GetScreenHeight() || bullet->getY() <= 0) // check also y
             {
@@ -208,92 +188,30 @@ int main()
                 continue;
             }
 
-            //if(bullet->isActive())
-            {
                 DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
-            }
-            //else
-            {
-               // bullet->setDamage(0);
-            }
-
 
             //collision between bullet and a monster
                 for(int i=0; i<EnAmount; i++)
-    {
-            if(enemies[i]->isActive())
-        {
-            collisionAttack=CheckCollisionCircleRec((Vector2){bullet->getPos()}, bullet->getRadius(),
-          (Rectangle){enemies[i]->getX(),enemies[i]->getY(),enemies[i]->getWidth(),enemies[i]->getHeight()});
-          if (collisionAttack)
-          {
-            enemies[i]->setHp(enemies[i]->getHp()-bullet->getDamage());
-            if(enemies[i]->getHp()<=0)
-            {
-                enemies[i]->setStatus(false);
-                player.setScore(player.getScore()+100);
-
-            }
-
-            bulletsToDelete.push_back(*bullet);
-            //bullet->setStatus(false);
-
-          }
-        }
-    }
-
-
-            /*if (i.isActive())
-            {
-
-
-                if(i.getX() > i.getTarget().x)
                 {
-                    i.setX(-1*(i.getSpeedX()+3)*GetFrameTime() );
+                        if(enemies[i]->isActive())
+                    {
+                        collisionAttack=CheckCollisionCircleRec((Vector2){bullet->getPos()}, bullet->getRadius(),
+                      (Rectangle){enemies[i]->getX(),enemies[i]->getY(),enemies[i]->getWidth(),enemies[i]->getHeight()});
+                      if (collisionAttack)
+                      {
+                        enemies[i]->setHp(enemies[i]->getHp()-bullet->getDamage());
+                        if(enemies[i]->getHp()<=0)
+                        {
+                            enemies[i]->setStatus(false);
+                            player.setScore(player.getScore()+100);
+
+                        }
+
+                        bulletsToDelete.push_back(*bullet);
+
+                      }
+                    }
                 }
-                if(i.getX() < i.getTarget().x)
-                {
-                    i.setX((i.getSpeedX()+3)*GetFrameTime() );
-                }
-                if(i.getY() >  i.getTarget().y)
-                {
-                    i.setY(-1*(i.getSpeedY()+3)*GetFrameTime() );
-                }
-                if(i.getY() < i.getTarget().y)
-                {
-                    i.setY((i.getSpeedY()+3)*GetFrameTime() );
-                }
-
-                //bullet[i].setX((bullet[i].getX()+3)*GetFrameTime());
-
-                i.setLifeSpawn(i.getLifeSpawn()+1);
-
-                if(i.getPos().x==i.getTarget().x && i.getPos().y==i.getTarget().y)
-                {
-                    i.setPos(Vector2{player.getX()+30,player.getY()+30});
-                    i.setSpeed(Vector2{0,0});
-                    i.setLifeSpawn(0);
-                    i.isActive(false);
-                }
-
-
-                if(i.getX()>=800)
-                {
-                    i.setPos(Vector2{player.getX()+30,player.getY()+30});
-                    i.setSpeed(Vector2{0,0});
-                    i.setLifeSpawn(0);
-                    i.isActive(false);
-                }
-
-                if(i.isActive())
-                {
-                    DrawCircleV(i.getPos(),i.getRadius(),WHITE);
-                }
-
-                //if(bullet[i].getLifeSpawn()>=80) {}
-
-            }*/
-
         }
 
 

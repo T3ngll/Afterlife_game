@@ -128,6 +128,30 @@ afterlife/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/build
 .PHONY : afterlife/fast
 
+include/game.obj: include/game.cpp.obj
+.PHONY : include/game.obj
+
+# target to build an object file
+include/game.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/include/game.cpp.obj
+.PHONY : include/game.cpp.obj
+
+include/game.i: include/game.cpp.i
+.PHONY : include/game.i
+
+# target to preprocess a source file
+include/game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/include/game.cpp.i
+.PHONY : include/game.cpp.i
+
+include/game.s: include/game.cpp.s
+.PHONY : include/game.s
+
+# target to generate assembly for a file
+include/game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/include/game.cpp.s
+.PHONY : include/game.cpp.s
+
 src/character.obj: src/character.cpp.obj
 .PHONY : src/character.obj
 
@@ -257,6 +281,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... afterlife
+	@echo ... include/game.obj
+	@echo ... include/game.i
+	@echo ... include/game.s
 	@echo ... src/character.obj
 	@echo ... src/character.i
 	@echo ... src/character.s

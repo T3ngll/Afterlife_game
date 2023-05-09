@@ -85,6 +85,12 @@
 		<Unit filename="D:/projects/projects c++/GitHub/afterlife/include/character.h">
 			<Option target="afterlife"/>
 		</Unit>
+		<Unit filename="D:/projects/projects c++/GitHub/afterlife/include/game.cpp">
+			<Option target="afterlife"/>
+		</Unit>
+		<Unit filename="D:/projects/projects c++/GitHub/afterlife/include/game.h">
+			<Option target="afterlife"/>
+		</Unit>
 		<Unit filename="D:/projects/projects c++/GitHub/afterlife/include/movable.h">
 			<Option target="afterlife"/>
 		</Unit>

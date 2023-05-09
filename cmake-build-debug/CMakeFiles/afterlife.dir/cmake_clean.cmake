@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/afterlife.dir/include/game.cpp.obj"
+  "CMakeFiles/afterlife.dir/include/game.cpp.obj.d"
   "CMakeFiles/afterlife.dir/src/character.cpp.obj"
   "CMakeFiles/afterlife.dir/src/character.cpp.obj.d"
   "CMakeFiles/afterlife.dir/src/main.cpp.obj"
