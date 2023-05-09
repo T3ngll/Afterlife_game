@@ -10,8 +10,10 @@ class Bullet : public Object,public Movable
     Vector2 target;
     int damage=5;
 public:
-    Bullet()= default;
+    Bullet() = default;
     Bullet(Vector2 pos,Vector2 speed, bool active,int lifeSpawn,float radius,Color color);
+
+    bool operator==(const Bullet& toCompare);
 
     int getDamage();
     void setDamage(int damage);

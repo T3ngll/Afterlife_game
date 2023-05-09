@@ -22,3 +22,8 @@ int Bullet::getDamage() {return damage;}
 
 void Bullet::setDamage(int damage) {this->damage=damage;}
 
+bool Bullet::operator==(const Bullet &toCompare) {
+
+    return this->getX() == toCompare.getX() && this->getY() == toCompare.getY();
+}
+

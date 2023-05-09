@@ -6,6 +6,7 @@
 #include <cmath>
 #include <vector>
 #include <time.h>
+#include <algorithm>
 
 #include "raylib.h"
 
@@ -18,6 +19,8 @@ using namespace std;
 //static Bullet bullet[PLAYER_MAX_SHOOTS];
 
 vector<Bullet> bullets;
+vector<Bullet> bulletsToDelete;
+
 vector<Enemy*> enemies;
 vector<Object*> heals;
 
@@ -32,8 +35,10 @@ int main()
     srand(time(NULL));
     const int screenWidth = 1920;
     const int screenHeight = 1080;
+
     //init window, set fps, set textures
-    InitWindow(screenWidth,screenHeight, "Afterlife");
+    InitWindow(1920,1080, "Afterlife");
+    void ToggleFullscreen(void);
 
     SetTargetFPS(60);
     //SetWindowState(FLAG_VSYNC_HINT);
@@ -42,8 +47,8 @@ int main()
     Image enemy = LoadImage("resources/character.png");
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
 
-       
-       
+
+
     Texture2D Background = LoadTextureFromImage(background);
     Texture2D Character = LoadTextureFromImage(character);
     Texture2D walker = LoadTextureFromImage(enemy);
@@ -84,6 +89,7 @@ int main()
     int frameCounter2=0;
     GameScreen currentScreen = TITLE;
 
+
     //main game loop
     while (!WindowShouldClose())
     {
@@ -108,8 +114,8 @@ int main()
             {
                 if (IsKeyPressed(KEY_ENTER))
                 {
-                    //currentScreen = TITLE;
-                    
+                    CloseWindow();
+
                 }
             } break;
             default: break;
@@ -119,9 +125,9 @@ int main()
 
         ClearBackground(RAYWHITE);
         switch(currentScreen)
+        {
+            case GAMEPLAY:
             {
-                case GAMEPLAY:
-                {
         DrawTexture(Background, 0, 0, WHITE);
         frameCounter++;
 
@@ -151,9 +157,9 @@ int main()
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
 
+            if (player.getCurAmmo() != 0) {
 
-            if (bullets.size() < player.getMaxAmmo()) {
-
+                //if (bullets.size() < player.getMaxAmmo()) {
 
                 Bullet temp;
                 float dist = 0.002*sqrtf((player.getX()-GetMousePosition().x)*(player.getX()-GetMousePosition().x) +
@@ -168,7 +174,7 @@ int main()
                 temp.setColor(WHITE);
                 temp.setTargetToMouse();
                 bullets.push_back(temp);
-                if(player.getCurAmmo()>0)
+                //if(player.getCurAmmo()>0)
                 {
                     player.setCurAmmo(player.getCurAmmo()-1);
                 }
@@ -176,37 +182,39 @@ int main()
             }
 
         }
-        if(player.getCurAmmo()==0)
+        //if(player.getCurAmmo()==0)
         {
-            bullets.clear();
+           // bullets.clear();
 
         }
 
         for(auto bullet = bullets.begin(); bullet != bullets.end(); bullet++)
         {
 
-                bullet->setX((-bullet->getSpeedX() ) * GetFrameTime() );
+            //if (bullet->isActive()) {}
 
-                bullet->setY((-bullet->getSpeedY() ) * GetFrameTime() );
+            bullet->setX((-bullet->getSpeedX() ) * GetFrameTime() );
+
+            bullet->setY((-bullet->getSpeedY() ) * GetFrameTime() );
 
 
             // add logic for collision
 
 
+
             if(bullet->getX() >= GetScreenWidth() || bullet->getX() <= 0 || bullet->getY() >= GetScreenHeight() || bullet->getY() <= 0) // check also y
             {
-
-                //bullets.erase(bullet);
+                bulletsToDelete.push_back(*bullet);
                 continue;
             }
 
-            if(bullet->isActive())
+            //if(bullet->isActive())
             {
                 DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
             }
-            else
+            //else
             {
-                bullet->setDamage(0);
+               // bullet->setDamage(0);
             }
 
 
@@ -224,14 +232,16 @@ int main()
             {
                 enemies[i]->setStatus(false);
                 player.setScore(player.getScore()+100);
-                
+
             }
-            bullet->setStatus(false);
+
+            bulletsToDelete.push_back(*bullet);
+            //bullet->setStatus(false);
 
           }
         }
     }
-        
+
 
             /*if (i.isActive())
             {
@@ -335,7 +345,7 @@ if (IsKeyPressed(KEY_KP_ADD))
             {
           collisionTakeDamage = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
           (Rectangle){enemies[i]->getX(),enemies[i]->getY(),20.0f,20.0f});
-        
+
           if (collisionTakeDamage)
           {
             if(frameCounter>60)
@@ -347,16 +357,26 @@ if (IsKeyPressed(KEY_KP_ADD))
             }
     }
 
-            /* if(aidkit->isActive())
-            {
-          collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-          (Rectangle){aidkit->getX(),aidkit->getY(),20.0f,20.0f});
-        
-          if (collisionObj)
-          {
-            player.setHp(player.getHp()+50); 
-          }
-            }*/
+        for (auto & it : bulletsToDelete) {
+            auto found = std::find(bullets.begin(), bullets.end(), it);
+            if (found != bullets.end()) {
+                bullets.erase(found);
+            }
+        }
+
+        bulletsToDelete.clear();
+
+
+        /* if(aidkit->isActive())
+        {
+      collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
+      (Rectangle){aidkit->getX(),aidkit->getY(),20.0f,20.0f});
+
+      if (collisionObj)
+      {
+        player.setHp(player.getHp()+50);
+      }
+        }*/
 
 
 
@@ -382,7 +402,7 @@ if (IsKeyPressed(KEY_KP_ADD))
     /*
      if(aidkit->isActive())
      {
-         DrawRectangle(aidkit->getX(),aidkit->getY(),20,20, RED); 
+         DrawRectangle(aidkit->getX(),aidkit->getY(),20,20, RED);
      }*/
 
         //healthbar
@@ -392,16 +412,16 @@ if (IsKeyPressed(KEY_KP_ADD))
     {
          enemies[i]->setHpPercent((float)(enemies[i]->getHp())/(float)enemies[i]->getHpMax());
     }
-    
 
-        DrawRectangle(10, 30, 400, 30, BLACK);  
+
+        DrawRectangle(10, 30, 400, 30, BLACK);
         DrawRectangle(14, 34, 392.0f * player.getHpPercent(), (22), RED);
         //enemy hp
         for(int i=0; i<EnAmount; i++)
     {
         if(enemies[i]->isActive())
         {
-             DrawRectangle(enemies[i]->getX()-90, enemies[i]->getY()-90, 200, 25, BLACK);  
+             DrawRectangle(enemies[i]->getX()-90, enemies[i]->getY()-90, 200, 25, BLACK);
              DrawRectangle(enemies[i]->getX()-86, enemies[i]->getY()-86, 192.0f * enemies[i]->getHpPercent(), (17), RED);
         }
     }
@@ -413,26 +433,26 @@ if (IsKeyPressed(KEY_KP_ADD))
         DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value\nPress MouseLeft to shoot", 10, 80, 20, WHITE);
         DrawText(TextFormat("SCORE: %i", player.getScore()), 10, 200, 20, WHITE);
         DrawFPS(10, 230);
-        } break;
-        case TITLE:
-                {
-                    // TODO: Draw TITLE screen here!
-                    DrawRectangle(0, 0, screenWidth, screenHeight, WHITE);
-                    DrawText("AfterLife", screenWidth/2, screenHeight/2, 100, BLACK);
-                    DrawText("PRESS ENTER to Gameplay Screen", 120, 220, 20, BLACK);
+            } break;
+            case TITLE:
+            {
+                // TODO: Draw TITLE screen here!
+                DrawRectangle(0, 0, screenWidth, screenHeight, WHITE);
+                DrawText("AfterLife", screenWidth/2, screenHeight/2, 100, BLACK);
+                DrawText("PRESS ENTER to Gameplay Screen", 120, 220, 20, BLACK);
 
-                } break;
+            } break;
 
-                case ENDING:
-                {
-                    // TODO: Draw ENDING screen here!
-                    DrawRectangle(0, 0, screenWidth, screenHeight, BLACK);
-                    DrawText("Game Over", screenWidth/2, screenHeight/2, 100, WHITE);
-                    DrawText("PRESS ENTER to Close Game", 120, 220, 20, WHITE);
+            case ENDING:
+            {
+                // TODO: Draw ENDING screen here!
+                DrawRectangle(0, 0, screenWidth, screenHeight, BLACK);
+                DrawText("Game Over", screenWidth/2, screenHeight/2, 100, WHITE);
+                DrawText("PRESS ENTER to Close Game", 120, 220, 20, WHITE);
 
-                } break;
-                default: break;
-            }
+            } break;
+            default: break;
+        }
 
         EndDrawing(); // end render
     }
