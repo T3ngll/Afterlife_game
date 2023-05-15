@@ -367,7 +367,7 @@ if (IsKeyPressed(KEY_KP_ADD))
     {
      if(ammokits[i]->isActive())
      {
-         DrawRectangle(ammokits[i]->getX(),ammokits[i]->getY(),100,100, BROWN);
+         DrawRectangle(ammokits[i]->getX(),ammokits[i]->getY(),100,100, BLACK);
      }
     }
 
@@ -395,15 +395,15 @@ if (IsKeyPressed(KEY_KP_ADD))
         {
             DrawText("YOU DIED", GetScreenWidth()/2-MeasureText("YOU DIED",200)/2, GetScreenHeight()/2, 200, RED);
         }
-        DrawText(TextFormat("ammo: %i",player.getCurAmmo()),GetScreenWidth()/2, GetScreenHeight()/2, 50,BLACK);
-        DrawText(TextFormat("aidkits: %i",player.getCurAid()),GetScreenWidth()/2+30, GetScreenHeight()/2+30, 50,BLACK);
+        DrawText(TextFormat("AMMO: %i",player.getCurAmmo()), 10, 980, 30, WHITE);
+        DrawText(TextFormat("AIDKITS: %i",player.getCurAid()), 10, 1010, 30, WHITE);
         DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value\nPress MouseLeft to shoot", 10, 80, 20, WHITE);
-        DrawText(TextFormat("SCORE: %i", player.getScore()), 10, 200, 20, WHITE);
-        DrawFPS(10, 230);
+        DrawText(TextFormat("SCORE: %i", player.getScore()), 10, 1040, 30, WHITE);
+        DrawFPS(10, 200);
             } break;
             case TITLE:
             {
-                // TODO: Draw TITLE screen here!
+                // TITLE screen
                 DrawRectangle(0, 0, screenWidth, screenHeight, WHITE);
                 DrawText("AfterLife", screenWidth/2, screenHeight/2, 100, BLACK);
                 DrawText("PRESS ENTER to Gameplay Screen", 120, 220, 20, BLACK);
@@ -412,7 +412,7 @@ if (IsKeyPressed(KEY_KP_ADD))
 
             case ENDING:
             {
-                // TODO: Draw ENDING screen here!
+                // ENDING screen
                 DrawRectangle(0, 0, screenWidth, screenHeight, BLACK);
                 DrawText("Game Over", screenWidth/2, screenHeight/2, 100, WHITE);
                 DrawText("PRESS ENTER to Close Game", 120, 220, 20, WHITE);
