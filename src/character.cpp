@@ -1,12 +1,13 @@
 #include "character.h"
 
 Character::Character(Texture2D CharacterTexture , float width, float height, Vector2 speed, int hpMax, int maxAmmo, int score): CharacterTexture(CharacterTexture), Object(pos,width,height),
-                    Movable(speed), hpMax(hpMax), maxAmmo(maxAmmo),score(score)
+                    Movable(speed), hpMax(hpMax), maxAmmo(maxAmmo), score(score)
 {
     pos.x=float(GetScreenWidth()) / 2 ;
     pos.y=float(GetScreenHeight()) / 2 ;
     hp=hpMax;
     curAmmo=maxAmmo;
+    curAid=0;
 }
 
 Texture2D Character::getTexture(){return CharacterTexture;}
@@ -38,5 +39,7 @@ void Character::setMaxAmmo(int maxAmmo) {this->maxAmmo=maxAmmo;}
 int Character::getCurAmmo() const{return curAmmo;}
 void Character::setCurAmmo(int curAmmo) {this->curAmmo=curAmmo;}
 
+int Character::getCurAid() const{return curAid;}
+void Character::setCurAid(int curAid) {this->curAid=curAid;}
 
 

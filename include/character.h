@@ -11,6 +11,7 @@ class Character: public Object, public Movable
     int hpMax;
     int maxAmmo;
     int curAmmo;
+    int curAid;
     int score;
     float HpPercent;
 
@@ -31,6 +32,9 @@ public:
 
     int getCurAmmo() const;
     void setCurAmmo(int ammo);
+
+    int getCurAid() const;
+    void setCurAid(int aid);
 
 
     int getScore() const;

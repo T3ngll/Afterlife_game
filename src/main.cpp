@@ -7,6 +7,7 @@
 #include <vector>
 #include <time.h>
 #include <algorithm>
+#include <iostream>
 
 #include "raylib.h"
 
@@ -17,6 +18,7 @@ vector<Bullet> bulletsToDelete;
 
 vector<Enemy*> enemies;
 vector<Object*> heals;
+vector<Object*> ammokits;
 
 Factory f;
 typedef enum GameScreen { TITLE, GAMEPLAY, ENDING } GameScreen;
@@ -50,28 +52,29 @@ int main()
 
 
     int EnAmount=3;
+    int HealAmount=2;
+    int AmmoKitAmount=2;
 
     // init characters
     class Character player(Character,70,50,Vector2{200,200},100,20,0);
-    Type type = Walker, Heal;
+    Type type1 = Walker;
+    Type type2 = Collect;
     for(int i=0; i<EnAmount; i++)
     {
-    enemies.push_back(f.create(type,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},walker));
+    enemies.push_back(f.create(type1,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},walker));
     }
-    //heals.push_back(f.create(type,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
-
+    for(int i=0; i<HealAmount; i++)
+    {
+    heals.push_back(f.create(type2,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+    }
+    for(int i=0; i<AmmoKitAmount; i++)
+    {
+    ammokits.push_back(f.create(type2,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+    }
     player.setFrameWidth(Character.width);
     player.setFrameHeight(Character.height);
 
-   /* for(int i=0; i<2; i++)
-    {
-    auto monster = enemies[i];
-    }
-    */
-    //auto aidkit = heals[0];
 
-   //monster.setFrameWidth(Enemy.width);
-   //monster.setFrameHeight(Enemy.height);
 
     bool collisionTakeDamage = false;
     bool collisionAttack = false;
@@ -221,7 +224,20 @@ if (IsKeyPressed(KEY_KP_ADD))
     player.setMaxAmmo(player.getCurAmmo());
 }
 
-
+        //aidkit use
+         if (IsKeyPressed(KEY_H) && player.getHp() < 100 && player.getCurAid()!=0)
+        { 
+            if(player.getHp()>50)
+            {
+            player.setCurAid(player.getCurAid()-1);    
+            player.setHp(player.getHpMax());
+            }
+            else
+            {
+            player.setCurAid(player.getCurAid()-1);
+            player.setHp(player.getHp()+50);
+            }
+        }
 
         //hp decrease and increase
         if (IsKeyPressed(KEY_UP) && player.getHp() < 100)
@@ -285,16 +301,35 @@ if (IsKeyPressed(KEY_KP_ADD))
         bulletsToDelete.clear();
 
 
-        /* if(aidkit->isActive())
+        for(int i=0; i<HealAmount; i++)
+    {
+         if(heals[i]->isActive())
         {
       collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-      (Rectangle){aidkit->getX(),aidkit->getY(),20.0f,20.0f});
+      (Rectangle){heals[i]->getX(),heals[i]->getY(),110,110});
 
       if (collisionObj)
       {
-        player.setHp(player.getHp()+50);
+        heals[i]->setStatus(false);
+        player.setCurAid(player.getCurAid()+1);
       }
-        }*/
+        }
+    }
+
+         for(int i=0; i<AmmoKitAmount; i++)
+    {
+         if(ammokits[i]->isActive())
+        {
+      collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
+      (Rectangle){ammokits[i]->getX(),ammokits[i]->getY(),110,110});
+
+      if (collisionObj)
+      {
+        ammokits[i]->setStatus(false);
+        player.setCurAmmo(player.getCurAmmo()+5);
+      }
+        }
+    }
 
 
 
@@ -317,11 +352,24 @@ if (IsKeyPressed(KEY_KP_ADD))
                        RED);
      }
     }
-    /*
-     if(aidkit->isActive())
+
+    //aidkits
+    for(int i=0; i<HealAmount; i++)
+    {
+     if(heals[i]->isActive())
      {
-         DrawRectangle(aidkit->getX(),aidkit->getY(),20,20, RED);
-     }*/
+         DrawRectangle(heals[i]->getX(),heals[i]->getY(),100,100, RED);
+     }
+    }
+
+    //ammokits
+     for(int i=0; i<AmmoKitAmount; i++)
+    {
+     if(ammokits[i]->isActive())
+     {
+         DrawRectangle(ammokits[i]->getX(),ammokits[i]->getY(),100,100, BROWN);
+     }
+    }
 
         //healthbar
        player.setHpPercent((float)(player.getHp())/(float)player.getHpMax());
@@ -348,6 +396,7 @@ if (IsKeyPressed(KEY_KP_ADD))
             DrawText("YOU DIED", GetScreenWidth()/2-MeasureText("YOU DIED",200)/2, GetScreenHeight()/2, 200, RED);
         }
         DrawText(TextFormat("ammo: %i",player.getCurAmmo()),GetScreenWidth()/2, GetScreenHeight()/2, 50,BLACK);
+        DrawText(TextFormat("aidkits: %i",player.getCurAid()),GetScreenWidth()/2+30, GetScreenHeight()/2+30, 50,BLACK);
         DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value\nPress MouseLeft to shoot", 10, 80, 20, WHITE);
         DrawText(TextFormat("SCORE: %i", player.getScore()), 10, 200, 20, WHITE);
         DrawFPS(10, 230);

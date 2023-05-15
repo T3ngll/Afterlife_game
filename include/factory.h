@@ -3,7 +3,7 @@
 #include "object.h"
 #include "raylib.h"
 
-enum Type{Walker, Heal};
+enum Type{Walker, Collect};
 
 class Factory
 {
@@ -41,10 +41,10 @@ class Factory
 	{
 		switch(d)
 		{
-			case Heal:
+			case Collect:
                 
-				auto heal = new Object(pos,140,140);
-                return heal;
+				auto collect = new Object(pos,140,140);
+                return collect;
 			
 		}
 	}
