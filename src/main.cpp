@@ -41,8 +41,6 @@ int main()
     Image enemy = LoadImage("resources/character.png");
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
 
-
-
     Texture2D Background = LoadTextureFromImage(background);
     Texture2D Character = LoadTextureFromImage(character);
     Texture2D walker = LoadTextureFromImage(enemy);
@@ -50,6 +48,13 @@ int main()
     UnloadImage(character);
     UnloadImage(enemy);
 
+    //init and set audio
+    InitAudioDevice();      
+    Sound shoot = LoadSound("resources/Shoot.mp3");
+    Sound collect = LoadSound("resources/Collect.mp3");
+    Sound nobullets = LoadSound("resources/No Bullets.mp3");
+    Sound kill = LoadSound("resources/Kill.mp3");
+    Sound damage = LoadSound("resources/Damage.mp3");
 
     int EnAmount=3;
     int HealAmount=2;
@@ -171,10 +176,13 @@ int main()
                 bullets.push_back(temp);
                 //if(player.getCurAmmo()>0)
                 {
+                    PlaySound(shoot);
                     player.setCurAmmo(player.getCurAmmo()-1);
                 }
 
             }
+            else
+            PlaySound(nobullets);
 
         }
 
@@ -206,6 +214,7 @@ int main()
                         if(enemies[i]->getHp()<=0)
                         {
                             enemies[i]->setStatus(false);
+                            PlaySound(kill);
                             player.setScore(player.getScore()+100);
 
                         }
@@ -225,7 +234,7 @@ if (IsKeyPressed(KEY_KP_ADD))
 }
 
         //aidkit use
-         if (IsKeyPressed(KEY_H) && player.getHp() < 100 && player.getCurAid()!=0)
+         if (IsKeyPressed(KEY_E) && player.getHp() < 100 && player.getCurAid()!=0)
         { 
             if(player.getHp()>50)
             {
@@ -284,6 +293,7 @@ if (IsKeyPressed(KEY_KP_ADD))
           {
             if(frameCounter>60)
             {
+            PlaySound(damage);
             player.setHp(player.getHp()-20);
             frameCounter=0;
             }
@@ -311,6 +321,7 @@ if (IsKeyPressed(KEY_KP_ADD))
       if (collisionObj)
       {
         heals[i]->setStatus(false);
+        PlaySound(collect);
         player.setCurAid(player.getCurAid()+1);
       }
         }
@@ -326,6 +337,7 @@ if (IsKeyPressed(KEY_KP_ADD))
       if (collisionObj)
       {
         ammokits[i]->setStatus(false);
+         PlaySound(collect);
         player.setCurAmmo(player.getCurAmmo()+5);
       }
         }
@@ -397,9 +409,9 @@ if (IsKeyPressed(KEY_KP_ADD))
         }
         DrawText(TextFormat("AMMO: %i",player.getCurAmmo()), 10, 980, 30, WHITE);
         DrawText(TextFormat("AIDKITS: %i",player.getCurAid()), 10, 1010, 30, WHITE);
-        DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value\nPress MouseLeft to shoot", 10, 80, 20, WHITE);
+        DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value \nPress MouseLeft to shoot \nPress E to heal", 10, 80, 20, WHITE);
         DrawText(TextFormat("SCORE: %i", player.getScore()), 10, 1040, 30, WHITE);
-        DrawFPS(10, 200);
+        DrawFPS(GetScreenWidth()-90, 10);
             } break;
             case TITLE:
             {
@@ -428,6 +440,13 @@ if (IsKeyPressed(KEY_KP_ADD))
     UnloadTexture(Background);
     UnloadTexture(Character);
     UnloadTexture(walker);
+
+    UnloadSound(shoot);  
+    UnloadSound(collect);  
+    UnloadSound(nobullets);  
+    UnloadSound(kill); 
+    UnloadSound(damage); 
+    CloseAudioDevice(); 
 
 
     //end
