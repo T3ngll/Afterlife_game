@@ -55,6 +55,7 @@ int main()
     Sound nobullets = LoadSound("resources/No Bullets.mp3");
     Sound kill = LoadSound("resources/Kill.mp3");
     Sound damage = LoadSound("resources/Damage.mp3");
+    Sound healsound = LoadSound("resources/Heal.mp3");
 
     int EnAmount=3;
     int HealAmount=2;
@@ -84,6 +85,8 @@ int main()
     bool collisionTakeDamage = false;
     bool collisionAttack = false;
     bool collisionObj = false;
+    bool collisionDoor = false;
+    int killcounter=0;
 
     int frameCounter=0;
     int frameCounter2=0;
@@ -108,6 +111,14 @@ int main()
                 if (player.getHp()<=0)
                 {
                     currentScreen = ENDING;
+                }
+                else if(collisionDoor)
+                {
+                     // EnAmount=EnAmount+3;
+                     // HealAmount=HealAmount+2;
+                     // AmmoKitAmount=AmmoKitAmount+2;
+                      for(int i=0; i<EnAmount; i++)
+                      player.setPos(Vector2{GetScreenWidth()/2, GetScreenHeight()-10});
                 }
             } break;
             case ENDING:
@@ -216,6 +227,7 @@ int main()
                             enemies[i]->setStatus(false);
                             PlaySound(kill);
                             player.setScore(player.getScore()+100);
+                            killcounter++;
 
                         }
 
@@ -238,11 +250,13 @@ if (IsKeyPressed(KEY_KP_ADD))
         { 
             if(player.getHp()>50)
             {
+            PlaySound(healsound);
             player.setCurAid(player.getCurAid()-1);    
             player.setHp(player.getHpMax());
             }
             else
             {
+            PlaySound(healsound);
             player.setCurAid(player.getCurAid()-1);
             player.setHp(player.getHp()+50);
             }
@@ -343,7 +357,12 @@ if (IsKeyPressed(KEY_KP_ADD))
         }
     }
 
-
+        //door 
+        if(killcounter==EnAmount)
+        {
+            collisionDoor = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
+      (Rectangle){GetScreenWidth()/2-150,0,300,100});
+        }
 
         //DrawLine(0,GetScreenHeight()/2,GetScreenWidth(),GetScreenHeight()/2,BLACK);
        // DrawLine(GetScreenWidth()/2,0,GetScreenWidth()/2,GetScreenHeight(),BLACK);
@@ -364,6 +383,11 @@ if (IsKeyPressed(KEY_KP_ADD))
                        RED);
      }
     }
+    //door
+     if(killcounter==EnAmount)
+        {
+            DrawRectangle(GetScreenWidth()/2-150,0,300,100, BROWN);
+        }
 
     //aidkits
     for(int i=0; i<HealAmount; i++)
@@ -379,7 +403,7 @@ if (IsKeyPressed(KEY_KP_ADD))
     {
      if(ammokits[i]->isActive())
      {
-         DrawRectangle(ammokits[i]->getX(),ammokits[i]->getY(),100,100, BLACK);
+         DrawRectangle(ammokits[i]->getX(),ammokits[i]->getY(),100,100, DARKBROWN);
      }
     }
 
@@ -446,6 +470,7 @@ if (IsKeyPressed(KEY_KP_ADD))
     UnloadSound(nobullets);  
     UnloadSound(kill); 
     UnloadSound(damage); 
+    UnloadSound(healsound); 
     CloseAudioDevice(); 
 
 
