@@ -46,13 +46,14 @@ const int screenHeight = 1080;
 
 int main()
 {
+    srand(time(NULL));
     Init();
 
     Preload p;
 
-    int EnAmount=3;
-    int HealAmount=2;
-    int AmmoKitAmount=2;
+   int EnAmount=GetRandomValue(0, 10);
+    int HealAmount=GetRandomValue(0, 2);
+    int AmmoKitAmount=GetRandomValue(1, 6);
     // init characters
     class Character player(p.getCharacter(),70,50,Vector2{200,200},100,20,0);
     Type type1 = Walker;
@@ -78,7 +79,7 @@ int main()
     bool collisionAttack = false;
     bool collisionObj = false;
     bool collisionDoor = false;
-    int killcounter=0;
+     bool Clear=false;
 
     int frameCounter=0;
     int frameCounter2=0;
@@ -100,17 +101,50 @@ int main()
             } break;
             case GAMEPLAY:
             {
-                if (player.getHp()<=0)
+               if (player.getHp()<=0)
                 {
                     currentScreen = ENDING;
                 }
                 else if(collisionDoor)
                 {
-                    // EnAmount=EnAmount+3;
-                    // HealAmount=HealAmount+2;
-                    // AmmoKitAmount=AmmoKitAmount+2;
-                    for(int i=0; i<EnAmount; i++)
-                        player.setPos(Vector2{(float)GetScreenWidth()/2, (float)GetScreenHeight()-10});
+                    frameCounter=0;
+                    if(frameCounter==0)
+                    {
+                        if(Clear)
+                        {
+                     for(int i=0; i<EnAmount; i++) 
+                          {
+                             enemies[i]->setStatus(false);
+                              }
+                    for(int i=0; i<HealAmount; i++)
+                      {
+                             heals[i]->setStatus(false);
+                         }
+                    for(int i=0; i<AmmoKitAmount; i++)
+                      {
+                             ammokits[i]->setStatus(false);
+                        }
+                        }
+                    DrawTexture(p.getBackground(), 0, 0, WHITE);
+                   // ClearBackground(WHITE);
+                   // DrawRectangle(0, 0, screenWidth, screenHeight, BLACK);
+                     EnAmount=EnAmount+(GetRandomValue(0, 10));
+                     HealAmount=HealAmount+(GetRandomValue(0, 2));
+                     AmmoKitAmount=AmmoKitAmount+(GetRandomValue(1, 6));
+                      player.setPos(Vector2{GetScreenWidth()/2, GetScreenHeight()-10});
+                      for(int i=0; i<EnAmount; i++)
+    {
+    enemies.push_back(f.create(type1,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},p.getWalker()));
+    }
+    for(int i=0; i<HealAmount; i++)
+    {
+    heals.push_back(f.create(type2,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+    }
+    for(int i=0; i<AmmoKitAmount; i++)
+    {
+    ammokits.push_back(f.create(type2,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+    }
+                    }
                 }
             } break;
             case ENDING:
@@ -219,7 +253,6 @@ int main()
                                     enemies[i]->setStatus(false);
                                     PlaySound(p.getKillSound());
                                     player.setScore(player.getScore()+100);
-                                    killcounter++;
 
                                 }
 
@@ -344,17 +377,46 @@ int main()
                         {
                             ammokits[i]->setStatus(false);
                             PlaySound(p.getCollectSound());
-                            player.setCurAmmo(player.getCurAmmo()+5);
+                            player.setCurAmmo(player.getCurAmmo()+10);
                         }
                     }
                 }
 
-                //door
-                if(killcounter==EnAmount)
-                {
+while(true)
+    {
+        for(int i=0; i<EnAmount; i++)
+    {
+        if(enemies[i]->isActive())
+         {
+            Clear=false;
+            break;
+         } 
+    }
+    for(int i=0; i<HealAmount; i++)
+    {
+     if(enemies[i]->isActive())
+         {
+            Clear=false;
+            break;
+         } 
+    }
+    for(int i=0; i<AmmoKitAmount; i++)
+    {
+     if(enemies[i]->isActive())
+         {
+            Clear=false;
+            break;
+         } 
+    }
+    Clear=true;
+    break;
+    }
+                
+                   //door
                     collisionDoor = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-                                                       (Rectangle){(float)GetScreenWidth()/2-150,0,300,100});
-                }
+                     (Rectangle){(float)GetScreenWidth()/2-150,0,300,100});
+                     DrawRectangle(GetScreenWidth()/2-150,0,300,100, BROWN);
+    
 
                 //DrawLine(0,GetScreenHeight()/2,GetScreenWidth(),GetScreenHeight()/2,BLACK);
                 // DrawLine(GetScreenWidth()/2,0,GetScreenWidth()/2,GetScreenHeight(),BLACK);
@@ -374,11 +436,6 @@ int main()
                                        enemies[i]->getRotationToPlayer(player),
                                        RED);
                     }
-                }
-                //door
-                if(killcounter==EnAmount)
-                {
-                    DrawRectangle(GetScreenWidth()/2-150,0,300,100, BROWN);
                 }
 
                 //aidkits

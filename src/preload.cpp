@@ -2,7 +2,7 @@
 #include "preload.h"
 
 Preload::Preload() {
-    Image background = LoadImage("resources/hall.png");
+    Image background = LoadImage("resources/map.png");
     Image character = LoadImage("resources/character.png");
     Image walker = LoadImage("resources/character.png");
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
@@ -82,7 +82,7 @@ void Preload::setCollectSound() {
 }
 
 void Preload::setEmptyAmmoSound() {
-    emptyAmmo = LoadSound("resources/No Bullets.mp3");
+    emptyAmmo = LoadSound("resources/Empty Ammo.mp3");
 }
 
 void Preload::setKillSound() {
