@@ -1,3 +1,3 @@
-D:/projects/projects c++/GitHub/afterlife/cmake-build-debug/CMakeFiles/afterlife.dir
-D:/projects/projects c++/GitHub/afterlife/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/projects/projects c++/GitHub/afterlife/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/projects/projects c++/GitHub/Afterlife_game/cmake-build-debug/CMakeFiles/afterlife.dir
+D:/projects/projects c++/GitHub/Afterlife_game/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/projects/projects c++/GitHub/Afterlife_game/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,4 @@
-# Install script for directory: D:/projects/projects c++/GitHub/afterlife
+# Install script for directory: D:/projects/projects c++/GitHub/Afterlife_game
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/projects/projects c++/GitHub/afterlife/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/projects/projects c++/GitHub/Afterlife_game/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

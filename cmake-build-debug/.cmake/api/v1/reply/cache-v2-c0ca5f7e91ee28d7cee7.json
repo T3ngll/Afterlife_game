@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/projects/projects c++/GitHub/afterlife/cmake-build-debug"
+			"value" : "d:/projects/projects c++/GitHub/Afterlife_game/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -707,7 +707,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "D:/projects/projects c++/GitHub/afterlife"
+			"value" : "D:/projects/projects c++/GitHub/Afterlife_game"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1323,7 +1323,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/projects/projects c++/GitHub/afterlife/cmake-build-debug"
+			"value" : "D:/projects/projects c++/GitHub/Afterlife_game/cmake-build-debug"
 		},
 		{
 			"name" : "afterlife_IS_TOP_LEVEL",
@@ -1347,7 +1347,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/projects/projects c++/GitHub/afterlife"
+			"value" : "D:/projects/projects c++/GitHub/Afterlife_game"
 		}
 	],
 	"kind" : "cache",

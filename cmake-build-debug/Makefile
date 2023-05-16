@@ -56,10 +56,10 @@ RM = "C:\Program Files\JetBrains\CLion 2022.1.3\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "D:\projects\projects c++\GitHub\afterlife"
+CMAKE_SOURCE_DIR = "D:\projects\projects c++\GitHub\Afterlife_game"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "D:\projects\projects c++\GitHub\afterlife\cmake-build-debug"
+CMAKE_BINARY_DIR = "D:\projects\projects c++\GitHub\Afterlife_game\cmake-build-debug"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\projects\projects c++\GitHub\afterlife\cmake-build-debug\CMakeFiles" "D:\projects\projects c++\GitHub\afterlife\cmake-build-debug\\CMakeFiles\progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "D:\projects\projects c++\GitHub\Afterlife_game\cmake-build-debug\CMakeFiles" "D:\projects\projects c++\GitHub\Afterlife_game\cmake-build-debug\\CMakeFiles\progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\projects\projects c++\GitHub\afterlife\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "D:\projects\projects c++\GitHub\Afterlife_game\cmake-build-debug\CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -248,6 +248,30 @@ src/object.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/object.cpp.s
 .PHONY : src/object.cpp.s
 
+src/preload.obj: src/preload.cpp.obj
+.PHONY : src/preload.obj
+
+# target to build an object file
+src/preload.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/preload.cpp.obj
+.PHONY : src/preload.cpp.obj
+
+src/preload.i: src/preload.cpp.i
+.PHONY : src/preload.i
+
+# target to preprocess a source file
+src/preload.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/preload.cpp.i
+.PHONY : src/preload.cpp.i
+
+src/preload.s: src/preload.cpp.s
+.PHONY : src/preload.s
+
+# target to generate assembly for a file
+src/preload.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\afterlife.dir\build.make CMakeFiles/afterlife.dir/src/preload.cpp.s
+.PHONY : src/preload.cpp.s
+
 src/projectiles.obj: src/projectiles.cpp.obj
 .PHONY : src/projectiles.obj
 
@@ -296,6 +320,9 @@ help:
 	@echo ... src/object.obj
 	@echo ... src/object.i
 	@echo ... src/object.s
+	@echo ... src/preload.obj
+	@echo ... src/preload.i
+	@echo ... src/preload.s
 	@echo ... src/projectiles.obj
 	@echo ... src/projectiles.i
 	@echo ... src/projectiles.s
