@@ -286,17 +286,11 @@ int main()
 
                         //if (bullets.size() < player.getMaxAmmo()) {
 
-                        Bullet temp;
+
                         float dist = 0.002*sqrtf((player.getX()-GetMousePosition().x)*(player.getX()-GetMousePosition().x) +
                                                  (player.getY()-GetMousePosition().y)*(player.getY()-GetMousePosition().y));
-                        // float dist = 0.002* sqrtf((GetMousePosition().x-player.getX())*(GetMousePosition().x-player.getX())
-                        //        +(GetMousePosition().y-player.getY()*(GetMousePosition().y-player.getY())
-                        temp.setSpeed(Vector2 {(player.getX()-GetMousePosition().x)/dist,(player.getY()-GetMousePosition().y)/dist});
-                        temp.setRadius(10);
-                        temp.setStatus(true);
+                        Bullet temp(p.getBullet(),(Vector2){player.getX(),player.getY()},Vector2 {(player.getX()-GetMousePosition().x)/dist,(player.getY()-GetMousePosition().y)/dist},true,10,WHITE);
                         temp.setDamage(34);
-                        temp.setPos((Vector2){player.getX(),player.getY()});
-                        temp.setColor(WHITE);
                         temp.setTargetToMouse();
                         bullets.push_back(temp);
                         //if(player.getCurAmmo()>0)
@@ -323,8 +317,10 @@ int main()
                         bulletsToDelete.push_back(*bullet);
                         continue;
                     }
+                    //DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
+                    DrawTextureV(p.getBullet(),bullet->getPos(),WHITE);
 
-                    DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
+
 
                     //collision between bullet and a monster
                     for(int i=0; i<EnAmount; i++)
