@@ -231,7 +231,7 @@ int main()
                     {
                         DrawTextureV(p.getGold(), (Vector2){treasure[i]->getX(),treasure[i]->getY()}, WHITE);
                         collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-                                                          (Rectangle){treasure[i]->getX(),treasure[i]->getY(),200,120});
+                                                          (Rectangle){treasure[i]->getX(),treasure[i]->getY(),205,125});
 
                         if (collisionObj)
                         {
@@ -248,7 +248,7 @@ int main()
                     {
                          DrawTextureV(p.getAmmo(), (Vector2){ammokits[i]->getX(),ammokits[i]->getY()}, WHITE);
                         collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-                                                          (Rectangle){ammokits[i]->getX(),ammokits[i]->getY(),80,60});
+                                                          (Rectangle){ammokits[i]->getX(),ammokits[i]->getY(),85,65});
 
                         if (collisionObj)
                         {
@@ -265,7 +265,7 @@ int main()
                     {
                          DrawTextureV(p.getAid(), (Vector2){heals[i]->getX(),heals[i]->getY()}, WHITE);
                         collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-                                                          (Rectangle){heals[i]->getX(),heals[i]->getY(),80,80});
+                                                          (Rectangle){heals[i]->getX(),heals[i]->getY(),85,85});
 
                         if (collisionObj)
                         {
