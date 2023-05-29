@@ -15,4 +15,4 @@ add_executable(afterlife
         src/main.cpp
         src/movable.cpp
         src/object.cpp
-        src/projectiles.cpp src/preload.cpp include/preload.h src/game.cpp include/game.h)
+        src/projectiles.cpp src/preload.cpp include/preload.h)
