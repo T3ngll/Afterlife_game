@@ -6,13 +6,22 @@ Preload::Preload() {
     Image character = LoadImage("resources/character.png");
     Image walker = LoadImage("resources/character.png");
     Image bullet = LoadImage("resources/bullet.png");
+    Image aid = LoadImage("resources/aid.png");
+    Image ammo = LoadImage("resources/ammo.png");
+    Image gold = LoadImage("resources/gold.png");
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
     ImageResize(&bullet,20,20);
+    ImageResize(&aid,80,80);
+    ImageResize(&ammo,70,60);
+    ImageResize(&gold,200,120);
 
     setBackground(background);
     setCharacter(character);
     setWalker(walker);
     setBullet(bullet);
+    setAid(aid);
+    setAmmo(ammo);
+    setGold(gold);
     UnloadImage(background);
     UnloadImage(character);
     UnloadImage(walker);
@@ -45,6 +54,21 @@ Texture2D Preload::getWalker() {
 Texture2D Preload::getBullet()
 {
     return Bullet;
+}
+
+Texture2D Preload::getAid()
+{
+    return Aid;
+}
+
+Texture2D Preload::getAmmo()
+{
+    return Ammo;
+}
+
+Texture2D Preload::getGold()
+{
+    return Gold;
 }
 
 Sound Preload::getShootSound() {
@@ -95,6 +119,18 @@ void Preload::setBullet(Image bullet) {
     Bullet = LoadTextureFromImage(bullet);
 }
 
+void Preload::setAid(Image aid) {
+    Aid = LoadTextureFromImage(aid);
+}
+
+void Preload::setAmmo(Image ammo) {
+    Ammo = LoadTextureFromImage(ammo);
+}
+
+void Preload::setGold(Image gold) {
+    Gold = LoadTextureFromImage(gold);
+}
+
 void Preload::setShootSound() {
     shoot = LoadSound("resources/Shoot.mp3");
 }
@@ -134,6 +170,11 @@ Preload::~Preload() {
     UnloadTexture(Background);
     UnloadTexture(Character);
     UnloadTexture(Walker);
+    UnloadTexture(Bullet);
+    UnloadTexture(Aid);
+    UnloadTexture(Ammo);
+    UnloadTexture(Gold);
+
 
     UnloadSound(shoot);
     UnloadSound(collect);

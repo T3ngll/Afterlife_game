@@ -5,6 +5,10 @@ class Preload {
     Texture2D Character;
     Texture2D Walker;
     Texture2D Bullet;
+    Texture2D Aid;
+    Texture2D Ammo;
+    Texture2D Gold;
+
 
     Sound shoot;
     Sound collect;
@@ -27,6 +31,15 @@ public:
 
     Texture2D getBullet();
     void setBullet(Image bullet);
+
+    Texture2D getAid();
+    void setAid(Image aid);
+
+    Texture2D getAmmo();
+    void setAmmo(Image ammo);
+
+    Texture2D getGold();
+    void setGold(Image gold);
 
     Sound getShootSound();
     void setShootSound();

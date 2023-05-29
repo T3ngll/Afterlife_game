@@ -229,9 +229,9 @@ int main()
                 {
                     if(treasure[i]->isActive())
                     {
-                         DrawRectangle(treasure[i]->getX(),treasure[i]->getY(),100,100, YELLOW);
+                        DrawTextureV(p.getGold(), (Vector2){treasure[i]->getX(),treasure[i]->getY()}, WHITE);
                         collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-                                                          (Rectangle){treasure[i]->getX(),treasure[i]->getY(),110,110});
+                                                          (Rectangle){treasure[i]->getX(),treasure[i]->getY(),200,120});
 
                         if (collisionObj)
                         {
@@ -246,15 +246,15 @@ int main()
                 {
                     if(ammokits[i]->isActive())
                     {
-                        DrawRectangle(ammokits[i]->getX(),ammokits[i]->getY(),100,100, DARKBROWN);
+                         DrawTextureV(p.getAmmo(), (Vector2){ammokits[i]->getX(),ammokits[i]->getY()}, WHITE);
                         collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-                                                          (Rectangle){ammokits[i]->getX(),ammokits[i]->getY(),110,110});
+                                                          (Rectangle){ammokits[i]->getX(),ammokits[i]->getY(),80,60});
 
                         if (collisionObj)
                         {
                             ammokits[i]->setStatus(false);
                             PlaySound(p.getCollectSound());
-                            player.setCurAmmo(player.getCurAmmo()+3);
+                            player.setCurAmmo(player.getCurAmmo()+4);
                         }
                     }
                 }
@@ -263,9 +263,9 @@ int main()
                 {
                     if(heals[i]->isActive())
                     {
-                         DrawRectangle(heals[i]->getX(),heals[i]->getY(),100,100, RED);
+                         DrawTextureV(p.getAid(), (Vector2){heals[i]->getX(),heals[i]->getY()}, WHITE);
                         collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-                                                          (Rectangle){heals[i]->getX(),heals[i]->getY(),110,110});
+                                                          (Rectangle){heals[i]->getX(),heals[i]->getY(),80,80});
 
                         if (collisionObj)
                         {
