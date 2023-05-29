@@ -60,10 +60,14 @@ int main()
     int TreasureAmount=GetRandomValue(1, 3);
     // init characters
     class Character player(p.getCharacter(),70,50,Vector2{200,200},100,20,0);
+
     Type type1 = Collect;
     Type type2 = Walker;
     Type type3 = Fatboy;
     Type type4 = Runner;
+
+
+
     for(int i=0; i<EnAmount; i++)
     {
         if(randomchoose==1)
@@ -101,6 +105,7 @@ int main()
     int frameCounter=0;
     int frameCounter2=0;
     int frameCounter3=0;
+    int sourceWidth=0;
     GameScreen currentScreen = TITLE;
 
 
@@ -281,6 +286,12 @@ int main()
                 //shooting
                 if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
                 {
+                    if(player.getCurAmmo()>0)
+                    {
+                        sourceWidth=0+p.getCharacter().width/3;
+                    }
+
+                   // player.setFrameWidth(player.getFrameWidth()+p.getCharacter().width/3);
 
                     if (player.getCurAmmo() != 0) {
 
@@ -508,8 +519,8 @@ while(true)
                      DrawRectangle(GetScreenWidth()/2-150,0,300,100, BROWN);
                      
 
-                DrawTexturePro(player.getTexture(),(Rectangle){0,0,player.getFrameWidth(),player.getFrameHeight()},
-                               (Rectangle){player.getX(),player.getY(),player.getWidth(),player.getHeight()},
+                DrawTexturePro(player.getTexture(),(Rectangle){(float)sourceWidth,0,player.getFrameWidth()/3,player.getFrameHeight()},
+                               (Rectangle){player.getX()+20,player.getY(),player.getWidth(),player.getHeight()},
                                (Vector2){(float)player.getWidth()/2, (float)player.getHeight()/2},
                                player.getRotation(),
                                WHITE);
@@ -575,6 +586,9 @@ while(true)
             } break;
             default: break;
         }
+
+
+        sourceWidth=0;
 
         EndDrawing(); // end render
     }

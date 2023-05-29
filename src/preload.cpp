@@ -4,7 +4,7 @@
 Preload::Preload() {
     Image background = LoadImage("resources/map.png");
     Image character = LoadImage("resources/character.png");
-    Image walker = LoadImage("resources/character.png");
+    Image walker = LoadImage("resources/walker.png");
     Image bullet = LoadImage("resources/bullet.png");
     Image aid = LoadImage("resources/aid.png");
     Image ammo = LoadImage("resources/ammo.png");

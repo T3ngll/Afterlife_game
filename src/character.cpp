@@ -19,7 +19,7 @@ float Character::getRotation() {
         Vector2 mousePosition = GetMousePosition();
         float dx = mousePosition.x - pos.x;
         float dy = mousePosition.y - pos.y;
-        float rotation = atan2f(dy, dx)+(PI/2);
+        float rotation = atan2f(dy, dx);
         return rotation*RAD2DEG;
 }
 
