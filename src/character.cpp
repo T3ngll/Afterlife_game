@@ -24,7 +24,7 @@ float Character::getRotation() {
 }
 
 int Character::getHpMax() const {return hpMax;}
-
+void Character::setHpMax(int hpMaxNew) {hp=hpMaxNew;}
 
 int Character::getScore() const{return score;}
 void Character::setScore(int scoreNew) {score=scoreNew;}
@@ -32,6 +32,8 @@ void Character::setScore(int scoreNew) {score=scoreNew;}
 void Character::setHpPercent(float hpPercentNew) {HpPercent=hpPercentNew;}
 float Character::getHpPercent() const {return HpPercent;}
 
+void Character::setHpMaxPercent(float hpMaxPercentNew) {HpMaxPercent=hpMaxPercentNew;}
+float Character::getHpMaxPercent() const {return HpMaxPercent;}
 
 int Character::getMaxAmmo() const{return maxAmmo;}
 void Character::setMaxAmmo(int maxAmmo) {this->maxAmmo=maxAmmo;}

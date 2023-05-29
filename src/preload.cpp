@@ -21,6 +21,8 @@ Preload::Preload() {
     setKillSound();
     setDamageSound();
     setHealSound();
+    setMeleeSound();
+    setMelee2Sound();
 }
 
 
@@ -61,6 +63,14 @@ Sound Preload::getHealSound() {
     return heal;
 }
 
+Sound Preload::getMeleeSound() {
+    return melee;
+}
+
+Sound Preload::getMelee2Sound() {
+    return melee2;
+}
+
 void Preload::setBackground(Image background) {
     Background = LoadTextureFromImage(background);
 }
@@ -98,6 +108,14 @@ void Preload::setHealSound() {
     heal = LoadSound("resources/Heal.mp3");
 }
 
+void Preload::setMeleeSound() {
+    melee = LoadSound("resources/Melee.mp3");
+}
+
+void Preload::setMelee2Sound() {
+    melee2 = LoadSound("resources/Melee2.mp3");
+}
+
 
 Preload::~Preload() {
 
@@ -111,6 +129,8 @@ Preload::~Preload() {
     UnloadSound(kill);
     UnloadSound(damage);
     UnloadSound(heal);
+    UnloadSound(melee);
+    UnloadSound(melee2);
     CloseAudioDevice();
 
 }

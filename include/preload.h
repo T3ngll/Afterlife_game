@@ -11,6 +11,8 @@ class Preload {
     Sound kill;
     Sound damage;
     Sound heal;
+    Sound melee;
+    Sound melee2;
 public:
     Preload();
     Texture2D getBackground();
@@ -39,6 +41,13 @@ public:
 
     Sound getHealSound();
     void setHealSound();
+
+    Sound getMeleeSound();
+    void setMeleeSound();
+
+    Sound getMelee2Sound();
+    void setMelee2Sound();
+
 
     ~Preload();
 };

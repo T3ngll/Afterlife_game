@@ -37,6 +37,7 @@ vector<Bullet> bulletsToDelete;
 vector<Enemy*> enemies;
 vector<Object*> heals;
 vector<Object*> ammokits;
+vector<Object*> treasure;
 
 Factory f;
 typedef enum GameScreen { TITLE, GAMEPLAY, ENDING } GameScreen;
@@ -51,9 +52,11 @@ int main()
 
     Preload p;
 
-   int EnAmount=GetRandomValue(0, 10);
-    int HealAmount=GetRandomValue(0, 2);
-    int AmmoKitAmount=GetRandomValue(1, 6);
+    int RandomEnemy=GetRandomValue(1, 10);
+    int EnAmount=RandomEnemy;
+    int HealAmount=GetRandomValue(0, 1);
+    int AmmoKitAmount=GetRandomValue(1, 3);
+    int TreasureAmount=GetRandomValue(1, 3);
     // init characters
     class Character player(p.getCharacter(),70,50,Vector2{200,200},100,20,0);
     Type type1 = Walker;
@@ -70,6 +73,10 @@ int main()
     {
         ammokits.push_back(f.create(type2,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
     }
+    for(int i=0; i<TreasureAmount; i++)
+    {
+        treasure.push_back(f.create(type2,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+    }
     player.setFrameWidth(p.getCharacter().width);
     player.setFrameHeight(p.getCharacter().height);
 
@@ -77,9 +84,11 @@ int main()
 
     bool collisionTakeDamage = false;
     bool collisionAttack = false;
+    bool collisionAttackMelee = false;
     bool collisionObj = false;
     bool collisionDoor = false;
-     bool Clear=false;
+    bool LevelUp=false;
+    bool Clear=false;
 
     int frameCounter=0;
     int frameCounter2=0;
@@ -124,13 +133,18 @@ int main()
                       {
                              ammokits[i]->setStatus(false);
                         }
+                         for(int i=0; i<TreasureAmount; i++)
+                      {
+                             treasure[i]->setStatus(false);
+                        }
                         }
                     DrawTexture(p.getBackground(), 0, 0, WHITE);
                    // ClearBackground(WHITE);
                    // DrawRectangle(0, 0, screenWidth, screenHeight, BLACK);
-                     EnAmount=EnAmount+(GetRandomValue(0, 10));
-                     HealAmount=HealAmount+(GetRandomValue(0, 2));
-                     AmmoKitAmount=AmmoKitAmount+(GetRandomValue(1, 6));
+                     EnAmount=EnAmount+RandomEnemy;
+                     HealAmount=HealAmount+(GetRandomValue(0, 1));
+                     AmmoKitAmount=AmmoKitAmount+(GetRandomValue(1, 3));
+                     TreasureAmount=TreasureAmount+(GetRandomValue(1, 3));
                       player.setPos(Vector2{GetScreenWidth()/2, GetScreenHeight()-10});
                       for(int i=0; i<EnAmount; i++)
     {
@@ -143,6 +157,10 @@ int main()
     for(int i=0; i<AmmoKitAmount; i++)
     {
     ammokits.push_back(f.create(type2,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+    }
+    for(int i=0; i<TreasureAmount; i++)
+    {
+    treasure.push_back(f.create(type2,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
     }
                     }
                 }
@@ -243,8 +261,8 @@ int main()
                     {
                         if(enemies[i]->isActive())
                         {
-                            collisionAttack=CheckCollisionCircleRec((Vector2){bullet->getPos()}, bullet->getRadius(),
-                                                                    (Rectangle){enemies[i]->getX(),enemies[i]->getY(),enemies[i]->getWidth(),enemies[i]->getHeight()});
+                            collisionAttack=CheckCollisionCircles((Vector2){bullet->getPos()}, bullet->getRadius(),
+                                                                    (Vector2){enemies[i]->getPos()},enemies[i]->getHeight()-60);
                             if (collisionAttack)
                             {
                                 enemies[i]->setHp(enemies[i]->getHp()-bullet->getDamage());
@@ -263,6 +281,33 @@ int main()
                     }
                 }
 
+                if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+                {
+                    DrawCircleV(player.getPos(), 70, WHITE);
+                    for(int i=0; i<EnAmount; i++)
+                    {
+                        if(enemies[i]->isActive())
+                        {
+                    collisionAttackMelee=CheckCollisionCircles((Vector2){player.getX(), player.getY()}, 70,
+                                                                    (Vector2){enemies[i]->getPos()},enemies[i]->getHeight()-60);
+                    if(collisionAttackMelee)
+                            {
+                    PlaySound(p.getMeleeSound());
+                    enemies[i]->setHp(enemies[i]->getHp()-20);
+                    if(enemies[i]->getHp()<=0)
+                                {
+                                    enemies[i]->setStatus(false);
+                                    PlaySound(p.getKillSound());
+                                    player.setScore(player.getScore()+100);
+
+                                }
+                            }
+                        }
+                         else
+                            PlaySound(p.getMelee2Sound());
+                    }
+                }
+
 
                 if (IsKeyPressed(KEY_KP_ADD))
                 {
@@ -271,9 +316,9 @@ int main()
                 }
 
                 //aidkit use
-                if (IsKeyPressed(KEY_E) && player.getHp() < 100 && player.getCurAid()!=0)
+                if (IsKeyPressed(KEY_E) && player.getHp() < player.getHpMax() && player.getCurAid()!=0)
                 {
-                    if(player.getHp()>50)
+                    if(player.getHp()>(player.getHpMax()-50))
                     {
                         PlaySound(p.getHealSound());
                         player.setCurAid(player.getCurAid()-1);
@@ -288,9 +333,9 @@ int main()
                 }
 
                 //hp decrease and increase
-                if (IsKeyPressed(KEY_UP) && player.getHp() < 100)
+                if (IsKeyPressed(KEY_UP) && player.getHp() < player.getHpMax())
                 {
-                    if(IsKeyPressed(KEY_UP) && player.getHp()>80)
+                    if(IsKeyPressed(KEY_UP) && player.getHp()>(player.getHpMax()-20))
                         player.setHp(player.getHpMax());
                     else
                         player.setHp(player.getHp()+20);
@@ -325,15 +370,15 @@ int main()
 
                     if(enemies[i]->isActive())
                     {
-                        collisionTakeDamage = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
-                                                                 (Rectangle){enemies[i]->getX(),enemies[i]->getY(),20.0f,20.0f});
+                        collisionTakeDamage = CheckCollisionCircles((Vector2){player.getPos()},player.getHeight()-60,
+                                                                 (Vector2){enemies[i]->getPos()},enemies[i]->getHeight()-60);
 
                         if (collisionTakeDamage)
                         {
                             if(frameCounter>60)
                             {
                                 PlaySound(p.getDamageSound());
-                                player.setHp(player.getHp()-20);
+                                player.setHp(player.getHp()-30);
                                 frameCounter=0;
                             }
                         }
@@ -377,7 +422,23 @@ int main()
                         {
                             ammokits[i]->setStatus(false);
                             PlaySound(p.getCollectSound());
-                            player.setCurAmmo(player.getCurAmmo()+10);
+                            player.setCurAmmo(player.getCurAmmo()+3);
+                        }
+                    }
+                }
+
+                for(int i=0; i<TreasureAmount; i++)
+                {
+                    if(treasure[i]->isActive())
+                    {
+                        collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
+                                                          (Rectangle){treasure[i]->getX(),treasure[i]->getY(),110,110});
+
+                        if (collisionObj)
+                        {
+                            treasure[i]->setStatus(false);
+                            PlaySound(p.getCollectSound());
+                            player.setScore(player.getScore()+100);
                         }
                     }
                 }
@@ -394,7 +455,7 @@ while(true)
     }
     for(int i=0; i<HealAmount; i++)
     {
-     if(enemies[i]->isActive())
+     if(heals[i]->isActive())
          {
             Clear=false;
             break;
@@ -402,15 +463,48 @@ while(true)
     }
     for(int i=0; i<AmmoKitAmount; i++)
     {
-     if(enemies[i]->isActive())
+     if(ammokits[i]->isActive())
          {
             Clear=false;
             break;
          } 
     }
+         for(int i=0; i<TreasureAmount; i++)
+    {
+     if(treasure[i]->isActive())
+         {
+            Clear=false;
+            break;
+         } 
+    }
+    
     Clear=true;
     break;
     }
+
+    //upgrade mechanic
+    //while(player.getScore()>=1000)
+       // LevelUp=true;
+
+   /* while(player.getScore()>=1000)
+    {
+        DrawText("Level Up! \nPress Y to increase MaxHp \nPress U to increase Speed", GetScreenWidth()-600, 100, 35, WHITE);
+        if(IsKeyPressed(KEY_Y))
+        {
+            player.setHpMax(player.getHpMax()+50);
+            player.setHpMaxPercent(1.5);
+            LevelUp=false;
+            break;
+        }
+       else if(IsKeyPressed(KEY_U))
+        {
+            player.setSpeedX(player.getSpeedX()+150);
+            player.setSpeedY(player.getSpeedY()+150);
+            LevelUp=false;
+            break;
+        }
+        
+    }*/
                 
                    //door
                     collisionDoor = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
@@ -456,6 +550,14 @@ while(true)
                     }
                 }
 
+                for(int i=0; i<TreasureAmount; i++)
+                {
+                    if(treasure[i]->isActive())
+                    {
+                        DrawRectangle(treasure[i]->getX(),treasure[i]->getY(),100,100, YELLOW);
+                    }
+                }
+
                 //healthbar
                 player.setHpPercent((float)(player.getHp())/(float)player.getHpMax());
 
@@ -465,7 +567,7 @@ while(true)
                 }
 
 
-                DrawRectangle(10, 30, 400, 30, BLACK);
+                DrawRectangle(10, 30, 400.0f * player.getHpMaxPercent() , 30, BLACK);
                 DrawRectangle(14, 34, 392.0f * player.getHpPercent(), (22), RED);
                 //enemy hp
                 for(int i=0; i<EnAmount; i++)

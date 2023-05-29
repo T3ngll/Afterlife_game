@@ -14,6 +14,7 @@ class Character: public Object, public Movable
     int curAid;
     int score;
     float HpPercent;
+    float HpMaxPercent=1;
 
 public:
     Character(Texture2D CharacterTexture , float width, float height, Vector2 speed, int hpMax, int maxAmmo, int score);
@@ -26,6 +27,7 @@ public:
     float getRotation();
 
     int getHpMax() const;
+    void setHpMax(int hpMaxNew);
 
     int getMaxAmmo() const;
     void setMaxAmmo(int ammo);
@@ -42,6 +44,9 @@ public:
 
       void setHpPercent(float hpPercentNew);
     float getHpPercent() const;
+
+    void setHpMaxPercent(float hpMaxPercentNew);
+    float getHpMaxPercent() const;
 };
 
 
