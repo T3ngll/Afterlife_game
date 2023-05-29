@@ -5,7 +5,6 @@
 #include "enemy.h"
 #include "factory.h"
 #include "preload.h"
-#include "game.h"
 
 #include <stdlib.h>
 #include <cmath>
@@ -31,6 +30,7 @@ void Init()
 
 
 }
+
 vector<Bullet> bullets;
 vector<Bullet> bulletsToDelete;
 
@@ -41,9 +41,6 @@ vector<Object*> treasure;
 
 Factory f;
 typedef enum GameScreen { TITLE, GAMEPLAY, ENDING } GameScreen;
-const int screenWidth = 1920;
-const int screenHeight = 1080;
-
 
 int main()
 {
@@ -160,12 +157,11 @@ int main()
                     maxenemy=maxenemy+2; 
                     RandomEnemy=GetRandomValue(minenemy, maxenemy);
                    }
-
                      EnAmount=EnAmount+RandomEnemy;
                      HealAmount=HealAmount+(GetRandomValue(0, 1));
                      AmmoKitAmount=AmmoKitAmount+(GetRandomValue(1, 3));
                      TreasureAmount=TreasureAmount+(GetRandomValue(1, 3));
-                      player.setPos(Vector2{GetScreenWidth()/2, GetScreenHeight()-10});
+                      player.setPos(Vector2{(float)GetScreenWidth()/2, (float)GetScreenHeight()-10});
                       for(int i=0; i<EnAmount; i++)
     {
    int randomchoose=GetRandomValue(1, 3);
@@ -509,39 +505,12 @@ while(true)
     Clear=true;
     break;
     }
-
-    //upgrade mechanic
-    //while(player.getScore()>=1000)
-       // LevelUp=true;
-
-   /* while(player.getScore()>=1000)
-    {
-        DrawText("Level Up! \nPress Y to increase MaxHp \nPress U to increase Speed", GetScreenWidth()-600, 100, 35, WHITE);
-        if(IsKeyPressed(KEY_Y))
-        {
-            player.setHpMax(player.getHpMax()+50);
-            player.setHpMaxPercent(1.5);
-            LevelUp=false;
-            break;
-        }
-       else if(IsKeyPressed(KEY_U))
-        {
-            player.setSpeedX(player.getSpeedX()+150);
-            player.setSpeedY(player.getSpeedY()+150);
-            LevelUp=false;
-            break;
-        }
-        
-    }*/
                 
                    //door
                     collisionDoor = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
                      (Rectangle){(float)GetScreenWidth()/2-150,0,300,100});
                      DrawRectangle(GetScreenWidth()/2-150,0,300,100, BROWN);
-    
-
-                //DrawLine(0,GetScreenHeight()/2,GetScreenWidth(),GetScreenHeight()/2,BLACK);
-                // DrawLine(GetScreenWidth()/2,0,GetScreenWidth()/2,GetScreenHeight(),BLACK);
+                     
 
                 DrawTexturePro(player.getTexture(),(Rectangle){0,0,player.getFrameWidth(),player.getFrameHeight()},
                                (Rectangle){player.getX(),player.getY(),player.getWidth(),player.getHeight()},

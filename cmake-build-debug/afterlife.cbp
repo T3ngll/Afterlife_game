@@ -85,15 +85,6 @@
 		<Unit filename="D:/projects/projects c++/GitHub/Afterlife_game/include/character.h">
 			<Option target="afterlife"/>
 		</Unit>
-		<Unit filename="D:/projects/projects c++/GitHub/Afterlife_game/include/game.cpp">
-			<Option target="afterlife"/>
-		</Unit>
-		<Unit filename="D:/projects/projects c++/GitHub/Afterlife_game/include/game.h">
-			<Option target="afterlife"/>
-		</Unit>
-		<Unit filename="D:/projects/projects c++/GitHub/Afterlife_game/include/init.h">
-			<Option target="afterlife"/>
-		</Unit>
 		<Unit filename="D:/projects/projects c++/GitHub/Afterlife_game/include/movable.h">
 			<Option target="afterlife"/>
 		</Unit>
