@@ -328,7 +328,7 @@ int main()
                         if(enemies[i]->isActive())
                         {
                             collisionAttack=CheckCollisionCircles((Vector2){bullet->getPos()}, bullet->getRadius(),
-                                                                    (Vector2){enemies[i]->getPos()},(enemies[i]->getHeight()-((enemies[i]->getHeight()/100)*43)));
+                                                                    (Vector2){enemies[i]->getPos()},(enemies[i]->getHeight()-((enemies[i]->getHeight()/100)*60)));
                             if (collisionAttack)
                             {
                                 enemies[i]->setHp(enemies[i]->getHp()-bullet->getDamage());
