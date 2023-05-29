@@ -4,6 +4,7 @@
 
 class Bullet : public Object,public Movable
 {
+    Texture2D BulletTexture;
     Color color;
     int lifeSpawn;
     float radius;
@@ -11,10 +12,12 @@ class Bullet : public Object,public Movable
     int damage=5;
 public:
     Bullet() = default;
-    Bullet(Vector2 pos,Vector2 speed, bool active,int lifeSpawn,float radius,Color color);
+    Bullet(Texture2D BulletTexture, Vector2 pos,Vector2 speed, bool active,float radius,Color color);
+
+    Texture2D getTexture();
 
     bool operator==(const Bullet& toCompare);
-
+    float getRotation();
     int getDamage();
     void setDamage(int damage);
 

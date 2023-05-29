@@ -5,11 +5,14 @@ Preload::Preload() {
     Image background = LoadImage("resources/map.png");
     Image character = LoadImage("resources/character.png");
     Image walker = LoadImage("resources/character.png");
+    Image bullet = LoadImage("resources/bullet.png");
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
+    ImageResize(&bullet,20,20);
 
     setBackground(background);
     setCharacter(character);
     setWalker(walker);
+    setBullet(bullet);
     UnloadImage(background);
     UnloadImage(character);
     UnloadImage(walker);
@@ -37,6 +40,11 @@ Texture2D Preload::getCharacter() {
 
 Texture2D Preload::getWalker() {
     return Walker;
+}
+
+Texture2D Preload::getBullet()
+{
+    return Bullet;
 }
 
 Sound Preload::getShootSound() {
@@ -81,6 +89,10 @@ void Preload::setCharacter(Image character) {
 
 void Preload::setWalker(Image walker) {
     Walker = LoadTextureFromImage(walker);
+}
+
+void Preload::setBullet(Image bullet) {
+    Bullet = LoadTextureFromImage(bullet);
 }
 
 void Preload::setShootSound() {
@@ -134,6 +146,8 @@ Preload::~Preload() {
     CloseAudioDevice();
 
 }
+
+
 
 
 
