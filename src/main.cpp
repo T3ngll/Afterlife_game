@@ -52,7 +52,10 @@ int main()
 
     Preload p;
 
-    int RandomEnemy=GetRandomValue(1, 10);
+    int minenemy=1;
+    int maxenemy=10;
+    int scoregoal=500;
+    int RandomEnemy=GetRandomValue(minenemy, maxenemy);
     int EnAmount=RandomEnemy;
     int HealAmount=GetRandomValue(0, 1);
     int AmmoKitAmount=GetRandomValue(1, 3);
@@ -92,6 +95,7 @@ int main()
 
     int frameCounter=0;
     int frameCounter2=0;
+    int frameCounter3=0;
     GameScreen currentScreen = TITLE;
 
 
@@ -141,6 +145,14 @@ int main()
                     DrawTexture(p.getBackground(), 0, 0, WHITE);
                    // ClearBackground(WHITE);
                    // DrawRectangle(0, 0, screenWidth, screenHeight, BLACK);
+                   if(scoregoal<player.getScore())
+                   {
+                    scoregoal=scoregoal+2000;
+                    minenemy=minenemy+5;
+                    maxenemy=maxenemy+5; 
+                    RandomEnemy=GetRandomValue(minenemy, maxenemy);
+                   }
+
                      EnAmount=EnAmount+RandomEnemy;
                      HealAmount=HealAmount+(GetRandomValue(0, 1));
                      AmmoKitAmount=AmmoKitAmount+(GetRandomValue(1, 3));
@@ -185,6 +197,7 @@ int main()
             {
                 DrawTexture(p.getBackground(), 0, 0, WHITE);
                 frameCounter++;
+                frameCounter3++;
 
                 //check if control key is down
                 // --replace by switch
@@ -281,8 +294,11 @@ int main()
                     }
                 }
 
-                if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+
+                //melee attack
+                if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT) && frameCounter3>30)
                 {
+                    frameCounter3=0;
                     DrawCircleV(player.getPos(), 70, WHITE);
                     for(int i=0; i<EnAmount; i++)
                     {
