@@ -3,7 +3,7 @@
 #include "object.h"
 #include "raylib.h"
 
-enum Type{Walker, Collect};
+enum Type{Walker, Collect, Fatboy, Runner};
 
 class Factory
 {
@@ -28,12 +28,31 @@ class Factory
 		switch(t)
 		{
 			case Walker:
-                
+                {
 				auto enemy = new Enemy(tex,140,140,pos,Vector2{100,100},100);
 
                 enemy->setFrameWidth(tex.width);
                 enemy->setFrameHeight(tex.height);
                 return enemy;
+                }
+
+                case Fatboy:
+                {
+				auto enemy = new Enemy(tex,210,210,pos,Vector2{50,50},200);
+
+                enemy->setFrameWidth(tex.width);
+                enemy->setFrameHeight(tex.height);
+                return enemy;
+                }
+
+                case Runner:
+                {
+				auto enemy = new Enemy(tex,100,100,pos,Vector2{180,180},40);
+
+                enemy->setFrameWidth(tex.width);
+                enemy->setFrameHeight(tex.height);
+                return enemy;
+                }
 			
 		}
 	}
