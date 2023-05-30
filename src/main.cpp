@@ -1,4 +1,7 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 #include "character.h"
 #include "projectiles.h"
@@ -33,7 +36,6 @@ void Init()
 
 vector<Bullet> bullets;
 vector<Bullet> bulletsToDelete;
-
 vector<Enemy*> enemies;
 vector<Object*> heals;
 vector<Object*> ammokits;
@@ -48,6 +50,15 @@ int main()
     Init();
 
     Preload p;
+
+string content;
+    ifstream inputFile("scoresheet.txt");
+    if (inputFile.is_open()) {
+        stringstream buffer;
+        buffer << inputFile.rdbuf();
+        content = buffer.str();
+        inputFile.close();
+    }
 
     int randomchoose=GetRandomValue(1, 3);
     int minenemy=1;
@@ -79,15 +90,15 @@ int main()
     }
     for(int i=0; i<HealAmount; i++)
     {
-        heals.push_back(f.create(type1,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+        heals.push_back(f.create(type1,Vector2{float(GetRandomValue(100, 1800)),float(GetRandomValue(100, 900))}));
     }
     for(int i=0; i<AmmoKitAmount; i++)
     {
-        ammokits.push_back(f.create(type1,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+        ammokits.push_back(f.create(type1,Vector2{float(GetRandomValue(100, 1800)),float(GetRandomValue(100, 900))}));
     }
     for(int i=0; i<TreasureAmount; i++)
     {
-        treasure.push_back(f.create(type1,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+        treasure.push_back(f.create(type1,Vector2{float(GetRandomValue(100, 1800)),float(GetRandomValue(100, 900))}));
     }
     player.setFrameWidth(p.getCharacter().width);
     player.setFrameHeight(p.getCharacter().height);
@@ -179,15 +190,15 @@ int main()
     }
     for(int i=0; i<HealAmount; i++)
     {
-    heals.push_back(f.create(type1,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+    heals.push_back(f.create(type1,Vector2{float(GetRandomValue(100, 1800)),float(GetRandomValue(100, 900))}));
     }
     for(int i=0; i<AmmoKitAmount; i++)
     {
-    ammokits.push_back(f.create(type1,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+    ammokits.push_back(f.create(type1,Vector2{float(GetRandomValue(100, 1800)),float(GetRandomValue(100, 900))}));
     }
     for(int i=0; i<TreasureAmount; i++)
     {
-    treasure.push_back(f.create(type1,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))}));
+    treasure.push_back(f.create(type1,Vector2{float(GetRandomValue(100, 1800)),float(GetRandomValue(100, 900))}));
     }
                     }
                 }
@@ -579,9 +590,12 @@ while(true)
             case ENDING:
             {
                 // ENDING screen
+            DrawText(content.c_str(), GetScreenWidth()/2, GetScreenHeight()/2+150, 50, YELLOW);
+    
                 DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
                 DrawText("Game Over", GetScreenWidth()/2, GetScreenHeight()/2, 100, WHITE);
                 DrawText("PRESS Esc to Close Game", 120, 220, 20, WHITE);
+                DrawText(TextFormat("Score: %i", player.getScore()), GetScreenWidth()/2, GetScreenHeight()/2+100, 50, YELLOW);
 
             } break;
             default: break;
