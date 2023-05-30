@@ -29,7 +29,7 @@ class Factory
 		{
 			case Walker:
                 {
-				auto enemy = new Enemy(tex,140,140,pos,Vector2{100,100},100,40);
+				auto enemy = new Enemy(tex,140,140,pos,Vector2{100,100},100,40,100);
 
                 enemy->setFrameWidth(tex.width);
                 enemy->setFrameHeight(tex.height);
@@ -38,7 +38,7 @@ class Factory
 
                 case Fatboy:
                 {
-				auto enemy = new Enemy(tex,210,210,pos,Vector2{50,50},200,60);
+				auto enemy = new Enemy(tex,210,210,pos,Vector2{50,50},200,60,150);
 
                 enemy->setFrameWidth(tex.width);
                 enemy->setFrameHeight(tex.height);
@@ -47,7 +47,7 @@ class Factory
 
                 case Runner:
                 {
-				auto enemy = new Enemy(tex,100,100,pos,Vector2{180,180},40,30);
+				auto enemy = new Enemy(tex,100,100,pos,Vector2{180,180},40,30,50);
 
                 enemy->setFrameWidth(tex.width);
                 enemy->setFrameHeight(tex.height);
