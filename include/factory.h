@@ -10,6 +10,7 @@ class Factory
     private:
 
     Texture2D walker;
+    Texture2D runner;
 
     public:
 

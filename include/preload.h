@@ -2,8 +2,11 @@
 #include "raylib.h"
 class Preload {
     Texture2D Background;
+    Texture2D Door;
     Texture2D Character;
     Texture2D Walker;
+    Texture2D Runner;
+    Texture2D Fatboy;
     Texture2D Bullet;
     Texture2D Aid;
     Texture2D Ammo;
@@ -23,11 +26,20 @@ public:
     Texture2D getBackground();
     void setBackground(Image background);
 
+    Texture2D getDoor();
+    void setDoor(Image door);
+
     Texture2D getCharacter();
     void setCharacter(Image character);
 
     Texture2D getWalker();
     void setWalker(Image walker);
+
+    Texture2D getRunner();
+    void setRunner(Image Runner);
+
+    Texture2D getFatboy();
+    void setFatboy(Image Fatboy);
 
     Texture2D getBullet();
     void setBullet(Image bullet);
