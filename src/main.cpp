@@ -300,7 +300,7 @@ int main()
 
                         float dist = 0.002*sqrtf((player.getX()-GetMousePosition().x)*(player.getX()-GetMousePosition().x) +
                                                  (player.getY()-GetMousePosition().y)*(player.getY()-GetMousePosition().y));
-                        Bullet temp(p.getBullet(),(Vector2){player.getX(),player.getY()},Vector2 {(player.getX()-GetMousePosition().x)/dist,(player.getY()-GetMousePosition().y)/dist},true,10,WHITE);
+                        Bullet temp(p.getBullet(),(Vector2){player.getX()+10,player.getY()},Vector2 {(player.getX()-GetMousePosition().x)/dist,(player.getY()-GetMousePosition().y)/dist},true,10,WHITE);
                         temp.setDamage(34);
                         temp.setTargetToMouse();
                         bullets.push_back(temp);
@@ -458,7 +458,7 @@ int main()
                             if(frameCounter>60)
                             {
                                 PlaySound(p.getDamageSound());
-                                player.setHp(player.getHp()-30);
+                                player.setHp(player.getHp()-enemies[i]->getDamage());
                                 frameCounter=0;
                             }
                         }
