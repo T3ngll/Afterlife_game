@@ -73,9 +73,9 @@ int main()
         if(randomchoose==1)
         enemies.push_back(f.create(type2,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},p.getWalker()));
         else if(randomchoose==2)
-        enemies.push_back(f.create(type3,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},p.getWalker()));
+        enemies.push_back(f.create(type3,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},p.getFatboy()));
         else if(randomchoose==3)
-        enemies.push_back(f.create(type4,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},p.getWalker()));
+        enemies.push_back(f.create(type4,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},p.getRunner()));
     }
     for(int i=0; i<HealAmount; i++)
     {
@@ -173,9 +173,9 @@ int main()
         if(randomchoose==1)
         enemies.push_back(f.create(type2,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},p.getWalker()));
         else if(randomchoose==2)
-        enemies.push_back(f.create(type3,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},p.getWalker()));
+        enemies.push_back(f.create(type3,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},p.getFatboy()));
         else if(randomchoose==3)
-        enemies.push_back(f.create(type4,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},p.getWalker()));
+        enemies.push_back(f.create(type4,Vector2{float(GetRandomValue(0, 1900)),float(GetRandomValue(0, 1000))},p.getRunner()));
     }
     for(int i=0; i<HealAmount; i++)
     {
@@ -328,7 +328,6 @@ int main()
                         bulletsToDelete.push_back(*bullet);
                         continue;
                     }
-                    //DrawCircleV(bullet->getPos(), bullet->getRadius(), WHITE);
                     DrawTextureV(p.getBullet(),bullet->getPos(),WHITE);
 
 
@@ -363,6 +362,8 @@ int main()
                 if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT) && frameCounter3>30)
                 {
                     frameCounter3=0;
+                    float meleeRot= atan2f(GetMousePosition().x-player.getX(), GetMousePosition().y-player.getX());
+                    //DrawCircleSectorLines(player.getPos(),70,meleeRot-PI,meleeRot,10,RED);
                     DrawCircleV(player.getPos(), 70, WHITE);
                     for(int i=0; i<EnAmount; i++)
                     {
@@ -516,7 +517,7 @@ while(true)
                    //door
                     collisionDoor = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
                      (Rectangle){(float)GetScreenWidth()/2-150,0,300,100});
-                     DrawRectangle(GetScreenWidth()/2-150,0,300,100, BROWN);
+                DrawTexture(p.getDoor(),GetScreenWidth()/2-150,0,WHITE);
                      
 
                 DrawTexturePro(player.getTexture(),(Rectangle){(float)sourceWidth,0,player.getFrameWidth()/3,player.getFrameHeight()},

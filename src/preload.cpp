@@ -3,28 +3,40 @@
 
 Preload::Preload() {
     Image background = LoadImage("resources/map.png");
+    Image door = LoadImage("resources/door.png");
     Image character = LoadImage("resources/character.png");
     Image walker = LoadImage("resources/walker.png");
+    Image runner = LoadImage("resources/runner.png");
+    Image fatboy = LoadImage("resources/fatboy.png");
     Image bullet = LoadImage("resources/bullet.png");
     Image aid = LoadImage("resources/aid.png");
     Image ammo = LoadImage("resources/ammo.png");
     Image gold = LoadImage("resources/gold.png");
+
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
+    ImageResize(&door,300,100);
     ImageResize(&bullet,20,20);
     ImageResize(&aid,40,40);
     ImageResize(&ammo,50,40);
     ImageResize(&gold,40,50);
 
     setBackground(background);
+    setDoor(door);
     setCharacter(character);
     setWalker(walker);
+    setRunner(runner);
+    setFatboy(fatboy);
     setBullet(bullet);
     setAid(aid);
     setAmmo(ammo);
     setGold(gold);
     UnloadImage(background);
+    UnloadImage(door);
     UnloadImage(character);
     UnloadImage(walker);
+    UnloadImage(runner);
+    UnloadImage(fatboy);
+    UnloadImage(bullet);
 
     //init and set audio
     setShootSound();
@@ -42,6 +54,9 @@ Preload::Preload() {
 Texture2D Preload::getBackground() {
     return Background;
 }
+Texture2D Preload::getDoor() {
+    return Door;
+}
 
 Texture2D Preload::getCharacter() {
     return Character;
@@ -50,6 +65,15 @@ Texture2D Preload::getCharacter() {
 Texture2D Preload::getWalker() {
     return Walker;
 }
+
+Texture2D Preload::getRunner() {
+    return Runner;
+}
+
+Texture2D Preload::getFatboy() {
+    return Fatboy;
+}
+
 
 Texture2D Preload::getBullet()
 {
@@ -107,12 +131,24 @@ void Preload::setBackground(Image background) {
     Background = LoadTextureFromImage(background);
 }
 
+void Preload::setDoor(Image door) {
+    Door = LoadTextureFromImage(door);
+}
+
 void Preload::setCharacter(Image character) {
     Character = LoadTextureFromImage(character);
 }
 
 void Preload::setWalker(Image walker) {
     Walker = LoadTextureFromImage(walker);
+}
+
+void Preload::setRunner(Image runner) {
+    Runner = LoadTextureFromImage(runner);
+}
+
+void Preload::setFatboy(Image fatboy) {
+    Fatboy = LoadTextureFromImage(fatboy);
 }
 
 void Preload::setBullet(Image bullet) {
@@ -168,6 +204,7 @@ void Preload::setMelee2Sound() {
 Preload::~Preload() {
 
     UnloadTexture(Background);
+    UnloadTexture(Door);
     UnloadTexture(Character);
     UnloadTexture(Walker);
     UnloadTexture(Bullet);
@@ -187,6 +224,7 @@ Preload::~Preload() {
     CloseAudioDevice();
 
 }
+
 
 
 
