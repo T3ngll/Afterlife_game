@@ -347,7 +347,7 @@ int main()
                                 {
                                     enemies[i]->setStatus(false);
                                     PlaySound(p.getKillSound());
-                                    player.setScore(player.getScore()+100);
+                                    player.setScore(player.getScore()+enemies[i]->getScore());
 
                                 }
 
@@ -378,7 +378,7 @@ int main()
                                 {
                                     enemies[i]->setStatus(false);
                                     PlaySound(p.getKillSound());
-                                    player.setScore(player.getScore()+100);
+                                    player.setScore(player.getScore()+enemies[i]->getScore());
 
                                 }
                             }

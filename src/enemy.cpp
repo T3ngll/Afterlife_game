@@ -15,3 +15,5 @@ void Enemy::setHpPercent(float hpPercentNew) {HpPercent=hpPercentNew;}
 float Enemy::getHpPercent() const {return HpPercent;}
 int Enemy::getDamage() const {return damage;}
 void Enemy::setDamage(int damagenew) {damage=damagenew;}
+int Enemy::getScore() const {return score;}
+void Enemy::setScore(int scorenew) {score=scorenew;}
