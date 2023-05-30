@@ -11,9 +11,9 @@ Preload::Preload() {
     Image gold = LoadImage("resources/gold.png");
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
     ImageResize(&bullet,20,20);
-    ImageResize(&aid,80,80);
-    ImageResize(&ammo,70,60);
-    ImageResize(&gold,200,120);
+    ImageResize(&aid,40,40);
+    ImageResize(&ammo,50,40);
+    ImageResize(&gold,40,50);
 
     setBackground(background);
     setCharacter(character);
