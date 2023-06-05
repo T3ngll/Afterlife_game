@@ -59,7 +59,7 @@ string content;
         content = buffer.str();
         inputFile.close();
     }
-
+    int backgroundswitch=1;
     int randomchoose=GetRandomValue(1, 3);
     int minenemy=1;
     int maxenemy=5;
@@ -70,7 +70,7 @@ string content;
     int AmmoKitAmount=GetRandomValue(1, 3);
     int TreasureAmount=GetRandomValue(1, 3);
     // init characters
-    class Character player(p.getCharacter(),70,50,Vector2{200,200},100,20,0);
+    class Character player(p.getCharacter(),70,50,Vector2{300,300},100,20,0);
 
     Type type1 = Collect;
     Type type2 = Walker;
@@ -163,9 +163,46 @@ string content;
                              treasure[i]->setStatus(false);
                         }
                         }
-                    DrawTexture(p.getBackground(), 0, 0, WHITE);
-                   // ClearBackground(WHITE);
-                   // DrawRectangle(0, 0, screenWidth, screenHeight, BLACK);
+
+                    if(backgroundswitch==1)
+                    {
+                   int random1=GetRandomValue(1,2);
+                   if(random1==1)
+                   {
+                    backgroundswitch=2;
+                   }
+                   else
+                   {
+                    backgroundswitch=3;
+                   }
+                    }
+
+                    else if(backgroundswitch==2)
+                    {
+                   int random1=GetRandomValue(1,2);
+                   if(random1==1)
+                   {
+                    backgroundswitch=1;
+                   }
+                   else
+                   {
+                    backgroundswitch=3;
+                   }
+                    }
+
+                    else if(backgroundswitch==3)
+                    {
+                   int random1=GetRandomValue(1,2);
+                   if(random1==1)
+                   {
+                    backgroundswitch=1;
+                   }
+                   else
+                   {
+                    backgroundswitch=2;
+                   }
+                    }
+
                    if(scoregoal<player.getScore())
                    {
                     scoregoal=scoregoal+2000;
@@ -212,12 +249,36 @@ string content;
         // start render
         BeginDrawing();
 
-        ClearBackground(RAYWHITE);
+        
         switch(currentScreen)
         {
             case GAMEPLAY:
             {
+                switch (backgroundswitch)
+                {
+                case 1:
+                {
+                    ClearBackground(RAYWHITE);
                 DrawTexture(p.getBackground(), 0, 0, WHITE);
+
+                } break;
+
+                case 2:
+                {
+                    ClearBackground(RAYWHITE);
+                DrawTexture(p.getBackground2(), 0, 0, WHITE);
+                
+                } break;
+
+                 case 3:
+                {
+                    ClearBackground(RAYWHITE);
+                DrawTexture(p.getBackground3(), 0, 0, WHITE);
+                
+                } break;
+            
+                }
+                
                 frameCounter++;
                 frameCounter3++;
 

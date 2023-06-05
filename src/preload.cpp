@@ -3,6 +3,8 @@
 
 Preload::Preload() {
     Image background = LoadImage("resources/map.png");
+    Image background2 = LoadImage("resources/map2.png");
+    Image background3 = LoadImage("resources/map3.png");
     Image door = LoadImage("resources/door.png");
     Image character = LoadImage("resources/character.png");
     Image walker = LoadImage("resources/walker.png");
@@ -14,6 +16,8 @@ Preload::Preload() {
     Image gold = LoadImage("resources/gold.png");
 
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
+    ImageResize(&background2,GetScreenWidth(),GetScreenHeight());
+    ImageResize(&background3,GetScreenWidth(),GetScreenHeight());
     ImageResize(&door,300,100);
     ImageResize(&bullet,20,20);
     ImageResize(&aid,40,40);
@@ -21,6 +25,8 @@ Preload::Preload() {
     ImageResize(&gold,40,50);
 
     setBackground(background);
+    setBackground2(background2);
+    setBackground3(background3);
     setDoor(door);
     setCharacter(character);
     setWalker(walker);
@@ -31,6 +37,8 @@ Preload::Preload() {
     setAmmo(ammo);
     setGold(gold);
     UnloadImage(background);
+    UnloadImage(background2);
+    UnloadImage(background3);
     UnloadImage(door);
     UnloadImage(character);
     UnloadImage(walker);
@@ -53,6 +61,12 @@ Preload::Preload() {
 
 Texture2D Preload::getBackground() {
     return Background;
+}
+Texture2D Preload::getBackground2() {
+    return Background2;
+}
+Texture2D Preload::getBackground3() {
+    return Background3;
 }
 Texture2D Preload::getDoor() {
     return Door;
@@ -130,6 +144,12 @@ Sound Preload::getMelee2Sound() {
 void Preload::setBackground(Image background) {
     Background = LoadTextureFromImage(background);
 }
+void Preload::setBackground2(Image background2) {
+    Background2 = LoadTextureFromImage(background2);
+}
+void Preload::setBackground3(Image background3) {
+    Background3 = LoadTextureFromImage(background3);
+}
 
 void Preload::setDoor(Image door) {
     Door = LoadTextureFromImage(door);
@@ -204,6 +224,8 @@ void Preload::setMelee2Sound() {
 Preload::~Preload() {
 
     UnloadTexture(Background);
+    UnloadTexture(Background2);
+    UnloadTexture(Background3);
     UnloadTexture(Door);
     UnloadTexture(Character);
     UnloadTexture(Walker);
