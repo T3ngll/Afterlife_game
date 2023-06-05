@@ -51,14 +51,10 @@ int main()
 
     Preload p;
 
-string content;
-    ifstream inputFile("scoresheet.txt");
-    if (inputFile.is_open()) {
-        stringstream buffer;
-        buffer << inputFile.rdbuf();
-        content = buffer.str();
-        inputFile.close();
-    }
+    ifstream inputFile("scoresheet.txt"); // Открываем файл для чтения
+    string line;
+
+    int number;
     int backgroundswitch=1;
     int randomchoose=GetRandomValue(1, 3);
     int minenemy=1;
@@ -242,7 +238,13 @@ string content;
             } break;
             case ENDING:
             {
-                
+                if (inputFile.is_open())
+                 {
+        while (getline(inputFile, line)) 
+        { 
+            number = atoi(line.c_str());
+        }
+                 }
             } break;
             default: break;
         }
@@ -652,7 +654,8 @@ while(true)
             case ENDING:
             {
                 // ENDING screen
-            DrawText(content.c_str(), GetScreenWidth()/2, GetScreenHeight()/2+150, 50, YELLOW);
+            //DrawText(content.c_str(), GetScreenWidth()/2, GetScreenHeight()/2+150, 50, YELLOW);
+            DrawText(TextFormat("Highscore: %i", number), GetScreenWidth()/2, GetScreenHeight()/2+150, 50, YELLOW);
     
                 DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
                 DrawText("Game Over", GetScreenWidth()/2, GetScreenHeight()/2, 100, WHITE);
