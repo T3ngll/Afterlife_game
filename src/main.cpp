@@ -428,6 +428,7 @@ int main()
                         }
                     }
                 }
+               // DrawTextureV(p.getSlash(), player.getPos(), WHITE);
 
 
                 //melee attack
@@ -437,6 +438,7 @@ int main()
                     float meleeRot= atan2f(GetMousePosition().x-player.getX(), GetMousePosition().y-player.getX());
                     //DrawCircleSectorLines(player.getPos(),70,meleeRot-PI,meleeRot,10,RED);
                     DrawCircleV(player.getPos(), 70, WHITE);
+                     //DrawTextureV(p.getSlash(), player.getPos(), WHITE);
                     for(int i=0; i<EnAmount; i++)
                     {
                         if(enemies[i]->isActive())

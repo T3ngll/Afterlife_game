@@ -5,6 +5,7 @@ Preload::Preload() {
     Image background = LoadImage("resources/map.png");
     Image background2 = LoadImage("resources/map2.png");
     Image background3 = LoadImage("resources/map3.png");
+    Image slash = LoadImage("resources/slash.png");
     Image door = LoadImage("resources/door.png");
     Image character = LoadImage("resources/character.png");
     Image walker = LoadImage("resources/walker.png");
@@ -18,6 +19,7 @@ Preload::Preload() {
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
     ImageResize(&background2,GetScreenWidth(),GetScreenHeight());
     ImageResize(&background3,GetScreenWidth(),GetScreenHeight());
+    ImageResize(&slash,80,80);
     ImageResize(&door,300,100);
     ImageResize(&bullet,20,20);
     ImageResize(&aid,40,40);
@@ -27,6 +29,7 @@ Preload::Preload() {
     setBackground(background);
     setBackground2(background2);
     setBackground3(background3);
+    setDoor(slash);
     setDoor(door);
     setCharacter(character);
     setWalker(walker);
@@ -67,6 +70,9 @@ Texture2D Preload::getBackground2() {
 }
 Texture2D Preload::getBackground3() {
     return Background3;
+}
+Texture2D Preload::getSlash() {
+    return Slash;
 }
 Texture2D Preload::getDoor() {
     return Door;
@@ -150,7 +156,9 @@ void Preload::setBackground2(Image background2) {
 void Preload::setBackground3(Image background3) {
     Background3 = LoadTextureFromImage(background3);
 }
-
+void Preload::setSlash(Image slash) {
+    Slash = LoadTextureFromImage(slash);
+}
 void Preload::setDoor(Image door) {
     Door = LoadTextureFromImage(door);
 }
@@ -226,6 +234,7 @@ Preload::~Preload() {
     UnloadTexture(Background);
     UnloadTexture(Background2);
     UnloadTexture(Background3);
+    UnloadTexture(Slash);
     UnloadTexture(Door);
     UnloadTexture(Character);
     UnloadTexture(Walker);

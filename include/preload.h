@@ -4,6 +4,7 @@ class Preload {
     Texture2D Background;
     Texture2D Background2;
     Texture2D Background3;
+    Texture2D Slash;
     Texture2D Door;
     Texture2D Character;
     Texture2D Walker;
@@ -31,6 +32,9 @@ public:
     void setBackground(Image background);
     void setBackground2(Image background2);
     void setBackground3(Image background3);
+
+    Texture2D getSlash();
+    void setSlash(Image slash);
 
     Texture2D getDoor();
     void setDoor(Image door);
