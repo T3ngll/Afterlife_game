@@ -747,13 +747,16 @@ while(true)
             case ENDING:
             {
                 // ENDING screen
-            DrawText(content.c_str(), GetScreenWidth()/2, GetScreenHeight()/2+150, 50, YELLOW);
+               // DrawText(content.c_str(), GetScreenWidth()/2, GetScreenHeight()/2+150, 50, YELLOW);
+               // cout<<content.c_str();
+               // DrawText(TextFormat("Score: %c", content), GetScreenWidth()/2, GetScreenHeight()/2+100, 50, YELLOW);
     
                 DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
                 DrawText("Game Over", GetScreenWidth()/2, GetScreenHeight()/2, 100, WHITE);
                 DrawText("PRESS Esc to Close Game", 120, 220, 20, WHITE);
                 DrawText(TextFormat("Score: %i", player.getScore()), GetScreenWidth()/2, GetScreenHeight()/2+100, 50, YELLOW);
-
+                DrawText("Highscore: ", GetScreenWidth()/2, GetScreenHeight()/2+150, 50, YELLOW);
+                DrawText(content.c_str(), GetScreenWidth()/2+290, GetScreenHeight()/2+150, 50, YELLOW);
             } break;
             default: break;
         }
