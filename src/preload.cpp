@@ -51,6 +51,7 @@ Preload::Preload() {
 
     //init and set audio
     setShootSound();
+    setExplosionSound();
     setCollectSound();
     setEmptyAmmoSound();
     setKillSound();
@@ -117,6 +118,10 @@ Texture2D Preload::getGold()
 
 Sound Preload::getShootSound() {
     return shoot;
+}
+
+Sound Preload::getExplosionSound() {
+    return explosion;
 }
 
 Sound Preload::getCollectSound() {
@@ -199,6 +204,10 @@ void Preload::setShootSound() {
     shoot = LoadSound("resources/Shoot.mp3");
 }
 
+void Preload::setExplosionSound() {
+    explosion = LoadSound("resources/Explosion.mp3");
+}
+
 void Preload::setCollectSound() {
     collect = LoadSound("resources/Collect.mp3");
 }
@@ -245,6 +254,7 @@ Preload::~Preload() {
 
 
     UnloadSound(shoot);
+    UnloadSound(explosion);
     UnloadSound(collect);
     UnloadSound(emptyAmmo);
     UnloadSound(kill);

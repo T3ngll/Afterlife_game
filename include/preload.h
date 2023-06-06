@@ -66,6 +66,9 @@ public:
     Sound getShootSound();
     void setShootSound();
 
+    Sound getExplosionSound();
+    void setExplosionSound();
+
     Sound getCollectSound();
     void setCollectSound();
 
