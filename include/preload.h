@@ -19,6 +19,7 @@ class Preload {
 
 
     Sound shoot;
+    Sound explosion;
     Sound collect;
     Sound emptyAmmo;
     Sound kill;

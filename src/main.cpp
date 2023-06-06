@@ -394,7 +394,7 @@ int main()
                         temp.setTargetToMouse();
                         grenades.push_back(temp);
                         {
-                            //PlaySound(p.getShootSound());
+
                             player.setCurGren(player.getCurGren()-1);
                         }
 
@@ -438,6 +438,7 @@ int main()
 
                             if(SplashActive)
                             {
+                                PlaySound(p.getExplosionSound());
 
                                 DrawTexture(p.getSplash(), Grenade->getX(),Grenade->getY(),WHITE);
                             }
