@@ -36,9 +36,10 @@ void Init()
 
 vector<Bullet> bullets;
 vector<Grenade> grenades;
+
 vector<Bullet> bulletsToDelete;
 vector<Grenade> grenadesToDelete;
-vector<Grenade> splashToDelete;
+
 vector<Enemy*> enemies;
 vector<Object*> heals;
 vector<Object*> ammokits;
@@ -75,7 +76,7 @@ int main()
     int AmmoKitAmount=GetRandomValue(1, 3);
     int TreasureAmount=GetRandomValue(1, 3);
     // init characters
-    class Character player(p.getCharacter(),70,50,Vector2{200,200},100,20,5,0);
+    class Character player(p.getCharacter(),70,50,Vector2{300,300},100,20,5,0);
 
     Type type1 = Collect;
     Type type2 = Walker;
@@ -118,8 +119,6 @@ int main()
     bool LevelUp=false;
     bool Clear=false;
 
-    bool SplashActive=false;
-    int SplashFrames=0;
     int frameCounter=0;
     int frameCounter2=0;
     int frameCounter3=0;
@@ -212,7 +211,7 @@ int main()
                     }
                    if(scoregoal<player.getScore())
                    {
-                    scoregoal=scoregoal+2000;
+                    scoregoal=scoregoal+1000;
                     minenemy=minenemy+2;
                     maxenemy=maxenemy+2; 
                     RandomEnemy=GetRandomValue(minenemy, maxenemy);
@@ -378,6 +377,7 @@ int main()
                         float dist = 0.002*sqrtf((player.getX()-GetMousePosition().x)*(player.getX()-GetMousePosition().x) +
                                                  (player.getY()-GetMousePosition().y)*(player.getY()-GetMousePosition().y));
                         Bullet temp(p.getBullet(),(Vector2){player.getX()+10,player.getY()},Vector2 {(player.getX()-GetMousePosition().x)/dist,(player.getY()-GetMousePosition().y)/dist},true,10,WHITE);
+
                         temp.setDamage(34);
                         temp.setTargetToMouse();
                         bullets.push_back(temp);
@@ -435,34 +435,25 @@ int main()
 
                 //grenade
 
-                if(SplashActive)
-                {
-                    SplashFrames++;
-                }
-                if(SplashFrames>20)
-                {
 
-                    SplashActive=false;
-                    SplashFrames=0;
-                }
                 if(IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
                 {
-                    if(player.getCurGren()>0)
-                    {
-                        sourceWidth=0+p.getCharacter().width/3;
-                    }
+
 
                     if (player.getCurGren() != 0) {
                         float dist = 0.002*sqrtf((player.getX()-GetMousePosition().x)*(player.getX()-GetMousePosition().x) +
                                                  (player.getY()-GetMousePosition().y)*(player.getY()-GetMousePosition().y));
                         Grenade temp(p.getGrenade(),(Vector2){player.getX()+10,player.getY()},Vector2 {(player.getX()-GetMousePosition().x)/dist,(player.getY()-GetMousePosition().y)/dist},true,30,WHITE);
+
                         temp.setDamage(300);
                         temp.setTargetToMouse();
+
                         grenades.push_back(temp);
                         {
-
                             player.setCurGren(player.getCurGren()-1);
                         }
+                        PlaySound(p.getExplosionSound());
+                        sourceWidth=0+p.getCharacter().width/3;
 
                     }
                     else
@@ -483,9 +474,11 @@ int main()
                     if(Grenade->getX() >= GetScreenWidth() || Grenade->getX() <= 0 || Grenade->getY() >= GetScreenHeight() || Grenade->getY() <= 0) // check also y
                     {
                         grenadesToDelete.push_back(*Grenade);
-                        Grenade->setStatus(false);
                         continue;
                     }
+
+
+
                     if(Grenade->isActive())
                     {
                         DrawTextureV(p.getGrenade(),Grenade->getPos(),WHITE);
@@ -502,18 +495,13 @@ int main()
                             collisionAttack=CheckCollisionCircles((Vector2){Grenade->getPos()}, Grenade->getRadius(),
                                                                   (Vector2){enemies[i]->getPos()},(enemies[i]->getHeight()-((enemies[i]->getHeight()/100)*60)));
 
-                            if(SplashActive)
-                            {
-                                PlaySound(p.getExplosionSound());
 
-                                DrawTexture(p.getSplash(), Grenade->getX(),Grenade->getY(),WHITE);
-                            }
                             if (collisionAttack)
                             {
 
                                 enemies[i]->setHp(enemies[i]->getHp()-Grenade->getDamage());
                                 Grenade->setStatus(false);
-                                SplashActive=true;
+
 
 
                                 if(enemies[i]->getHp()<=0)
@@ -524,6 +512,7 @@ int main()
 
                                 }
 
+
                                 grenadesToDelete.push_back(*Grenade);
 
                             }
@@ -532,6 +521,7 @@ int main()
                         }
                     }
                 }
+
 
 
                 //melee attack
@@ -564,7 +554,7 @@ int main()
                             PlaySound(p.getMelee2Sound());
                     }
                 }
-
+                
 
                 if (IsKeyPressed(KEY_KP_ADD))
                 {

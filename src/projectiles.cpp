@@ -78,11 +78,4 @@ void Grenade::setTargetToMouse()
 Vector2 Grenade::getTarget() {return target;}
 
 
-
-
-
-
-
-
-
-
+Splash::Splash(Texture2D SplashTexture, Vector2 pos, bool active, Color color):Object(pos,0,0),color(color){}

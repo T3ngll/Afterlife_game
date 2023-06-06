@@ -37,7 +37,7 @@ class Grenade : public Object,public Movable
     Color color;
     float radius;
     Vector2 target;
-    int damage=5;
+    int damage=300;
 public:
     Grenade() = default;
     Grenade(Texture2D GrenadeTexture, Vector2 pos,Vector2 speed, bool active,float radius,Color color);
@@ -56,4 +56,17 @@ public:
 
     void setTargetToMouse();
     Vector2 getTarget();
+};
+
+class Splash: public Object,public Movable
+{
+    Texture2D SplashTexture;
+    Color color;
+
+public:
+    Splash() = default;
+    Splash(Texture2D SplashTexture, Vector2 pos, bool active,Color color);
+
+
+
 };
