@@ -63,6 +63,8 @@ int main()
         inputFile.close();
     }
 
+    int randomchoose2=GetRandomValue(1, 4);
+    int backgroundswitch=1;
     int randomchoose=GetRandomValue(1, 3);
     int minenemy=1;
     int maxenemy=5;
@@ -169,9 +171,45 @@ int main()
                              treasure[i]->setStatus(false);
                         }
                         }
-                    DrawTexture(p.getBackground(), 0, 0, WHITE);
-                   // ClearBackground(WHITE);
-                   // DrawRectangle(0, 0, screenWidth, screenHeight, BLACK);
+
+                    if(backgroundswitch==1)
+                    {
+                   int random1=GetRandomValue(1,2);
+                   if(random1==1)
+                   {
+                    backgroundswitch=2;
+                   }
+                   else
+                   {
+                    backgroundswitch=3;
+                   }
+                    }
+
+                    else if(backgroundswitch==2)
+                    {
+                   int random1=GetRandomValue(1,2);
+                   if(random1==1)
+                   {
+                    backgroundswitch=1;
+                   }
+                   else
+                   {
+                    backgroundswitch=3;
+                   }
+                    }
+
+                    else if(backgroundswitch==3)
+                    {
+                   int random1=GetRandomValue(1,2);
+                   if(random1==1)
+                   {
+                    backgroundswitch=1;
+                   }
+                   else
+                   {
+                    backgroundswitch=2;
+                   }
+                    }
                    if(scoregoal<player.getScore())
                    {
                     scoregoal=scoregoal+2000;
@@ -223,7 +261,30 @@ int main()
         {
             case GAMEPLAY:
             {
+                switch (backgroundswitch)
+                {
+                case 1:
+                {
+                    ClearBackground(RAYWHITE);
                 DrawTexture(p.getBackground(), 0, 0, WHITE);
+
+                } break;
+
+                case 2:
+                {
+                    ClearBackground(RAYWHITE);
+                DrawTexture(p.getBackground2(), 0, 0, WHITE);
+                
+                } break;
+
+                 case 3:
+                {
+                    ClearBackground(RAYWHITE);
+                DrawTexture(p.getBackground3(), 0, 0, WHITE);
+                
+                } break;
+            
+                }
                 frameCounter++;
                 frameCounter3++;
 
@@ -271,12 +332,17 @@ int main()
                          DrawTextureV(p.getAmmo(), (Vector2){ammokits[i]->getX(),ammokits[i]->getY()}, WHITE);
                         collisionObj = CheckCollisionRecs((Rectangle){player.getX(),player.getY(),(float)player.getWidth(),(float)player.getHeight()},
                                                           (Rectangle){ammokits[i]->getX(),ammokits[i]->getY(),55,45});
+                        randomchoose2=GetRandomValue(1, 4);
 
                         if (collisionObj)
                         {
                             ammokits[i]->setStatus(false);
                             PlaySound(p.getCollectSound());
                             player.setCurAmmo(player.getCurAmmo()+4);
+                            if(randomchoose2==1)
+                            {
+                                player.setCurGren(player.getCurGren()+1);
+                            }
                         }
                     }
                 }
