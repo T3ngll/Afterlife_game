@@ -35,7 +35,10 @@ void Init()
 }
 
 vector<Bullet> bullets;
+vector<Grenade> grenades;
 vector<Bullet> bulletsToDelete;
+vector<Grenade> grenadesToDelete;
+vector<Grenade> splashToDelete;
 vector<Enemy*> enemies;
 vector<Object*> heals;
 vector<Object*> ammokits;
@@ -51,7 +54,7 @@ int main()
 
     Preload p;
 
-string content;
+    string content;
     ifstream inputFile("scoresheet.txt");
     if (inputFile.is_open()) {
         stringstream buffer;
@@ -70,7 +73,7 @@ string content;
     int AmmoKitAmount=GetRandomValue(1, 3);
     int TreasureAmount=GetRandomValue(1, 3);
     // init characters
-    class Character player(p.getCharacter(),70,50,Vector2{200,200},100,20,0);
+    class Character player(p.getCharacter(),70,50,Vector2{200,200},100,20,5,0);
 
     Type type1 = Collect;
     Type type2 = Walker;
@@ -113,10 +116,13 @@ string content;
     bool LevelUp=false;
     bool Clear=false;
 
+    bool SplashActive=false;
+    int SplashFrames=0;
     int frameCounter=0;
     int frameCounter2=0;
     int frameCounter3=0;
     int sourceWidth=0;
+
     GameScreen currentScreen = TITLE;
 
 
@@ -302,20 +308,13 @@ string content;
                         sourceWidth=0+p.getCharacter().width/3;
                     }
 
-                   // player.setFrameWidth(player.getFrameWidth()+p.getCharacter().width/3);
-
                     if (player.getCurAmmo() != 0) {
-
-                        //if (bullets.size() < player.getMaxAmmo()) {
-
-
                         float dist = 0.002*sqrtf((player.getX()-GetMousePosition().x)*(player.getX()-GetMousePosition().x) +
                                                  (player.getY()-GetMousePosition().y)*(player.getY()-GetMousePosition().y));
                         Bullet temp(p.getBullet(),(Vector2){player.getX()+10,player.getY()},Vector2 {(player.getX()-GetMousePosition().x)/dist,(player.getY()-GetMousePosition().y)/dist},true,10,WHITE);
                         temp.setDamage(34);
                         temp.setTargetToMouse();
                         bullets.push_back(temp);
-                        //if(player.getCurAmmo()>0)
                         {
                             PlaySound(p.getShootSound());
                             player.setCurAmmo(player.getCurAmmo()-1);
@@ -364,6 +363,105 @@ string content;
                                 bulletsToDelete.push_back(*bullet);
 
                             }
+                        }
+                    }
+                }
+
+                //grenade
+
+                if(SplashActive)
+                {
+                    SplashFrames++;
+                }
+                if(SplashFrames>20)
+                {
+
+                    SplashActive=false;
+                    SplashFrames=0;
+                }
+                if(IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
+                {
+                    if(player.getCurGren()>0)
+                    {
+                        sourceWidth=0+p.getCharacter().width/3;
+                    }
+
+                    if (player.getCurGren() != 0) {
+                        float dist = 0.002*sqrtf((player.getX()-GetMousePosition().x)*(player.getX()-GetMousePosition().x) +
+                                                 (player.getY()-GetMousePosition().y)*(player.getY()-GetMousePosition().y));
+                        Grenade temp(p.getGrenade(),(Vector2){player.getX()+10,player.getY()},Vector2 {(player.getX()-GetMousePosition().x)/dist,(player.getY()-GetMousePosition().y)/dist},true,30,WHITE);
+                        temp.setDamage(300);
+                        temp.setTargetToMouse();
+                        grenades.push_back(temp);
+                        {
+                            //PlaySound(p.getShootSound());
+                            player.setCurGren(player.getCurGren()-1);
+                        }
+
+                    }
+                    else
+                        PlaySound(p.getEmptyAmmoSound());
+
+                }
+                for(auto Grenade = grenades.begin(); Grenade != grenades.end(); Grenade++)
+                {
+                    if(Grenade->isActive())
+                    {
+                        Grenade->setX((-Grenade->getSpeedX() ) * GetFrameTime() );
+
+                        Grenade->setY((-Grenade->getSpeedY() ) * GetFrameTime() );
+
+                    }
+
+
+                    if(Grenade->getX() >= GetScreenWidth() || Grenade->getX() <= 0 || Grenade->getY() >= GetScreenHeight() || Grenade->getY() <= 0) // check also y
+                    {
+                        grenadesToDelete.push_back(*Grenade);
+                        Grenade->setStatus(false);
+                        continue;
+                    }
+                    if(Grenade->isActive())
+                    {
+                        DrawTextureV(p.getGrenade(),Grenade->getPos(),WHITE);
+                    }
+
+
+
+
+                    //collision between grenade and a monster
+                    for(int i=0; i<EnAmount; i++)
+                    {
+                        if(enemies[i]->isActive())
+                        {
+                            collisionAttack=CheckCollisionCircles((Vector2){Grenade->getPos()}, Grenade->getRadius(),
+                                                                  (Vector2){enemies[i]->getPos()},(enemies[i]->getHeight()-((enemies[i]->getHeight()/100)*60)));
+
+                            if(SplashActive)
+                            {
+
+                                DrawTexture(p.getSplash(), Grenade->getX(),Grenade->getY(),WHITE);
+                            }
+                            if (collisionAttack)
+                            {
+
+                                enemies[i]->setHp(enemies[i]->getHp()-Grenade->getDamage());
+                                Grenade->setStatus(false);
+                                SplashActive=true;
+
+
+                                if(enemies[i]->getHp()<=0)
+                                {
+                                    enemies[i]->setStatus(false);
+                                    PlaySound(p.getKillSound());
+                                    player.setScore(player.getScore()+enemies[i]->getScore());
+
+                                }
+
+                                grenadesToDelete.push_back(*Grenade);
+
+                            }
+
+
                         }
                     }
                 }
@@ -573,7 +671,8 @@ while(true)
                 {
                     DrawText("YOU DIED", GetScreenWidth()/2-MeasureText("YOU DIED",200)/2, GetScreenHeight()/2, 200, RED);
                 }
-                DrawText(TextFormat("AMMO: %i",player.getCurAmmo()), 10, 980, 30, WHITE);
+                DrawText(TextFormat("AMMO: %i",player.getCurAmmo()), 10, 950, 30, WHITE);
+                DrawText(TextFormat("GRENADES: %i",player.getCurGren()), 10, 980, 30, WHITE);
                 DrawText(TextFormat("AIDKITS: %i",player.getCurAid()), 10, 1010, 30, WHITE);
                 DrawText("AfterLife Test \nPress W A S D to move\nPress arrowup/arrowdown to increase/decrease HP value \nPress MouseLeft to shoot \nPress E to heal", 10, 80, 20, WHITE);
                 DrawText(TextFormat("SCORE: %i", player.getScore()), 10, 1040, 30, WHITE);

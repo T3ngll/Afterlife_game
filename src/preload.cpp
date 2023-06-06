@@ -9,6 +9,8 @@ Preload::Preload() {
     Image runner = LoadImage("resources/runner.png");
     Image fatboy = LoadImage("resources/fatboy.png");
     Image bullet = LoadImage("resources/bullet.png");
+    Image grenade = LoadImage("resources/grenade.png");
+    Image splash = LoadImage("resources/splash.png");
     Image aid = LoadImage("resources/aid.png");
     Image ammo = LoadImage("resources/ammo.png");
     Image gold = LoadImage("resources/gold.png");
@@ -16,6 +18,8 @@ Preload::Preload() {
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
     ImageResize(&door,300,100);
     ImageResize(&bullet,20,20);
+    ImageResize(&grenade,30,30);
+    ImageResize(&splash,150,150);
     ImageResize(&aid,40,40);
     ImageResize(&ammo,50,40);
     ImageResize(&gold,40,50);
@@ -27,6 +31,8 @@ Preload::Preload() {
     setRunner(runner);
     setFatboy(fatboy);
     setBullet(bullet);
+    setGrenade(grenade);
+    setSplash(splash);
     setAid(aid);
     setAmmo(ammo);
     setGold(gold);
@@ -37,6 +43,8 @@ Preload::Preload() {
     UnloadImage(runner);
     UnloadImage(fatboy);
     UnloadImage(bullet);
+    UnloadImage(grenade);
+    UnloadImage(splash);
 
     //init and set audio
     setShootSound();
@@ -79,6 +87,16 @@ Texture2D Preload::getBullet()
 {
     return Bullet;
 }
+
+Texture2D Preload::getGrenade() {
+    return Grenade;
+}
+
+Texture2D Preload::getSplash() {
+    return Splash;
+}
+
+
 
 Texture2D Preload::getAid()
 {
@@ -155,6 +173,14 @@ void Preload::setBullet(Image bullet) {
     Bullet = LoadTextureFromImage(bullet);
 }
 
+void Preload::setGrenade(Image grenade) {
+    Grenade = LoadTextureFromImage(grenade);
+}
+
+void Preload::setSplash(Image splash) {
+    Splash = LoadTextureFromImage(splash);
+}
+
 void Preload::setAid(Image aid) {
     Aid = LoadTextureFromImage(aid);
 }
@@ -208,6 +234,8 @@ Preload::~Preload() {
     UnloadTexture(Character);
     UnloadTexture(Walker);
     UnloadTexture(Bullet);
+    UnloadTexture(Grenade);
+    UnloadTexture(Splash);
     UnloadTexture(Aid);
     UnloadTexture(Ammo);
     UnloadTexture(Gold);
@@ -224,6 +252,12 @@ Preload::~Preload() {
     CloseAudioDevice();
 
 }
+
+
+
+
+
+
 
 
 

@@ -1,14 +1,16 @@
 #include "character.h"
 
-Character::Character(Texture2D CharacterTexture , float width, float height, Vector2 speed, int hpMax, int maxAmmo, int score): CharacterTexture(CharacterTexture), Object(pos,width,height),
-                    Movable(speed), hpMax(hpMax), maxAmmo(maxAmmo), score(score)
+Character::Character(Texture2D CharacterTexture , float width, float height, Vector2 speed, int hpMax, int maxAmmo,int maxGren, int score): CharacterTexture(CharacterTexture), Object(pos,width,height),
+                    Movable(speed), hpMax(hpMax), maxAmmo(maxAmmo),maxGren(maxGren), score(score)
 {
     pos.x=float(GetScreenWidth()) / 2 ;
     pos.y=float(GetScreenHeight()) / 2 ;
     hp=hpMax;
     curAmmo=maxAmmo;
+    curGren=maxGren;
     curAid=0;
 }
+
 
 Texture2D Character::getTexture(){return CharacterTexture;}
 
@@ -38,10 +40,20 @@ float Character::getHpMaxPercent() const {return HpMaxPercent;}
 int Character::getMaxAmmo() const{return maxAmmo;}
 void Character::setMaxAmmo(int maxAmmo) {this->maxAmmo=maxAmmo;}
 
+int Character::getMaxGren() const{return maxGren;}
+void Character::setMaxGren(int maxGren) {this->maxGren=maxGren;}
+
 int Character::getCurAmmo() const{return curAmmo;}
 void Character::setCurAmmo(int curAmmo) {this->curAmmo=curAmmo;}
 
 int Character::getCurAid() const{return curAid;}
 void Character::setCurAid(int curAid) {this->curAid=curAid;}
+
+int Character::getCurGren() const{return curGren;}
+void Character::setCurGren(int curGren) {this->curGren=curGren;}
+
+
+
+
 
 

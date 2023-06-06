@@ -8,6 +8,8 @@ class Preload {
     Texture2D Runner;
     Texture2D Fatboy;
     Texture2D Bullet;
+    Texture2D Grenade;
+    Texture2D Splash;
     Texture2D Aid;
     Texture2D Ammo;
     Texture2D Gold;
@@ -43,6 +45,12 @@ public:
 
     Texture2D getBullet();
     void setBullet(Image bullet);
+
+    Texture2D getGrenade();
+    void setGrenade(Image grenade);
+
+    Texture2D getSplash();
+    void setSplash(Image splash);
 
     Texture2D getAid();
     void setAid(Image aid);
