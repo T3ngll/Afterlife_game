@@ -3,6 +3,9 @@
 
 Preload::Preload() {
     Image background = LoadImage("resources/map.png");
+    Image background2 = LoadImage("resources/map2.png");
+    Image background3 = LoadImage("resources/map3.png");
+    Image slash = LoadImage("resources/slash.png");
     Image door = LoadImage("resources/door.png");
     Image character = LoadImage("resources/character.png");
     Image walker = LoadImage("resources/walker.png");
@@ -16,6 +19,9 @@ Preload::Preload() {
     Image gold = LoadImage("resources/gold.png");
 
     ImageResize(&background,GetScreenWidth(),GetScreenHeight());
+    ImageResize(&background2,GetScreenWidth(),GetScreenHeight());
+    ImageResize(&background3,GetScreenWidth(),GetScreenHeight());
+    ImageResize(&slash,80,80);
     ImageResize(&door,300,100);
     ImageResize(&bullet,20,20);
     ImageResize(&grenade,30,30);
@@ -25,6 +31,9 @@ Preload::Preload() {
     ImageResize(&gold,40,50);
 
     setBackground(background);
+    setBackground2(background2);
+    setBackground3(background3);
+    setDoor(slash);
     setDoor(door);
     setCharacter(character);
     setWalker(walker);
@@ -37,6 +46,8 @@ Preload::Preload() {
     setAmmo(ammo);
     setGold(gold);
     UnloadImage(background);
+    UnloadImage(background2);
+    UnloadImage(background3);
     UnloadImage(door);
     UnloadImage(character);
     UnloadImage(walker);
@@ -48,6 +59,7 @@ Preload::Preload() {
 
     //init and set audio
     setShootSound();
+    setExplosionSound();
     setCollectSound();
     setEmptyAmmoSound();
     setKillSound();
@@ -61,6 +73,15 @@ Preload::Preload() {
 
 Texture2D Preload::getBackground() {
     return Background;
+}
+Texture2D Preload::getBackground2() {
+    return Background2;
+}
+Texture2D Preload::getBackground3() {
+    return Background3;
+}
+Texture2D Preload::getSlash() {
+    return Slash;
 }
 Texture2D Preload::getDoor() {
     return Door;
@@ -117,6 +138,10 @@ Sound Preload::getShootSound() {
     return shoot;
 }
 
+Sound Preload::getExplosionSound() {
+    return explosion;
+}
+
 Sound Preload::getCollectSound() {
     return collect;
 }
@@ -148,7 +173,15 @@ Sound Preload::getMelee2Sound() {
 void Preload::setBackground(Image background) {
     Background = LoadTextureFromImage(background);
 }
-
+void Preload::setBackground2(Image background2) {
+    Background2 = LoadTextureFromImage(background2);
+}
+void Preload::setBackground3(Image background3) {
+    Background3 = LoadTextureFromImage(background3);
+}
+void Preload::setSlash(Image slash) {
+    Slash = LoadTextureFromImage(slash);
+}
 void Preload::setDoor(Image door) {
     Door = LoadTextureFromImage(door);
 }
@@ -197,6 +230,10 @@ void Preload::setShootSound() {
     shoot = LoadSound("resources/Shoot.mp3");
 }
 
+void Preload::setExplosionSound() {
+    explosion = LoadSound("resources/Explosion.mp3");
+}
+
 void Preload::setCollectSound() {
     collect = LoadSound("resources/Collect.mp3");
 }
@@ -230,6 +267,9 @@ void Preload::setMelee2Sound() {
 Preload::~Preload() {
 
     UnloadTexture(Background);
+    UnloadTexture(Background2);
+    UnloadTexture(Background3);
+    UnloadTexture(Slash);
     UnloadTexture(Door);
     UnloadTexture(Character);
     UnloadTexture(Walker);
@@ -242,6 +282,7 @@ Preload::~Preload() {
 
 
     UnloadSound(shoot);
+    UnloadSound(explosion);
     UnloadSound(collect);
     UnloadSound(emptyAmmo);
     UnloadSound(kill);
